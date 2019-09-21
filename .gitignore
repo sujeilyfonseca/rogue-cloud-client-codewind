@@ -1,0 +1,24 @@
+#=========================================================#
+#                    Rogue Cloud Client                   #
+#    Gitignore file to use with the Rogue Cloud Client    #
+#=========================================================#
+/src/main/liberty/config/server.env
+/caches
+/local.properties
+
+# Generated Files
+.*.swp
+.DS_Store
+.vscode
+.classpath
+.metadata
+.factorypath
+
+# Directories
+/.m2/
+/bin/
+/target/
+/.settings/
+/.project/
+/.apt_generated/
+/mc-target/
