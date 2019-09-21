@@ -10,6 +10,7 @@
 .*.swp
 .DS_Store
 .vscode
+.project
 .classpath
 .metadata
 .factorypath
@@ -19,6 +20,5 @@
 /bin/
 /target/
 /.settings/
-/.project/
 /.apt_generated/
 /mc-target/
