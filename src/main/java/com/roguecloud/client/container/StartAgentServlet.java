@@ -46,39 +46,40 @@ import com.roguecloud.utils.RCUtils;
 import com.roguecloud.utils.RegisterUser;
 import com.roguecloud.utils.RegisterUser.ClientApiVersionReturn;
 
-/** This class will both start the player AI code, and also serve the browser UI page to the player. */
+/** 
+ * The StartAgentServlet class will both start the player AI code, and also serve the browser UI 
+ * page to the player. 
+ */
 @WebServlet("/")
 public class StartAgentServlet extends HttpServlet {
 
 	private static final Logger log = Logger.getInstance();
-	
 	private static final long serialVersionUID = 1L;
-    
 	private static AtomicBoolean agentStarted = new AtomicBoolean(false);
-	
 	private static String lastError = null;
 	
-	// ----------------------------------------------------
-
-	// Specify your username and password. These will be automatically registered when you first connect
-	// to the game server.
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Client information
+	// These values will be automatically registered when you first connect to the game server.
+	///////////////////////////////////////////////////////////////////////////////////////////
 	
 	public static final String USERNAME = "your-username";
 	public static final String PASSWORD = "your-password";
 	
+	/**
+	 * Method to construct a simple AI.
+	 * @return remote client
+	 */
 	private static RemoteClient constructMyAI() {
 		return new SimpleAI();
- 
 	}
 
-	// ----------------------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Server information
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public static final String SERVER_HOST_AND_PATH_NON_URL = "roguecloud.space:29080/RogueCloudServer";
-//	public static final String SERVER_HOST_AND_PATH_NON_URL = "localhost:29080/RogueCloudServer";
-
-	public static final String SERVER_URL = "http://"+SERVER_HOST_AND_PATH_NON_URL;
-	public static final String CLIENT_API_URL = "ws://"+SERVER_HOST_AND_PATH_NON_URL+"/api/client";
-	
+	public static final String SERVER_URL = "http://" + SERVER_HOST_AND_PATH_NON_URL;
+	public static final String CLIENT_API_URL = "ws://" + SERVER_HOST_AND_PATH_NON_URL + "/api/client";
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -129,9 +130,11 @@ public class StartAgentServlet extends HttpServlet {
 		String pageStr = Resources.getInstance().generatePage(p, false);
 		
 		response.getWriter().append(pageStr);
-		
 	}
 	
+	/**
+	 * Support method to start the agent.
+	 */
 	public static void atomicAgentStart(String uuid) throws IOException {
 
 		boolean startAgent = false;
@@ -152,11 +155,12 @@ public class StartAgentServlet extends HttpServlet {
 			} catch (DeploymentException | URISyntaxException | InterruptedException e) {
 				throw new RuntimeException(e);
 			}
-
 		}
-
 	}
 	
+	/**
+	 * Method to start the agent.
+	 */
 	private static void agentStart(String uuid) throws DeploymentException, IOException, URISyntaxException, InterruptedException {
 		
 		NG.getInstance().setWhoami("client");
@@ -168,7 +172,6 @@ public class StartAgentServlet extends HttpServlet {
 		ClientApiVersionReturn v = RegisterUser.isClientApiVersionSupported(RCSharedConstants.CLIENT_API_VERSION, SERVER_URL, 65 * 1000);
 		
 		if(!v.isSupported() && v.getException() == null) {
-			
 			lastError = "\nError: This version of the Rogue Cloud client is deprecated, and thus is no longer supported by the newer version running on the Rogue Cloud game server.\n";
 			lastError += "\n";
 			lastError += "Instructions on how to upgrade to the latest client are available from the Rogue Cloud git repo:\n";
@@ -204,7 +207,7 @@ public class StartAgentServlet extends HttpServlet {
 		try {
 			val = (Integer) new InitialContext().lookup("rc_server_port");
 		} catch (NamingException e1) {
-			/* ignore */
+			// Do nothing
 		}
 		
 		if(val == null || val <= 0) {
@@ -219,16 +222,17 @@ public class StartAgentServlet extends HttpServlet {
 		System.out.println();
 				
 		doInitialConnect(username, password, uuid);
-		
 	}	
 	
+	/**
+	 * Method to perform the initial connection.
+	 */
 	private static void doInitialConnect(String username, String password, String uuid) throws DeploymentException, IOException, URISyntaxException, InterruptedException {
 
 		Thread mainConnectThread = new Thread() {
 			public void run() {
 				
 				ConnectData data = new ConnectData();
-				
 				boolean continueLoop = true;
 				
 				while(continueLoop) {
@@ -241,15 +245,16 @@ public class StartAgentServlet extends HttpServlet {
 						try { Thread.sleep(100); } catch (InterruptedException e) { /* ignore */ }
 					}
 				}
-				
 			}
 		};
+
 		mainConnectThread.start();
 		LibertyClientInstance.getInstance().add(mainConnectThread);
-		
 	}
 	
-	/** Returns true if the calling connection method should continue, or false otherwise. */
+	/** 
+	 * Returns true if the calling connection method should continue, or false otherwise. 
+	 */
 	private static boolean doInitialConnectInner(String username, String password, String uuid, ConnectData data, RemoteClient remoteClient) throws DeploymentException, IOException, URISyntaxException {
 
 		ClientState state = new ClientState(username, password, uuid, remoteClient, new LibertyWebsocketFactory(), data.numberOfTimesInterupted);
@@ -298,6 +303,9 @@ public class StartAgentServlet extends HttpServlet {
 		return true;
 	}
 	
+	/**
+	 * Method to validate the username and password for the client.
+	 */
 	private static boolean isValidatedUsernameAndPassword(String username, String password) {
 		
 		String error = null;
@@ -315,16 +323,15 @@ public class StartAgentServlet extends HttpServlet {
 		}
 		
 		return error == null;
-
 	}
 
-	/** Used by doInitialConnect(...), keeps track of the # of times we have been interrupted during the round. */
+	/** 
+	 * Used by doInitialConnect(...), keeps track of the # of times we have been interrupted during the round. 
+	 * */
 	private static class ConnectData {
-		
 		@SuppressWarnings("unused")
 		boolean roundComplete = false;
 		
 		int numberOfTimesInterupted = 0;
 	}
-
 }
