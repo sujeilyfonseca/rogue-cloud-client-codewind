@@ -10,6 +10,7 @@
 .*.swp
 .DS_Store
 .vscode
+.cw-settings
 .project
 .classpath
 .metadata
@@ -22,3 +23,5 @@
 /.settings/
 /.apt_generated/
 /mc-target/
+/libertyrepocache.zip
+/localm2cache.zip
