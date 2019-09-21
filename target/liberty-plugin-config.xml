@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liberty-plugin-config>
+    <activeBuildProfiles>
+        <profileId>liberty</profileId>
+    </activeBuildProfiles>
+    <installDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty/wlp</installDirectory>
+    <serverDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty/wlp/usr/servers/defaultServer</serverDirectory>
+    <userDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty/wlp/usr</userDirectory>
+    <serverOutputDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty/wlp/usr/servers/defaultServer</serverOutputDirectory>
+    <serverName>defaultServer</serverName>
+    <configFile>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/src/main/liberty/config/server.xml</configFile>
+    <bootstrapProperties>
+        <app.location>gameclient-1.0-SNAPSHOT.war</app.location>
+        <default.http.port>9080</default.http.port>
+        <default.https.port>9443</default.https.port>
+    </bootstrapProperties>
+    <jvmOptionsFile>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/src/main/liberty/config/jvm.options</jvmOptionsFile>
+    <appsDirectory>dropins</appsDirectory>
+    <looseApplication>false</looseApplication>
+    <stripVersion>false</stripVersion>
+    <installAppPackages>project</installAppPackages>
+    <applicationFilename>gameclient-1.0-SNAPSHOT.war</applicationFilename>
+    <assemblyArtifact>
+        <groupId>com.ibm.websphere.appserver.runtime</groupId>
+        <artifactId>wlp-webProfile7</artifactId>
+        <version>19.0.0.1</version>
+        <type>zip</type>
+    </assemblyArtifact>
+    <assemblyArchive>/Users/sfonseca/.m2/repository/com/ibm/websphere/appserver/runtime/wlp-webProfile7/19.0.0.1/wlp-webProfile7-19.0.0.1.zip</assemblyArchive>
+    <assemblyInstallDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty</assemblyInstallDirectory>
+    <refresh>false</refresh>
+    <installAppsConfigDropins>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/target/liberty/wlp/usr/servers/defaultServer/configDropins/defaults/install_apps_configuration_1491924271.xml</installAppsConfigDropins>
+    <projectType>war</projectType>
+    <projectCompileDependency>com.fasterxml.jackson.core:jackson-core:2.9.7</projectCompileDependency>
+    <projectCompileDependency>com.fasterxml.jackson.core:jackson-databind:2.9.7</projectCompileDependency>
+    <projectCompileDependency>com.fasterxml.jackson.core:jackson-annotations:2.9.7</projectCompileDependency>
+    <projectCompileDependency>javax.json:javax.json-api:1.0</projectCompileDependency>
+    <projectCompileDependency>au.com.codeka:carrot:2.3.0</projectCompileDependency>
+    <projectCompileDependency>com.google.code.findbugs:jsr305:3.0.1</projectCompileDependency>
+    <warSourceDirectory>/Users/sfonseca/codewind-workspace/rogue-cloud-client-codewind/src/main/webapp</warSourceDirectory>
+</liberty-plugin-config>

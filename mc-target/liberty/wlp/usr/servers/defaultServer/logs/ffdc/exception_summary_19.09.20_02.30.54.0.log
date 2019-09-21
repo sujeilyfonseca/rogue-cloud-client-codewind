@@ -1,0 +1,11 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      7     9/20/19 2:30:53:570 UTC     9/20/19 2:31:06:844 UTC java.nio.channels.UnresolvedAddressException com.ibm.ws.wsoc.outbound.ClientConnector 87
+                                                                            - /home/default/app/mc-target/liberty/wlp/usr/servers/defaultServer/logs/ffdc/ffdc_19.09.20_02.30.53.0.log
+     1      6     9/20/19 2:30:55:360 UTC     9/20/19 9:48:00:454 UTC javax.ws.rs.ProcessingException com.ibm.ws.webcontainer.filter.WebAppFilterManager.invokeFilters 1105
+                                                                            - /home/default/app/mc-target/liberty/wlp/usr/servers/defaultServer/logs/ffdc/ffdc_19.09.20_02.30.55.0.log
+
+     2      1     9/20/19 3:18:37:813 UTC     9/20/19 3:18:37:814 UTC java.net.ConnectException com.ibm.ws.wsoc.outbound.ClientConnector 81
+
+------+------+---------------------------+---------------------------+---------------------------

@@ -1,0 +1,6 @@
+
+ Index  Count  Time of first Occurrence    Time of last Occurrence     Exception SourceId ProbeId
+------+------+---------------------------+---------------------------+---------------------------
+     0      1     9/20/19 0:50:27:273 UTC     9/20/19 0:50:27:273 UTC java.lang.NoClassDefFoundError com.ibm.ws.wsoc.LinkRead 368
+                                                                            - /home/default/app/mc-target/liberty/wlp/usr/servers/defaultServer/logs/ffdc/ffdc_19.09.20_00.50.27.0.log
+------+------+---------------------------+---------------------------+---------------------------

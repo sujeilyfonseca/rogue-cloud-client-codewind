@@ -1,0 +1,2098 @@
+Launching defaultServer (WebSphere Application Server 19.0.0.3/wlp-1.0.26.cl190320190321-1636) on IBM J9 VM, version 8.0.5.40 - pxa6480sr5fp40-20190807_01(SR5 FP40) (en_US)
+[AUDIT   ] CWWKE0001I: The server defaultServer has been launched.
+[AUDIT   ] CWWKE0100I: This product is licensed for development, and limited production use. The full license terms can be viewed here: https://public.dhe.ibm.com/ibmdl/export/pub/software/websphere/wasdev/license/base_ilan/ilan/19.0.0.3/lafiles/en.html
+[AUDIT   ] CWWKZ0058I: Monitoring dropins for applications.
+[AUDIT   ] CWPKI0820A: The default keystore has been created using the 'keystore_password' environment variable.
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://ae08c72be9da:9080/javametrics/
+[AUDIT   ] CWWKZ0001I: Application javametrics-rest started in 1.376 seconds.
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://ae08c72be9da:9080/javametrics-dash/
+[AUDIT   ] CWWKZ0001I: Application javametrics-dash started in 1.630 seconds.
+[AUDIT   ] CWWKT0016I: Web application available (default_host): http://ae08c72be9da:9080/
+[AUDIT   ] CWWKZ0001I: Application gameclient started in 8.208 seconds.
+[AUDIT   ] CWWKF0015I: The server has the following interim fixes active in the runtime: PH06340. For a full listing of installed fixes run: productInfo version --ifixes
+[AUDIT   ] CWWKF0012I: The server installed the following features: [appSecurity-2.0, distributedMap-1.0, el-3.0, jaxrs-2.0, jaxrsClient-2.0, jndi-1.0, json-1.0, jsonp-1.0, jsp-2.3, servlet-3.1, ssl-1.0, transportSecurity-1.0, websocket-1.1].
+[AUDIT   ] CWWKF0011I: The server defaultServer is ready to run a smarter planet.
+[ci:868af4ef-3129-4428-b0a9-98f65ce1f291] Client instance started. 
+[ci:868af4ef-3129-4428-b0a9-98f65ce1f291] Instance informed of start.
+***********************************************************************************************
+*                                                                                             *
+*    Agent has started. Watch at: http://localhost:9080/                                   *
+*                                                                                             *
+***********************************************************************************************
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [Sep-21 15:25:00.984] Attempting to connect
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [Sep-21 15:25:01.153] Websocket session h6ZvHu4K7tZXcyDFkX4dV52 opened with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+shouldIAttackCreature
+whereShouldIGo
+Going to (43, 352)
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 2
+Attack creature!!!
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 2
+Attack creature!!!
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:33.139] ClientState was first informed that round is complete: 105519
+Round is over, waiting 19 seconds.
+close. CloseReason[1000]
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:52.868] Websocket session h6ZvHu4K7tZXcyDFkX4dV52 closed CloseReason[1000] with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:52.991] Attempting to connect
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:53.071] Websocket session 2bmA2TX6WbCEeaHzTXul_e_ opened with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+Update: Round is over, waiting for new round..
+close. CloseReason[1000]
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:53.139] Websocket session 2bmA2TX6WbCEeaHzTXul_e_ closed CloseReason[1000] with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:54.346] Attempting to connect
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [2977t] [Sep-21 15:25:54.419] Websocket session x17B8RLhOm6ZaVcndlXNs3f opened with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+shouldIAttackCreature
+whereShouldIGo
+Going to (277, 240)
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 2
+Attack creature!!!
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+whereShouldIGo
+Going to (51, 141)
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 94
+Main Player Level: 1
+Enemy Level: 3
+unprovokedAttackShouldIAttackBack
+Main Player HP: 93
+Main Player Level: 1
+Enemy Level: 10
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 63
+Main Player Level: 1
+Enemy Level: 3
+Defense attack!!!
+shouldIAttackCreature
+whereShouldIGo
+Going to (29, 127)
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+whereShouldIGo
+Going to (321, 18)
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+Main Player HP: 57
+Main Player Level: 1
+Enemy Level: 2
+Attack creature!!!
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+whereShouldIGo
+Going to (200, 70)
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 52
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 47
+Main Player Level: 1
+Enemy Level: 5
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+whereShouldIGo
+Going to (220, 323)
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 35
+Main Player Level: 1
+Enemy Level: 4
+unprovokedAttackShouldIAttackBack
+Main Player HP: 34
+Main Player Level: 1
+Enemy Level: 7
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 26
+Main Player Level: 1
+Enemy Level: 4
+shouldIAttackCreature
+Main Player HP: 26
+Main Player Level: 1
+Enemy Level: 4
+Main Player HP: 26
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 26
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 26
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+shouldIAttackCreature
+Main Player HP: 16
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 16
+Main Player Level: 1
+Enemy Level: 4
+Encountered Armour: FEET, 2
+unprovokedAttackShouldIAttackBack
+Main Player HP: 14
+Main Player Level: 1
+Enemy Level: 4
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 8
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 8
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 8
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 8
+Main Player Level: 1
+Enemy Level: 5
+Potion taken: Life Potion
+unprovokedAttackShouldIAttackBack
+Main Player HP: 27
+Main Player Level: 1
+Enemy Level: 6
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 4
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 4
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 4
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 4
+Main Player Level: 1
+Enemy Level: 7
+Previous Weapon Attack Range: 1
+New Weapon Attack Range: 6
+unprovokedAttackShouldIAttackBack
+Main Player HP: 1
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 1
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 1
+Main Player Level: 1
+Enemy Level: 1
+Main Player HP: 1
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 1
+Main Player Level: 1
+Enemy Level: 5
+Previous Weapon Hit Rating: 20
+New Weapon Hit Rating: 20
+Client was interrupted -- restarting.
+close. CloseReason[1000]
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [659t] [Sep-21 15:27:01.547] Websocket session x17B8RLhOm6ZaVcndlXNs3f closed CloseReason[1000] with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [659t] [Sep-21 15:27:01.638] Attempting to connect
+[client: d5a56965-970e-4d82-9c89-6c863e6f687e][inter] [659t] [Sep-21 15:27:01.716] Websocket session GzLgjUCXLg0BSHk8NqTR2tw opened with client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 6
+Previous Weapon Attack Range: 1
+New Weapon Attack Range: 6
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 6
+Previous Weapon Hit Rating: 20
+New Weapon Hit Rating: 20
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 3
+Previous Weapon Hit Rating: 20
+New Weapon Hit Rating: 20
+shouldIAttackCreature
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 100
+Main Player Level: 1
+Enemy Level: 3
+Previous Weapon Attack Range: 1
+New Weapon Attack Range: 2
+unprovokedAttackShouldIAttackBack
+Main Player HP: 96
+Main Player Level: 1
+Enemy Level: 6
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 89
+Main Player Level: 1
+Enemy Level: 10
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 85
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 85
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 83
+Main Player Level: 1
+Enemy Level: 3
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 79
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 77
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 77
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 77
+Main Player Level: 1
+Enemy Level: 9
+Main Player HP: 77
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 69
+Main Player Level: 1
+Enemy Level: 9
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 65
+Main Player Level: 1
+Enemy Level: 6
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 63
+Main Player Level: 1
+Enemy Level: 8
+Main Player HP: 63
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 63
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 63
+Main Player Level: 1
+Enemy Level: 2
+Attack creature!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 60
+Main Player Level: 1
+Enemy Level: 8
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+whereShouldIGo
+Going to (126, 285)
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+whereShouldIGo
+Going to (151, 66)
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 8
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 8
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 3
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 5
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 8
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+WebSocket nLXShO-1vLBGxBVjhe0FS1Q opened for Web browser on client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+WebSocket nLXShO-1vLBGxBVjhe0FS1Q closed for Web browser on client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+[err] Exception in thread "com.roguecloud.client.container.LibertyClientBrowserSessionWrapper$ClientSessionThread" 
+[err] java.lang.IllegalStateException: write not allowed.  Most likely cause is that another Write or Close is in progress
+[err] 	at com.ibm.ws.wsoc.RemoteEndpointBasicImpl.sendText(RemoteEndpointBasicImpl.java:198)
+[err] 	at com.ibm.ws.wsoc.external.RemoteEndpointBasicExt.sendText(RemoteEndpointBasicExt.java:107)
+[err] 	at com.roguecloud.client.container.LibertyClientBrowserSessionWrapper$ClientSessionThread.innerRun(LibertyClientBrowserSessionWrapper.java:161)
+[err] 	at com.roguecloud.client.container.LibertyClientBrowserSessionWrapper$ClientSessionThread.run(LibertyClientBrowserSessionWrapper.java:113)
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Encountered Armour: CHEST, 8
+WebSocket D9OWI4XUCugl5DRd-WuuisU opened for Web browser on client instance 868af4ef-3129-4428-b0a9-98f65ce1f291
+shouldIAttackCreature
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 56
+Main Player Level: 1
+Enemy Level: 1
+Attack creature!!!
+Potion taken: Life Potion
+unprovokedAttackShouldIAttackBack
+Main Player HP: 77
+Main Player Level: 1
+Enemy Level: 8
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 62
+Main Player Level: 1
+Enemy Level: 6
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 57
+Main Player Level: 1
+Enemy Level: 6
+Defense attack!!!
+unprovokedAttackShouldIAttackBack
+Main Player HP: 49
+Main Player Level: 1
+Enemy Level: 7
+Defense attack!!!
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+whereShouldIGo
+Going to (334, 112)
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 8
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 8
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 7
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+shouldIAttackCreature
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 6
+Main Player HP: 46
+Main Player Level: 1
+Enemy Level: 10
