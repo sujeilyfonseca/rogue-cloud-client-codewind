@@ -40,15 +40,12 @@ import com.roguecloud.utils.ResourceLifecycleUtil;
  * 
  * This class establishes a connection to the server then receives messages from the server (passing them
  * to the appropriate handler after decompression). 
- **/
+ */
 public class LibertyClientEndpoint extends Endpoint {
 	
 	private final static Logger log = Logger.getInstance();
-
 	private final ClientState clientState;
-	
 	private final LibertySessionWrapper sessionWrapper;
-	
 	private RCUtilLatencySim latencySim;
 	
 	public LibertyClientEndpoint(LibertySessionWrapper sessionWrapper, ClientState clientState) {
@@ -66,35 +63,35 @@ public class LibertyClientEndpoint extends Endpoint {
 		// If the client instance is disposed, then immediately close all opened Sessions 
 		if(LibertyClientInstance.getInstance().isDisposed()) {
 			log.interesting("Ignoring onOpen on an endpoint with a closed LibertyClientInstance", clientState.getLogContext());
-			try { session.close(); } catch (IOException e) {  /*ignore*/ }
+			try { 
+				session.close(); 
+			} catch (IOException e) {  
+				// Ignore
+			}
+			
 			return;
 		}
 		
-		log.interesting("Websocket session "+session.getId()+" opened with client instance "+LibertyClientInstance.getInstance().getUuid(),
+		log.interesting("Websocket session "+session.getId() + " opened with client instance " + LibertyClientInstance.getInstance().getUuid(),
 				clientState.getLogContext());
 		
 		session.setMaxBinaryMessageBufferSize(128 * 1024);
 		session.addMessageHandler(new BinaryMessageHandler(this, session, sessionWrapper));
-		
-//		session.addMessageHandler(new StringMessageHandler(this, session));
-		
+				
 		sessionWrapper.newSession(session);
-		
-		ResourceLifecycleUtil.getInstance().addNewSession(ClientUtil.convertSessionToManagedResource(session));
 
+		ResourceLifecycleUtil.getInstance().addNewSession(ClientUtil.convertSessionToManagedResource(session));
 		LibertyClientInstance.getInstance().add(session);
 	}
 
 	@Override
 	public void onClose(Session session, CloseReason closeReason) {
-		System.out.println("close. "+closeReason);
-		log.interesting("Websocket session "+session.getId()+" closed "+closeReason
-				+" with client instance "+LibertyClientInstance.getInstance().getUuid(), clientState.getLogContext());
+		System.out.println("Close: " + closeReason);
+		log.interesting("Websocket session " + session.getId() + " closed: " + closeReason
+				+ " with client instance " + LibertyClientInstance.getInstance().getUuid(), clientState.getLogContext());
 		
 		sessionWrapper.onDisconnect(session);
-
 		ResourceLifecycleUtil.getInstance().removeSession(ClientUtil.convertSessionToManagedResource(session));
-
 	}
 
 	@Override
@@ -109,9 +106,11 @@ public class LibertyClientEndpoint extends Endpoint {
 		}
 	}
 
-	/** Messages to/from the server are sent as Deflate-compressed whole binary messages; the use of compression
+	/** 
+	 * Messages to/from the server are sent as Deflate-compressed whole binary messages; the use of compression
 	 * significantly reduces the overall side of the JSON payload. Once the message is decompressed, we pass
-	 * it to next step in the process. */
+	 * it to next step in the process. 
+	 */
 	private static class BinaryMessageHandler implements MessageHandler.Whole<byte[]> {
 		final LibertyClientEndpoint parent;
 		final Session session;
@@ -133,12 +132,13 @@ public class LibertyClientEndpoint extends Endpoint {
 			} else {
 				parent.sessionWrapper.receiveJson(str, session);				
 			}
-		}
-		
+		}	
 	}
 
-	/** This class is not currently used, but this class does allow us to support sending websocket JSON data 
-	 * as an uncompressed whole string, rather than as a compressed whole binary message.  */
+	/** 
+	 * This class is not currently used, but this class does allow us to support sending websocket JSON data 
+	 * as an uncompressed whole string, rather than as a compressed whole binary message.  
+	 */
 	@SuppressWarnings("unused")
 	private static class StringMessageHandler implements MessageHandler.Whole<String> {
 
@@ -154,6 +154,5 @@ public class LibertyClientEndpoint extends Endpoint {
 		public void onMessage(String s) {
 			parent.sessionWrapper.receiveJson(s, session);
 		}
-		
 	}
 }

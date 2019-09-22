@@ -33,17 +33,13 @@ import com.roguecloud.json.actions.JsonStepActionResponse;
  * - To find the path from your current position to another point on the map, consider using FastPathSearch or AStarSearch.
  * 
  * See the IActionResponse class for more information on action responses.
- *  
- **/
+ */
 public class StepActionResponse implements IActionResponse {
 	
-	/** If the step action failed, this will indicate the reason. */
+	// If the step action failed, this will indicate the reason
 	public static enum StepActionFailReason { BLOCKED, OTHER };
-	
 	private final StepActionFailReason failReason;
-	
 	private final Position newPosition;
-	
 	private final boolean success;
 
 	public StepActionResponse(Position newPosition) {
@@ -62,19 +58,19 @@ public class StepActionResponse implements IActionResponse {
 		return failReason;
 	}
 
-	/** If the step succeeded, what is our new character position? */
+	/** 
+	 * If the step succeeded, what is our new character position?
+	 */
 	public Position getNewPosition() {
 		return newPosition;
 	}
 	
-
 	@Override
 	public boolean actionPerformed() {
 		return success;
 	}
 
-	// Internal Methods -----------------------------------------------------------------
-	
+	// Internal Methods 
 	public JsonStepActionResponse toJson() {
 		JsonStepActionResponse result = new JsonStepActionResponse();
 		result.setFailReason(failReason != null ? failReason.name() : null);
@@ -83,5 +79,4 @@ public class StepActionResponse implements IActionResponse {
 		
 		return result;
 	}
-
 }

@@ -55,7 +55,7 @@ import com.roguecloud.utils.Logger;
  * 
  * This class implements a simple interface over a WebSocket Session object, and is implemented using 
  * WebSphere Liberty/OpenLiberty's WebSocket library.
-*/
+ */
 public class LibertySessionWrapper implements ISessionWrapper {
 
 	private final static Logger log = Logger.getInstance();
@@ -66,42 +66,36 @@ public class LibertySessionWrapper implements ISessionWrapper {
 	
 	private final ClientStateOutputThread thread = new ClientStateOutputThread();
 	
-	/** Contains a list of sessions that have failed (disconnected/terminated connection), and that we have
-	 * attempted to restart.*/
+	// Contains a list of sessions that have failed (disconnected/terminated connection), and that we have
+	// attempted to restart
 	private final HashMap<String /* session uuid */, OldSessionInfo> sessionRestartedNew_synch = new HashMap<>();
 	
 	private enum WrapperState {
-		/* 1) The initial state of the wrapper before we start to connect: */
+		// 1) The initial state of the wrapper before we start to connect: 
 		INITIAL,
-		/* 2) We have sent JsonClientConnect to the server, and are waiting for a response: */
+		// 2) We have sent JsonClientConnect to the server, and are waiting for a response: 
 		WAITING_FOR_CONFIRMATION,
-		/* 3) We have received back a (successful) JsonClientConnectResponse from the server, and next we will 
-		 * resend the last 100 messages we sent to the server: */
+		// 3) We have received back a (successful) JsonClientConnectResponse from the server, and next we will 
+		// resend the last 100 messages we sent to the server: 
 		WAITING_FOR_RESEND,
-		/* 4) We have resent the last 100 messages, and are now sending any data that is put in the 
-		 * messagesToSend list: */
+		// 4) We have resent the last 100 messages, and are now sending any data that is put in the 
+		// messagesToSend list: */
 		ACTIVE,
-		/** 5) The websocket is no longer required and will be disposed of.*/
+		// 5) The websocket is no longer required and will be disposed of
 		COMPLETE }; 
 	
 	private WrapperState state_synch_lock;
-	
 	private static final long INITIAL_TIME_TO_WAIT_BETWEEN_CONN_FAILURES = 100l;
 	private long timeToWaitBetweenConnectFailuresInMsecs = INITIAL_TIME_TO_WAIT_BETWEEN_CONN_FAILURES;
-	
 	private static final long MAX_TIME_TO_WAIT_BETWEEN_CONN_FAILURES = 10 * 1000l;
-	
 	private final LibertyClientEndpoint hce;
 	
 	private Session session_synch_lock;
 	private Basic basicRemote_synch_lock;
-	
 	private boolean disposed = false;
 	
 	private String url_synch_lock  = null;
-
 	private boolean isInitialConnect_synch_lock = true;
-	
 	private RCUtilLatencySim latencySim;
 	
 	public LibertySessionWrapper(ClientState parent) {
@@ -116,7 +110,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		LibertyClientInstance.getInstance().add(this);
 	}
 
-	// This should only be called once.
+	// This should only be called once
 	public void initialConnect(String url) {
 		synchronized (lock) {
 			url_synch_lock = url;
@@ -133,19 +127,18 @@ public class LibertySessionWrapper implements ISessionWrapper {
 
 		log.interesting("Attempting to connect", parent.getLogContext());
 		final ClientEndpointConfig cec = ClientEndpointConfig.Builder.create().build();
-		//
-		// ClientManager client = ClientManager.createClient();
-
+		
 		WebSocketContainer c = ContainerProvider.getWebSocketContainer();
 		c.setDefaultMaxTextMessageBufferSize(1024 * 1024);
 		c.setDefaultMaxSessionIdleTimeout(2 * TimeUnit.MILLISECONDS.convert(RCSharedConstants.MAX_ROUND_LENGTH_IN_NANOS, TimeUnit.NANOSECONDS));
+		
 		try {
 			c.connectToServer(this.hce, cec, new URI(url));
-			// Wait for the endpoint to call us on success or failure.
+			
+			// Wait for the endpoint to call us on success or failure
 		} catch (DeploymentException | IOException | URISyntaxException e) {
 			errorOccurred(null);
 		}
-
 	}
 	
 	private void changeState(WrapperState ws) {
@@ -160,7 +153,9 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		}
 	}
 	
-	/** This should be called by the endpoint */
+	/** 
+	 * This should be called by the endpoint. 
+	 */
 	public void newSession(Session session) {
 		if(disposed) {
 			log.err("Attempt to add session on disposed wrapper", parent.getLogContext());
@@ -193,10 +188,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 				
 				session_synch_lock = session;
 				basicRemote_synch_lock = session.getBasicRemote();
-				basicRemote_synch_lock.sendBinary(CompressionUtils.compressToByteBuffer(connectJsonString));
-								
-//				basicRemote_synch_lock.sendText(om.writeValueAsString(ccj));
-				
+				basicRemote_synch_lock.sendBinary(CompressionUtils.compressToByteBuffer(connectJsonString));				
 			} catch (IOException e) {
 				e.printStackTrace();
 				errorOccurred(session);
@@ -226,13 +218,13 @@ public class LibertySessionWrapper implements ISessionWrapper {
 	private void waitingForRoundToStart(Session failedSession) {
 		boolean startThread = false;
 		
-		// Close failed session on a separate thread.
+		// Close failed session on a separate thread
 		new Thread() {
 			public void run() {
 				try {
 					failedSession.close();
 				} catch(Exception e) {
-					/* ignore*/
+					// Do nothing
 				}
 			};
 		}.start();
@@ -249,6 +241,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		}
 
 		if(startThread) {
+			
 			// Start a new thread so we aren't blocking the calling thread
 			new Thread() {
 				@Override
@@ -258,7 +251,6 @@ public class LibertySessionWrapper implements ISessionWrapper {
 						// Wait 10 seconds, since we are waiting for the round to start.
 						Thread.sleep(10 * 1000);
 					} catch (InterruptedException e) {
-						/* ignore*/
 						e.printStackTrace();
 					}
 					String url;
@@ -274,6 +266,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 	private void clearOldSessionsIfNeeded() {
 		synchronized (sessionRestartedNew_synch) {
 			if(sessionRestartedNew_synch.size() > 200) {
+				
 				// Expire session restoration entries that are older than 10 minutes.
 				long expireTimeInNanos = System.nanoTime()-TimeUnit.NANOSECONDS.convert(10, TimeUnit.MINUTES);
 				
@@ -282,15 +275,13 @@ public class LibertySessionWrapper implements ISessionWrapper {
 						it.remove();
 					}
 				}
-				
 			}
 		}
 	}
 	
 	private void errorOccurred(Session failedSession) {
-		// failSession should only be null when connect() fails..
 		
-//		if(failedSession == null) { return; }
+		// failSession should only be null when connect() fails
 		if(disposed == true) { return; }
 		
 		boolean startThread = false;
@@ -302,12 +293,11 @@ public class LibertySessionWrapper implements ISessionWrapper {
 					try {
 						failedSession.close();
 					} catch(Exception e) {
-						/* ignore*/
+						// Do nothing
 					}
 				};
 			}.start();
 		}
-		
 		
 		final long localTimeToWaitInMsecs = timeToWaitBetweenConnectFailuresInMsecs;
 				
@@ -332,6 +322,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		}
 		
 		if(startThread) {
+			
 			// Start a new thread so we aren't blocking the calling thread
 			new Thread() {
 				@Override
@@ -340,13 +331,13 @@ public class LibertySessionWrapper implements ISessionWrapper {
 					try {
 						Thread.sleep(localTimeToWaitInMsecs);
 					} catch (InterruptedException e) {
-						/* ignore */
 						e.printStackTrace();
 					}
 					String url;
 					synchronized(lock) {
 						url = url_synch_lock;
 					}
+					
 					connect(url);
 				}
 			}.start();
@@ -364,11 +355,11 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		} else {
 			thread.addMessageToSend(str);	
 		}
-		
-		
 	}
 	
-	// Called by endpoint message handler
+	/* 
+	 * Called by endpoint message handler.
+	 */
 	public void receiveJson(String str, Session session) {
 		
 		if(Logger.CLIENT_RECEIVED) {
@@ -408,7 +399,6 @@ public class LibertySessionWrapper implements ISessionWrapper {
 			e.printStackTrace();
 			log.severe("Exception on receive json: "+str, e, null);
 		}
-		
 	}
 
 
@@ -416,7 +406,6 @@ public class LibertySessionWrapper implements ISessionWrapper {
 	public void dispose() {
 		
 		disposed = true;
-		
 		thread.interrupt();
 		
 		synchronized(sessionRestartedNew_synch) {
@@ -426,11 +415,10 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		try {
 			session_synch_lock.close(); // Intentional non-synch call
 		} catch (IOException e) {
-			/* ignore */
+			// Do nothing
 		}
 		
 		thread.dispose();
-		
 		hce.dispose();
 	}
 	
@@ -445,16 +433,13 @@ public class LibertySessionWrapper implements ISessionWrapper {
 	 * When the parent state is ACTIVE, this thread will write messages in messagesToSend to the WebSocket.
 	 * 
 	 * If the connection fails, this class will inform the parent and the reconnection cycle will begin anew.
-	 *   
 	 * 
 	 * Only a single instance of this thread is created per LibertySessionWrapper. 
 	 */	
 	private class ClientStateOutputThread extends Thread implements ILatencySimReceiver {
 		
 		private final Object threadLock = new Object();
-		
 		private final List<String> messagesToSend_synch_threadLock = new ArrayList<>();
-		
 		private final List<String> last100Messages_synch_threadLock = new ArrayList<String>();
 		
 		public ClientStateOutputThread() {
@@ -468,7 +453,7 @@ public class LibertySessionWrapper implements ISessionWrapper {
 				innerRun();
 			} catch (InterruptedException e) {
 				if(disposed) {
-					/* This is expected on dispose. */
+					// This is expected on dispose
 					log.info("LSW client interrupted.", parent.getLogContext());
 				} else {
 					log.severe("Unexpected interrupt", e, parent.getLogContext());
@@ -482,23 +467,22 @@ public class LibertySessionWrapper implements ISessionWrapper {
 			List<String> localCopy = new ArrayList<>();
 			List<String> localLast100Messages = new ArrayList<>();
 
-			
 			while(!disposed && !parent.isRoundComplete()) {
 
 				boolean isActive = false;
 				
-				// Wait for new messages to write (or 100 msecs, whichever comes first).
+				// Wait for new messages to write (or 100 msecs, whichever comes first)
 				synchronized (threadLock) {
 					if(messagesToSend_synch_threadLock.size() == 0) {
 						threadLock.wait(100);
 					} else {
+						
 						// If the backing session is active, then try to write the messages
 						synchronized(LibertySessionWrapper.this.lock) {
 							if(state_synch_lock == WrapperState.ACTIVE ) {
 								isActive = true;
 							}
-						}
-						if(isActive) {
+						} if(isActive) {
 							localCopy.addAll(messagesToSend_synch_threadLock);
 							messagesToSend_synch_threadLock.clear();
 						}
@@ -508,13 +492,13 @@ public class LibertySessionWrapper implements ISessionWrapper {
 				
 				if(!isActive && localCopy.size() == 0) {
 					boolean wait = false;
+					
 					// TODO: EASY - Is this entire block a no-op?
 					synchronized(LibertySessionWrapper.this.lock) {
 						if(state_synch_lock == WrapperState.WAITING_FOR_RESEND) {
 							wait  = false;
 						}
-					}
-					if(wait) {
+					} if(wait) {
 						Thread.sleep(50);
 					}
 				}
@@ -532,14 +516,16 @@ public class LibertySessionWrapper implements ISessionWrapper {
 					if(state_synch_lock == WrapperState.WAITING_FOR_RESEND) {
 						
 						if(session_synch_lock.isOpen()) {
-							// Send the last 100 messages. This ensures that the server will receive any text that we sent during the outage. 
+							// Send the last 100 messages. This ensures that the server will receive any text that we sent during the outage
 							// If the server receives a duplicate of a message that it has already received, it will ignore it. 
 							for(String previousMessage : localLast100Messages) {
 								if(Logger.CLIENT_SENT) { log.interesting("Client sending previous text: "+previousMessage, parent.getLogContext()); }
-								if(NG.ENABLED) { NG.log(RCRuntime.GAME_TICKS.get(), "Sending previous text:" +previousMessage); }
+								if(NG.ENABLED) { 
+									NG.log(RCRuntime.GAME_TICKS.get(), "Sending previous text:" +previousMessage); 
+								}
+								
 								try {
 									basicRemote_synch_lock.sendBinary(CompressionUtils.compressToByteBuffer(previousMessage));
-//									basicRemote_synch_lock.sendText(previousMessage);
 								} catch (IOException e) {
 									log.err("Errored occured on writing previous text", e, parent.getLogContext());
 									e.printStackTrace();
@@ -559,13 +545,14 @@ public class LibertySessionWrapper implements ISessionWrapper {
 							errorOccurred(session_synch_lock);
 						}
 						
-					} // end if for state is 'waiting for resend' 
+					} // End if for state is 'waiting for resend' 
 					
 					outer: for(String str : localCopy) {
 						
 						if(RCRuntime.SIMULATE_BAD_CONNECTION) {
+							
 							// We simulate a bad connection by simulating a 10% chance of any individual message causing the
-							// connection to die. This is simulating a VERY unreliable connection.
+							// connection to die. This is simulating a VERY unreliable connection
 							if(Math.random() < .1) {
 								try {
 									if(NG.ENABLED) { NG.log(RCRuntime.GAME_TICKS.get(), "Nuking connection!"); }
@@ -587,7 +574,6 @@ public class LibertySessionWrapper implements ISessionWrapper {
 									if(NG.ENABLED) { NG.log(RCRuntime.GAME_TICKS.get(), "Sending current text:" +str); }
 									
 									basicRemote_synch_lock.sendBinary(CompressionUtils.compressToByteBuffer(str));
-//									basicRemote_synch_lock.sendText(str);
 								} catch (IOException e) {
 									log.err("Exception occurred on writing text", e, parent.getLogContext());
 									errorOccurred(session_synch_lock);
@@ -599,12 +585,11 @@ public class LibertySessionWrapper implements ISessionWrapper {
 							 }
 						}
 																	
-					} // end outer
+					} // End outer
 										
-				}  // end synchronized
+				}  // End synchronized
 				
 				localCopy.clear();
-				
 			}
 		}
 		
@@ -624,18 +609,18 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		}
 
 		public void dispose() {
-
 			synchronized(threadLock) {
 				messagesToSend_synch_threadLock.clear();
 				last100Messages_synch_threadLock.clear();
 			}			
 		}
-
 	}
 
 	
-	/** Information on a session that prematurely terminated, and that we have
-	 * attempted to reestablish. */
+	/** 
+	 * Information on a session that prematurely terminated, and that we have
+	 * attempted to reestablish. 
+	 */
 	static class OldSessionInfo {
 		final long infoCreationTimeInNanos;
 		
@@ -649,10 +634,8 @@ public class LibertySessionWrapper implements ISessionWrapper {
 		}
 	}
 
-
 	@Override
 	public boolean isDisposed() {
 		return disposed;
 	}
-
 }

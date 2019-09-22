@@ -70,5 +70,4 @@ public class JsonMoveInventoryItemActionResponse extends JsonAbstractTypedMessag
 	public boolean isDropItem() {
 		return dropItem;
 	}
-	
 }

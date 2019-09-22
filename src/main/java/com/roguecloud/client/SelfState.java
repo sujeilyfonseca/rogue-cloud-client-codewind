@@ -26,7 +26,7 @@ import com.roguecloud.creatures.ICreature;
  * - What items are in my inventory?
  * 
  * To get your character's creature object, call getPlayer(...).
- **/
+ */
 public class SelfState {
 
 	private final ICreature player;
@@ -35,9 +35,10 @@ public class SelfState {
 		this.player = player;
 	}
 	
-	/** Get an object representing the most recent state of the player character */
+	/** 
+	 * Get an object representing the most recent state of the player character.
+	 */
 	public ICreature getPlayer() {
 		return player;
 	}
-	
 }

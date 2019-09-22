@@ -19,12 +19,11 @@ package com.roguecloud.items;
 import com.roguecloud.json.JsonOwnableObject;
 
 /** 
- * An object that is in a players inventory (ie unlike a GroundObject, an OwnableObject has no physical coordinates.)
- **/
+ * An object that is in a players inventory (i.e., unlike a GroundObject, an OwnableObject has no physical coordinates).
+ */
 public class OwnableObject {
 
 	final long id;
-	
 	final IObject containedObject;
 
 	public OwnableObject(IObject containedObject, long objectId) {
@@ -34,12 +33,16 @@ public class OwnableObject {
 		this.id = objectId;
 	}
 	
-	/** Unique ID for the object*/
+	/** 
+	 * Unique ID for the object.
+	 */
 	public long getId() {
 		return id;
 	}
 	
-	/** The object that is owned by the player, and in their inventory: an instance of Armour, Weapon or DrinkableItem. */
+	/** 
+	 * The object that is owned by the player, and in their inventory: an instance of Armour, Weapon or DrinkableItem. 
+	 */
 	public IObject getContainedObject() {
 		return containedObject;
 	}
@@ -59,8 +62,9 @@ public class OwnableObject {
 		return oo.getId() == id;
 	}
 	
-	// Internal methods ----------------------------------------------------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public int hashCode() {
 		return (int)(id);
@@ -72,6 +76,4 @@ public class OwnableObject {
 		result.setContainedObject(containedObject.getId());
 		return result;
 	}
-
-
 }

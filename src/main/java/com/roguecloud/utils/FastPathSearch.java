@@ -58,7 +58,6 @@ import com.roguecloud.map.Tile;
  * To use only the Fast Path algorithm, without falling back to AStar, use doSearch(...)
  * 
  * (This class is used extensively on the server side to allow for increased scalability of monster AIs) 
- * 
  */
 public class FastPathSearch {
 
@@ -103,10 +102,12 @@ public class FastPathSearch {
 	}
 	
 	
-	/** When "bridging" between results from the fast path algorithm into results from the
+	/** 
+	 * When "bridging" between results from the fast path algorithm into results from the
 	 * a-star algorithm, there can be duplicate "dead path" elements, which can be removed.
 	 *   
-	 * Example: (0, 0), (1, 0), (0, 0), (1, 0), (1, 1) --> (0, 0), (1, 0), (1, 1)*/
+	 * Example: (0, 0), (1, 0), (0, 0), (1, 0), (1, 1) --> (0, 0), (1, 0), (1, 1)
+	 */
 	private static final List<Position> removeDeadPathIfNecessary(List<Position> currentList) {
 		int firstDupePos = -1;
 		int secondDupePos = -1;
@@ -156,7 +157,6 @@ public class FastPathSearch {
 		
 		
 		while(!currPosition.equals(goal)) {
-
 			int deltaX = goal.getX() - currPosition.getX();
 			int deltaY = goal.getY() - currPosition.getY();
 
@@ -171,8 +171,7 @@ public class FastPathSearch {
 			Position newPos = new Position(currPosition.getX()+currDirectionX, currPosition.getY()+currDirectionY );
 			result.add(newPos);
 			
-			currPosition = newPos;
-			
+			currPosition = newPos;	
 		}
 		
 		return result;
@@ -188,10 +187,10 @@ public class FastPathSearch {
 		if(!canDoX && !canDoY) {
 			return null;
 		} else if(canDoX && !canDoY) {
-			// can only do X
+			// Can only do X
 			doX = true;
 		} else if(canDoY && !canDoX) {
-			// can only do Y
+			// Can only do Y
 			doX = false;
 		} else {
 			if(currDirectionX == 0 && currDirectionY == 0) {
@@ -218,7 +217,6 @@ public class FastPathSearch {
 		}
 		
 		return new int[] { currDirectionX, currDirectionY };
-
 	}
 		
 	private static final boolean isValidTile(int x, int y, IMap map) {
@@ -240,20 +238,8 @@ public class FastPathSearch {
 			}
 		}
 		
-//		map.putTile(9, 9, new Tile(false, null, null));
-//		map.putTile(9, 8, new Tile(false, null, null));
-//		map.putTile(8, 9, new Tile(false, null, null));
-		
-		
-		for(int x = 0; x < map.getYSize(); x++) {
-//			map.putTile(x, 10, new Tile(false, null, null));
-		}
-		
 		Position start = new Position(1, 1);
-		
 		Position goal = new Position(20, 20);
-		
-//		List<Position> result = doSearch(start, goal, map);
 		List<Position> result = doSearchWithAStar(start, goal, map);
 		
 		result.forEach( e -> {
@@ -262,7 +248,4 @@ public class FastPathSearch {
 		
 		// Need to add check if we the path on the map is traversable, otherwise bail.
 	}
-	
-
-	
 }

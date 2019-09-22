@@ -29,25 +29,33 @@ import com.roguecloud.map.TileType;
  *
  * An object may be either on the ground (in which case it is contained inside an IGroundObject) or in an player's
  * inventory (in which case it is inside an OwnableObject). 
- * 
- **/
+ */
 public interface IObject {
 	
-	/** The type of the object, which can be used to determine which class it is: Armour, Weapon, or DrinkableItem. */
+	/** 
+	 * The type of the object, which can be used to determine which class it is: Armour, Weapon, or DrinkableItem. 
+	 */
 	public ObjectType getObjectType();
 	
-	/** Unique ID of the object */
+	/** 
+	 * Unique ID of the object. 
+	 */
 	public long getId();
 	
-	/** The name of the object (for example, Short Sword) */
+	/** 
+	 * The name of the object (for example, Short Sword).
+	 */
 	public String getName();
 
-	/** For internal use only: the graphical tile that represents the object. */
+	/** 
+	 * For internal use only: the graphical tile that represents the object. 
+	 */
 	public TileType getTileType();
 
-	/** The type of the object, which can be used to determine which class it is: Armour, Weapon, or DrinkableItem. */
+	/** 
+	 * The type of the object, which can be used to determine which class it is: Armour, Weapon, or DrinkableItem. 
+	 */
 	public static enum ObjectType {
 		WEAPON, ARMOUR, ITEM
 	}
-
 }

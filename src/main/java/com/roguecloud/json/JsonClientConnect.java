@@ -19,22 +19,17 @@ package com.roguecloud.json;
 public class JsonClientConnect extends JsonAbstractTypedMessage {
 	
 	public static final String TYPE = "ClientConnect"; 
-
+	
 	private String uuid;
-	
 	private String username;
-	
 	private String password;
-	
 	private String clientVersion;
 	
 	private Long roundToEnter;
-
-	Long lastActionResponseReceived = null;
+	private Long lastActionResponseReceived = null;
 	
 	private boolean initialConnect = false;
 
-	
 	public JsonClientConnect() {
 		setType(TYPE);
 	}

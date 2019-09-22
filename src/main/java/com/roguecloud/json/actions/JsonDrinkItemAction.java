@@ -43,6 +43,4 @@ public class JsonDrinkItemAction extends JsonAbstractTypedMessage {
 	public final void setId(long id) {
 		this.id = id;
 	}
-	
-	
 }

@@ -18,14 +18,11 @@ package com.roguecloud.json.browser;
 import com.roguecloud.json.JsonAbstractTypedMessage;
 
 public class JsonBrowserConnect extends JsonAbstractTypedMessage {
+	
 	public static final String TYPE = "JsonBrowserConnect";
-
 	private String uuid;
-
 	private String username;
-
 	private String password;
-
 	private String viewType;
 	
 	public JsonBrowserConnect() {
@@ -63,5 +60,4 @@ public class JsonBrowserConnect extends JsonAbstractTypedMessage {
 	public void setViewType(String viewType) {
 		this.viewType = viewType;
 	}
-	
 }

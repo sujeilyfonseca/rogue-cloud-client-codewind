@@ -25,12 +25,13 @@ package com.roguecloud.client;
  * - WebSphere Liberty/OpenLiberty's WebSocket implementation (for use when running inside Liberty)
  * - Tyrus Java-EE WebSocket reference implementation (for use when running outside Liberty)
  *
- *
  * For internal use only.
  */
 public interface IWebsocketFactory {
 	
-	/** Create a session wrapper, which will be used to connect to a remote Rogue Cloud server. See ISessionWrapper
-	 * for details.*/
+	/** 
+	 * Create a session wrapper, which will be used to connect to a remote Rogue Cloud server. See ISessionWrapper
+	 * for details.
+	 */
 	ISessionWrapper createSessionWrapper(ClientState cs);
 }

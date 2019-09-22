@@ -20,14 +20,14 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-/** Utility methods that can be used to print to the console; the actual console write operation 
+/** 
+ * Utility methods that can be used to print to the console; the actual console write operation 
  * is passed to InnerConsole, which will write on a separate thread. 
- * 
- * For internal use only. */
+ * For internal use only. 
+ */
 public class Console {
 
 	private static final Object sysoutLock = new Object(); 
-	
 	private static final InnerConsole console = InnerConsole.getInstance();
 	
     private static String getTime() {
@@ -50,14 +50,9 @@ public class Console {
 		synchronized(sysoutLock) {
 			System.out.println(str);
 		}
-    	
     }
 	
 	public static void println(String str, LogContext context) {
-		
-//		if(addTime) {
-//			str = getTime() + " "+	str;
-//		}
 		
 		if(context != null) {
 			str = context.getContext()+str;

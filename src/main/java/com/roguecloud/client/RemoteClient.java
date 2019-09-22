@@ -33,19 +33,14 @@ import com.roguecloud.utils.Logger;
  * To send actions to the server (move, attack, pick up item), call the sendAction(...) method with the action to perform.
  *  
  * See the sample agent code for an example of how this class' code is used. 
- **/
+ */
 public abstract class RemoteClient implements IClient {
 	
 	private static final Logger log = Logger.getInstance(); 
-
 	protected SelfState selfState = null;
-	
 	protected WorldState worldState = null;
-	
 	private ClientState clientState;
-	
 	protected EventLog eventLog;
-
 	boolean disposed = false;
 	
 	public void setClientState(ClientState clientState) {
@@ -98,7 +93,6 @@ public abstract class RemoteClient implements IClient {
 		return eventLog;
 	}
 	
-
 	void internalDispose() {
 		disposed = true;
 		selfState = null;
@@ -106,5 +100,4 @@ public abstract class RemoteClient implements IClient {
 		clientState = null;
 		eventLog = null;
 	}
-
 }

@@ -18,12 +18,11 @@ package com.roguecloud.map;
 
 /**
  * Some tiles have special attributes (such is 'is door'). These attributes implement this interface.  
- * 
- * For internal server use only */ 
+ * For internal server use only.
+ */ 
 public interface ITileProperty {
 
 	enum TilePropertyType { DOOR };
 	
 	public TilePropertyType getType();
-	
 }

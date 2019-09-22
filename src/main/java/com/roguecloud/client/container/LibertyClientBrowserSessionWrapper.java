@@ -32,18 +32,16 @@ public class LibertyClientBrowserSessionWrapper {
 	private static final boolean SIMULATE_INTERMITTENT_FAILURES = false;
 	
 	private static final Logger log = Logger.getInstance();
-
+	
 	private final Object lock = new Object();
 	
-	/** Synchronize on me when accessing, and when writing to */
+	// Synchronize on me when accessing, and when writing to 
 	private final Session session_synch;
 	
 	private final ClientSessionThread thread;
 	
 	private boolean disposed_synch_lock = false;
-	
-//	private LibertyWSClientWorldStateListener listener;
-	
+		
 	public LibertyClientBrowserSessionWrapper(Session session) {
 		if(session == null) { throw new IllegalArgumentException(); }
 		
@@ -62,20 +60,10 @@ public class LibertyClientBrowserSessionWrapper {
 		thread.addMessage(message);
 	}
 
-//	public void setListener(LibertyWSClientWorldStateListener listener) {
-//		this.listener = listener;
-//	}
-	
-//	public LibertyWSClientWorldStateListener getListener() {
-//		return listener;
-//	}
-	
-	
 	public void dispose() {
 		thread.interrupt();
 		
 		synchronized(lock) {
-			
 			if(disposed_synch_lock) { return; }
 			disposed_synch_lock = true;			
 		}
@@ -86,7 +74,7 @@ public class LibertyClientBrowserSessionWrapper {
 				try {
 					session_synch.close();
 				} catch (IOException e) {
-					/* ignore */
+					// Do nothing
 				}
 			}
 		}.start();
@@ -98,7 +86,6 @@ public class LibertyClientBrowserSessionWrapper {
 	private class ClientSessionThread extends Thread {
 		
 		private final List<String> messagesToSend_synch = new ArrayList<>();
-		
 		private final AtomicBoolean isRunning_synch = new AtomicBoolean(true);
 		
 		public ClientSessionThread() {
@@ -142,7 +129,7 @@ public class LibertyClientBrowserSessionWrapper {
 						System.out.println("nuking browser.");
 						
 					} catch(Exception e) {
-						/* ignore */
+						// Do nothing
 					}
 				}
 				
@@ -159,7 +146,6 @@ public class LibertyClientBrowserSessionWrapper {
 				synchronized(session_synch) {
 					for(String str : localMessagesToSend) {
 						b.sendText(str);
-//						System.out.println("sending text: "+str);
 					}
 				}
 				
@@ -192,5 +178,4 @@ public class LibertyClientBrowserSessionWrapper {
 			return disposed_synch_lock;
 		}
 	}
-	
 }

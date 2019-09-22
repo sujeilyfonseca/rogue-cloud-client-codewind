@@ -19,13 +19,11 @@ package com.roguecloud;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Constants that are shared through the codebase. 
- * 
- * This class is an internal class, for server use only. */
+ * The RCSharedConstants contains the constants shared through the code base. 
+ * This class is an internal class, for server use only. 
+ */
 public class RCSharedConstants {
 
 	public static final String CLIENT_API_VERSION = "19.4";
-	
 	public static final long MAX_ROUND_LENGTH_IN_NANOS = TimeUnit.NANOSECONDS.convert(10, TimeUnit.MINUTES);
-	
 }

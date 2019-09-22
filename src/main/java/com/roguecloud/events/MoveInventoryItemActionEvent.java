@@ -39,17 +39,23 @@ public class MoveInventoryItemActionEvent extends AbstractEvent {
 		this.dropItem = dropItem;
 	}
 
-	/** The creature that picked up or drooped the item. */
+	/** 
+	 * The creature that picked up or drooped the item. 
+	 */
 	public ICreature getCreature() {
 		return creature;
 	}
 	
-	/** The object that was picked up or dropped. */
+	/** 
+	 * The object that was picked up or dropped. 
+	 */
 	public IObject getObject() {
 		return object;
 	}
 	
-	/** Returns true if the character was dropping an item, and false if they were picking up an item  */
+	/** 
+	 * Returns true if the character was dropping an item, and false if they were picking up an item.
+	 */
 	public boolean isDropItem() {
 		return dropItem;
 	}
@@ -59,26 +65,33 @@ public class MoveInventoryItemActionEvent extends AbstractEvent {
 		return EventType.MOVE_INVENTORY_ITEM;
 	}
 
-	/** The coordinates on the map at which that the event occurred. */
+	/** 
+	 * The coordinates on the map at which that the event occurred. 
+	 */
 	@Override
 	public Position getWorldLocation() {
 		return creature.getPosition();
 	}
 
-	/** Returns true if the specified creature was involved in this event, or false otherwise. */
+	/** 
+	 * Returns true if the specified creature was involved in this event, or false otherwise. 
+	 */
 	@Override
 	public boolean isCreatureInvolved(ICreature creature) {
 		return this.creature.equals(creature);
 	}
 
-	/** Return a list of all the creatures involved in the event. */
+	/** 
+	 * Return a list of all the creatures involved in the event. 
+	 */
 	@Override
 	public ICreature[] getCreaturesInvolved() {
 		return new ICreature[] { creature };
 	}
-
-	// Internal methods ----------------------------------------------------------------------------
 	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public JsonAbstractTypedMessage toJson() {
 		JsonMoveInventoryItemActionEvent result = new JsonMoveInventoryItemActionEvent();
@@ -89,5 +102,4 @@ public class MoveInventoryItemActionEvent extends AbstractEvent {
 		result.setObjectId(object.getId());
 		return result;
 	}
-
 }

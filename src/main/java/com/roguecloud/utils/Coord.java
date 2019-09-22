@@ -18,9 +18,8 @@ package com.roguecloud.utils;
 
 /** 
  * A simple (x, y) coordinate.
- * 
  * This class is an internal class, for server use only. 
- **/
+ */
 public final class Coord {
 	final int x;
 	final int y;

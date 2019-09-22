@@ -18,13 +18,15 @@ package com.roguecloud.map;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A group of related tiles, used to create a larger sprite that is composed of multiple tiles */
+/** 
+ * A group of related tiles, used to create a larger sprite that is composed of multiple tiles.
+ */
 public final class TileTypeGroup {
 
-	// number of (32x32) tiles wide
+	// Number of (32x32) tiles wide
 	private final int width;
 
-	// number of (32x32) tiles tall
+	// Number of (32x32) tiles tall
 	private final int height;
 	
 	// 1 dimensional array of tiles, in the (x, y) form of: [ (0, 0), (1, 0), (0, 1), (1, 1) ]
@@ -62,8 +64,7 @@ public final class TileTypeGroup {
 		this.tileTypes = ttList.toArray(new TileType[ttList.size()]);
 		this.passable = bList.toArray(new Boolean[bList.size()]);
 	}
-
-
+	
 	public int getWidth() {
 		return width;
 	}
@@ -87,9 +88,10 @@ public final class TileTypeGroup {
 		return passable[index];		
 	}
 
-	
-	/** Create a new copy of this TileTypeGroup, but in the result replace the given tileType 
-	 * with the new given type */
+	/** 
+	 * Create a new copy of this TileTypeGroup, but in the result replace the given tileType 
+	 * with the new given type.
+	 */
 	public TileTypeGroup cloneAndReplace(TileType oldType, TileType newType) {
 		TileType[] newArray = new TileType[this.tileTypes.length];
 		
@@ -103,5 +105,4 @@ public final class TileTypeGroup {
 		
 		return new TileTypeGroup(this.width, this.height, newArray);
 	}
-	
 }

@@ -21,14 +21,16 @@ import com.roguecloud.json.actions.JsonCombatAction;
 
 /**
  * To attack another creature, create this object and send it with the client sendAction(...) method.
- * 
- * This will cause your character to attack another creature from your current position.
- *  
- **/
+ * This will cause your character to attack another creature from your current position.  
+ */
 public class CombatAction implements IAction {
 	
 	private final ICreature target;
 	
+	/**
+	 * Constructor for the CombatAction class
+	 * @param target - Desired target of the attack
+	 */
 	public CombatAction(ICreature target) {
 		if(target == null) { throw new IllegalArgumentException(); }
 		this.target = target;
@@ -39,18 +41,24 @@ public class CombatAction implements IAction {
 		return IAction.ActionType.COMBAT;
 	}
 
-	/** The desired target of the attack */
+	/** 
+	 * The desired target of the attack.
+	 */
 	public ICreature getTarget() {
 		return target;
 	}
 
+	/** 
+	 * Change the combat action to string.
+	 */
 	public String toString() {
-		return "CombatAction - target: "+target.getId();
+		return "CombatAction - target: " + target.getId();
 	}
 	
-	
-	// Internal methods ------------------------------------------
-	
+	/**
+	 * Internal method.
+	 * @return JSON Combat Action object
+	 */
 	public JsonCombatAction toJson() {
 		JsonCombatAction jca = new JsonCombatAction();
 		jca.setTargetCreatureId(target.getId());

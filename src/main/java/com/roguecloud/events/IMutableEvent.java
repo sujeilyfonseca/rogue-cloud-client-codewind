@@ -19,10 +19,9 @@ package com.roguecloud.events;
 import com.roguecloud.json.JsonAbstractTypedMessage;
 
 /**
- * Interface providing additional event methods that are used to pass events between the client and server. 
- *  
+ * Interface providing additional event methods that are used to pass events between the client and server.  
  * Server-side interface, for internal use only! For the public client API, see IEvent. 
- **/
+ */
 public interface IMutableEvent extends IEvent {
 
 	public JsonAbstractTypedMessage toJson();

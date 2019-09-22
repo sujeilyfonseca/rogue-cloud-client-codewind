@@ -37,27 +37,16 @@ import com.roguecloud.map.TileType;
 public final class PlayerCreature  implements ICreature, IMutableCreature {
 
 	private final Object lock = new Object();
-	
 	private int currHp_synch_lock = -1;
-	
 	private int maxHp = -1;
-	
 	private int level = 1;
-	
 	private Weapon weapon = null;
-	
 	private Position position_synch_lock = null;
-	
 	private final ArmourSet armourSet;
-	
 	private final ArrayList<OwnableObject> ownableObject_synch_lock = new ArrayList<>();
-
 	private final ArrayList<Effect> activeEffects_synch_lock = new ArrayList<>();
-	
 	private final long creatureId;
-	
 	private final TileType tileType;
-	
 	private final String name;
 	
 	public PlayerCreature(String name, long creatureId, Position p, TileType tileType, ArmourSet armourSet) {
@@ -83,7 +72,6 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 		this.creatureId = json.getCreatureId();
 		this.tileType = new TileType((int)json.getTileTypeNumber());
 
-		
 		for(JsonEffect e : json.getEffects()){ 
 			activeEffects_synch_lock.add(new Effect(e));
 		}
@@ -106,7 +94,6 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 		this.maxHp = json.getMaxHp();
 		this.level = json.getLevel();
 		this.weapon = weapon;
-		
 		
 		armourSet.getAll().stream().forEach( e -> {
 			this.armourSet.put(e);
@@ -131,7 +118,6 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 		synchronized (lock) {
 			this.position_synch_lock = p;	
 		}
-		
 	}
 
 	@Override
@@ -223,9 +209,9 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 			result = new PlayerCreature(this.name, this.creatureId, this.position_synch_lock, this.tileType, this.armourSet.fullClone());
 			result.setCurrHp(currHp_synch_lock);
 		}
+		
 		result.setLevel(level);
 		result.setMaxHp(maxHp);
-		
 		result.setWeapon(weapon);
 		
 		synchronized(lock) {
@@ -233,7 +219,6 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 		}
 		
 		return result;
-		
 	}
 
 	@Override
@@ -273,7 +258,6 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 			return "PlayerCreature - id: "+creatureId+" position: "+position_synch_lock;
 		}
 	}
-
 
 	@Override
 	public void addEffect(Effect e) {
@@ -317,5 +301,4 @@ public final class PlayerCreature  implements ICreature, IMutableCreature {
 			return t.getLastTickUpdated();
 		}
 	}
-	
 }

@@ -20,7 +20,7 @@ package com.roguecloud.json;
  * All classes that extend this class have a JSON field 'type' containing a name which represents
  * the specific JSON message they correspond to. This allows consumers of the JSON string to 
  * determine the message type without "guessing" based on the existence of specific fields. 
- **/
+ */
 public abstract class JsonAbstractTypedMessage {
 
 	private String type;
@@ -32,5 +32,4 @@ public abstract class JsonAbstractTypedMessage {
 	public void setType(String type) {
 		this.type = type;
 	}
-
 }

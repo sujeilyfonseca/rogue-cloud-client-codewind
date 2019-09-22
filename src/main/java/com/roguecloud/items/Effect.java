@@ -27,16 +27,12 @@ import com.roguecloud.json.JsonEffect;
  * - **Magnitude**: The strength of the effect. For example, if the effect is a heal, then magnitude is the number of HP healed per turn.
  * - **Remaining Turns**: For effects that last multiple turns, this is the number of remaining turns that the effect magnitude will apply.
  * - **Type**: The qualitative effect of the potion, such as healing the player, or reducing the damage taken.
- * 
- **/
+ */
 public class Effect {
 	
 	private final Object lock = new Object();
-
 	private final EffectType type;
-
 	private int remainingTurns_synch_lock;
-
 	private int magnitude_synch_lock;
 
 	public Effect(EffectType type, int magnitude) {
@@ -50,14 +46,18 @@ public class Effect {
 		this.type = EffectType.valueOf(json.getType());
 	}
 
-	/** How many turns will the effect last on the creature */
+	/** 
+	 * How many turns will the effect last on the creature.
+	 */
 	public int getRemainingTurns() {
 		synchronized (lock) {
 			return remainingTurns_synch_lock;
 		}
 	}
 
-	/** The strength of the effect: for positive effects, larger is better. */
+	/** 
+	 * The strength of the effect: for positive effects, larger is better. 
+	 */
 	public int getMagnitude() {
 		synchronized (lock) {
 			return magnitude_synch_lock;
@@ -85,7 +85,9 @@ public class Effect {
 		}
 	}
 	
-	/** The type of effect: does it heal or hurt, increase/decrease armour, etc. */
+	/** 
+	 * The type of effect: does it heal or hurt, increase/decrease armour, etc. 
+	 */
 	public static enum EffectType {
 		LIFE("Healing", "Poison"), VISION_RANGE("Eagle Sight", "Blindness"), DAMAGE_REDUCTION("Armour",
 				"Britleness"), INVISIBILITY("Invisibility");
@@ -111,9 +113,10 @@ public class Effect {
 		}
 
 	};
-	
-	// Internal methods --------------------------------------------------------------
 
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public void setRemainingTurns(int remainingTurns) {
 		synchronized (lock) {
 			this.remainingTurns_synch_lock = remainingTurns;
@@ -143,6 +146,4 @@ public class Effect {
 			return result;
 		}
 	}
-
-
 }

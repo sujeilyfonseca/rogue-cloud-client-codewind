@@ -21,10 +21,10 @@ public class JsonVisibleObject {
 	JsonPosition position;
 	
 	long objectId;
-	
 	long containedObjectId;
 	
 	public JsonVisibleObject() {
+		
 	}
 	
 	public long getObjectId() {
@@ -50,5 +50,4 @@ public class JsonVisibleObject {
 	public long getContainedObjectId() {
 		return containedObjectId;
 	}
-	
 }

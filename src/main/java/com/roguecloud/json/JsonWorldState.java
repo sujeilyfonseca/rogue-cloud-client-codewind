@@ -20,32 +20,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonWorldState {
+	
 	int clientViewPosX;
 	int clientViewPosY;
-
 	int clientViewWidth;
 	int clientViewHeight;
-	
 	int worldWidth;
 	int worldHeight;
-	
 	int roundSecsLeft;
 
 	private List<JsonDrinkableItem> drinkables = new ArrayList<>();
 	private List<JsonWeapon> weapons = new ArrayList<>();
 	private List<JsonArmour> armours = new ArrayList<>();
-	
 	private List<JsonViewFrame> frames = new ArrayList<>();
-
 	private List<JsonVisibleCreature> visibleCreatures = new ArrayList<>();
-	
 	private List<JsonVisibleObject> visibleObjects = new ArrayList<>();
-	
 	private List<Object> tileProperties = new ArrayList<>();
-	
 	private List<Object> events = new ArrayList<>();
 	
 	public JsonWorldState() {
+		
 	}
 
 	public void setDrinkables(List<JsonDrinkableItem> drinkables) {
@@ -128,7 +122,6 @@ public class JsonWorldState {
 	public void setArmours(List<JsonArmour> armours) {
 		this.armours = armours;
 	}
-
 
 	public List<Object> getTileProperties() {
 		return tileProperties;
@@ -219,5 +212,4 @@ public class JsonWorldState {
 			this.data = data;
 		}
 	}
-
 }

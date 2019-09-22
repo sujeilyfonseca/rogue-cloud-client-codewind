@@ -19,13 +19,19 @@ package com.roguecloud.map;
 import java.util.HashMap;
 import java.util.Map;
 
-/** For internal server use only: the graphical representation of an item or tile */
+/** 
+ * For internal server use only: the graphical representation of an item or tile.
+ */
 public final class TileType {
 	
-	/** The numerical name of the .png file that contains the tile data. */
+	/** 
+	 * The numerical name of the .png file that contains the tile data. 
+	 */
 	private final int number;
 	
-	/** Rotation of the tile: 0, 90, 180, 270. */
+	/** 
+	 * Rotation of the tile: 0, 90, 180, 270. 
+	 */
 	private final int rotation;
 	
 	private static final HashMap<Integer, String> numberMap_synch = new HashMap<>();
@@ -39,8 +45,7 @@ public final class TileType {
     		numberMap_synch.put(number, null);
     	}
     }	 
-
-	
+    
     public TileType(int number, int rotation) {
     	this.number = number;
     	this.rotation = rotation;
@@ -57,7 +62,6 @@ public final class TileType {
     	}
     }	 
 
-    
     public int getNumber() {
 		return number;
 	}
@@ -71,11 +75,10 @@ public final class TileType {
     		HashMap<Integer, String> result = new HashMap<>();
     		
     		result.putAll(numberMap_synch);
-//    		ArrayList<Integer> result = new ArrayList<>();
-//    		result.addAll(numberMap_synch.keySet());
     		return result;
     	}
 	}
+    
 	// TODO: LOW - Find a better way to handle this map.
 
     @Override
@@ -85,7 +88,7 @@ public final class TileType {
     	}
     	TileType other = (TileType)obj;
     	
-    	// We intentionally do not compare name here.
+    	// We intentionally do not compare name here
     	return this.number == other.number && this.rotation == other.rotation;
     }
 }

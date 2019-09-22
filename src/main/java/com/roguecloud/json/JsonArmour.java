@@ -19,13 +19,10 @@ package com.roguecloud.json;
 public class JsonArmour {
 
 	private String type;
-	
 	private String name;
 	
 	private int defense;
-	
 	private long id;
-
 	private int tile;
 	
 	public String getType() {
@@ -67,6 +64,4 @@ public class JsonArmour {
 	public void setTile(int tile) {
 		this.tile = tile;
 	}
-	
-	
 }

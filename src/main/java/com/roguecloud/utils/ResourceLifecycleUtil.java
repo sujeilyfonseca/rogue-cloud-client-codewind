@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * 
  * See IManagedResource for a description of managed resources.
  * 
  * This class will automatically dispose of managed resources once they expire, based on 
@@ -35,13 +34,10 @@ import java.util.List;
  * This class is currently used to expire websockets that are open for too long.
  * 
  * This class is an internal class, for server use only.
- *
  */
 public class ResourceLifecycleUtil {
-	/** For internal use only */
 
 	private static final Logger log = Logger.getInstance();
-
 	private static final ResourceLifecycleUtil instance = new ResourceLifecycleUtil(); 
 	
 	private ResourceLifecycleUtil() {
@@ -53,10 +49,7 @@ public class ResourceLifecycleUtil {
 		return instance;
 	}
 	
-	// ----------------------------
-
 	private final ResourceLifeCycleThread thread;
-	
 	private final HashMap<String /* id*/, WrapperEntry> idToResourceMap_synch = new HashMap<>();
 	
 	public void addNewSession(IManagedResource wrapper) {
@@ -92,8 +85,10 @@ public class ResourceLifecycleUtil {
 	
 	}
 
-	/** Every X seconds, check if any of the resources are disposed (in which case remove them from the list) 
-	 * or are expired (in which case call dispose and remove them from the list) */
+	/** 
+	 * Every X seconds, check if any of the resources are disposed (in which case remove them from the list) 
+	 * or are expired (in which case call dispose and remove them from the list).
+	 */
 	private class ResourceLifeCycleThread extends Thread {
 		
 		public ResourceLifeCycleThread() {
@@ -143,14 +138,13 @@ public class ResourceLifecycleUtil {
 				} catch(Exception e) {
 					log.info("Exception in lifecycle thread:", e, null);
 				}
-				
 			}
 		}
-		
 	}
 	
-	
-	/** An actively managed resource inside the resource lifecycle map. */
+	/** 
+	 * An actively managed resource inside the resource life cycle map. 
+	 */
 	private static class WrapperEntry {
 		
 		IManagedResource wrapper;

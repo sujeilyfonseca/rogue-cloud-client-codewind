@@ -30,22 +30,31 @@ import javax.websocket.Session;
  * - Tyrus Java-EE WebSocket reference implementation (for use when running outside Liberty)
  * 
  * This class is for internal server use only.
- **/
+ */
 public interface ISessionWrapper  {
 	
-	/** Connect to a WebSocket at the specific URL */
+	/*
+	 * Connect to a WebSocket at the specific URL.
+	 */
 	void initialConnect(String url);
 
-	/** Write a (usually JSON) message to the WebSokcet */
+	/*
+	 * Write a (usually JSON) message to the WebSokce.
+	 */
 	void write(String str);
 
-	/** This method is called when a message is received on the WebSocket wrapped by this class */
+	/*
+	 * This method is called when a message is received on the WebSocket wrapped by this class.
+	 */
 	void receiveJson(String str, Session session);
 
-	/** Close the WebSocket and dispose of any other class resources*/
+	/*
+	 * Close the WebSocket and dispose of any other class resources.
+	 */
 	void dispose();
 
-	/** Whether or not the class has completed the dispose lifecycle.*/
+	/* 
+	 * Whether or not the class has completed the dispose life cycle.
+	 */
 	boolean isDisposed();
-
 }

@@ -32,7 +32,8 @@ import com.roguecloud.utils.Logger;
 
 /**
  * This class generates a JSON representation of all or part of the game world map, for consumption by HTML/JS-based browser UI. 
- * The algorithm used by this class will, in certain cases, only send small sections of the world, rather than the full world, in order to save bandwidth/processing.
+ * The algorithm used by this class will, in certain cases, only send small sections of the world, rather than the full world, 
+ * in order to save bandwidth/processing.
  *
  * This class is an internal class, for server use only.
  */
@@ -40,8 +41,9 @@ public class BrowserWebSocketClientShared {
 	
 	private static final Logger log = Logger.getInstance();
 
-	/** This class/method is used by both the client and the server, and will be run on both the game thread and the client message thread. */
-	
+	/** 
+	 * This class/method is used by both the client and the server, and will be run on both the game thread and the client message thread. 
+	 */
 	public static String generateBrowserJson(/*EngineWebsocketState ews, */ int currClientWorldX, int currClientWorldY, int newWorldPosX, int newWorldPosY,
 			int newWidth, int newHeight, IMap map, List<Position> changedTiles, List<ICreature> creatures, long ticks, JsonBuilderFactory factory) {
 
@@ -49,10 +51,10 @@ public class BrowserWebSocketClientShared {
 		
 		JsonObjectBuilder outer = factory.createObjectBuilder()
 				.add("frame", ticks)
-				.add("currWorldPosX", newWorldPosX) // the world X coord of the top left hand tile, eg browser tile (0, 0)
-				.add("currWorldPosY", newWorldPosY) // the world Y coord of the top left hand tile
-				.add("currViewHeight", newHeight) // the height of the visible bounding box of information we are sending the client  
-				.add("currViewWidth", newWidth) // the width of the visible bounding box of information we are sending the client 
+				.add("currWorldPosX", newWorldPosX) // The world X coord of the top left hand tile, e.g., browser tile (0, 0)
+				.add("currWorldPosY", newWorldPosY) // The world Y coord of the top left hand tile
+				.add("currViewHeight", newHeight)   // The height of the visible bounding box of information we are sending the client  
+				.add("currViewWidth", newWidth)     // The width of the visible bounding box of information we are sending the client 
 				; 
 		
 		boolean fullThingSent = false;
@@ -60,14 +62,12 @@ public class BrowserWebSocketClientShared {
 		Map<Long, ICreature> creaturesSeen = new HashMap<Long, ICreature>();
 		
 		// Add all creatures in the view 
-
 		if(creatures != null) {
 			creatures.forEach( e -> {
 				
 				if(Position.containedInBox(e.getPosition(), newWorldPosX, newWorldPosY, newWidth, newHeight)) {
 					creaturesSeen.put(e.getId(), e);
 				}
-			
 			});
 		} else {
 			for(int y = newWorldPosY; y < newWorldPosY+newHeight; y++) {
@@ -83,7 +83,7 @@ public class BrowserWebSocketClientShared {
 			}			
 		}
 		
-		if(newWorldPosX != currClientWorldX || newWorldPosY != currClientWorldY/* || newWidth != ssd.getCurrWidth() || newHeight != ssd.getCurrHeight()*/) {
+		if(newWorldPosX != currClientWorldX || newWorldPosY != currClientWorldY) {
 		
 			final int deltaX = newWorldPosX-currClientWorldX; // > 0 if the view has shifted right
 			final int deltaY = newWorldPosY-currClientWorldY; // > 0 if the view has shifted down
@@ -104,16 +104,12 @@ public class BrowserWebSocketClientShared {
 						for(int x = newWorldPosX; x < newWorldPosX+newWidth; x++) {
 							
 							data = getAndConvertTile(x, y, map, data, factory, ticks);
-//							Tile t = map.getTile(x, y);					
-//							data = data.add(convertSingle(t));
-							
 						}
 					}
 					frame = frame.add("data", data);
 				}
 				
 				frameData = frameData.add(frame);
-				
 				fullThingSent = true;
 			} else {
 								
@@ -132,11 +128,7 @@ public class BrowserWebSocketClientShared {
 			
 						for(int y = newWorldPosY; y < newWorldPosY+newHeight; y++) {
 							for(int x = newWorldPosX+newWidth-deltaX; x < newWorldPosX+newWidth; x++) {
-
 								data = getAndConvertTile(x, y, map, data, factory, ticks);
-//								Tile t = map.getTile(x, y);		
-//								data = data.add(convertSingle(t));
-								
 							}
 						}
 						frame = frame.add("data", data);
@@ -157,11 +149,7 @@ public class BrowserWebSocketClientShared {
 			
 						for(int y = newWorldPosY; y < newWorldPosY+newHeight; y++) {
 							for(int x = newWorldPosX; x < newWorldPosX+Math.abs(deltaX); x++) {
-								
 								data = getAndConvertTile(x, y, map, data, factory, ticks);
-//								Tile t = map.getTile(x, y);		
-//								data = data.add(convertSingle(t));
-								
 							}
 						}
 						frame = frame.add("data", data);
@@ -182,11 +170,7 @@ public class BrowserWebSocketClientShared {
 			
 						for(int y = newWorldPosY+newHeight-deltaY; y < newWorldPosY+newHeight; y++) {
 							for(int x = newWorldPosX; x < newWorldPosX+newWidth; x++) {
-								
 								data = getAndConvertTile(x, y, map, data, factory, ticks);
-//								Tile t = map.getTile(x, y);		
-//								data = data.add(convertSingle(t));
-								
 							}
 						}
 						frame = frame.add("data", data);
@@ -206,12 +190,7 @@ public class BrowserWebSocketClientShared {
 			
 						for(int y = newWorldPosY; y < newWorldPosY+Math.abs(deltaY); y++) {
 							for(int x = newWorldPosX; x < newWorldPosX+newWidth; x++) {
-
 								data = getAndConvertTile(x, y, map, data, factory, ticks);
-								
-//								Tile t = map.getTile(x, y);		
-//								data = data.add(convertSingle(t));
-								
 							}
 						}
 						frame = frame.add("data", data);
@@ -222,9 +201,7 @@ public class BrowserWebSocketClientShared {
 				} else {
 					log.severe("Unexpected browser client branch", null);
 				}
-						
 			}
-			
 		}
 		
 		if(fullThingSent) {
@@ -245,21 +222,11 @@ public class BrowserWebSocketClientShared {
 					.add("w", 1)
 					.add("h", 1);
 				
-//				Tile t = map.getTile(p);
-//				data = data.add(convertSingle(t));
 				data = getAndConvertTile(p.getX(), p.getY(), map, data, factory, ticks);
-				
 				frame = frame.add("data", data);
-				
 				frameData = frameData.add(frame);
 			}
 		}
-		
-
-//		ews.setCurrClientWorldX(newWorldPosX);
-//		ews.setCurrClientWorldY(newWorldPosY);
-//		ews.setHeight(newHeight);
-//		ews.setWidth(newWidth);
 		
 		outer = outer.add("frameData", frameData);
 
@@ -279,11 +246,7 @@ public class BrowserWebSocketClientShared {
 		});
 		
 		outer = outer.add("creatures", creatureArray);
-
-
 		String result = outer.build().toString();
-
-
 		return result;
 		
 	}
@@ -291,11 +254,6 @@ public class BrowserWebSocketClientShared {
 	private static JsonArrayBuilder getAndConvertTile(int x, int y, IMap map, JsonArrayBuilder data, JsonBuilderFactory factory, long ticks) {
 		
 		Tile t = map.getTile(x, y);
-		
-//		t.getCreatures().forEach( e -> {
-//			creaturesSeen.put(e.getId(), e);
-//		});
-		
 		data = data.add(convertSingle(t, factory, ticks));
 	
 		return data;
@@ -311,35 +269,24 @@ public class BrowserWebSocketClientShared {
 		
 		// When there are multiple creatures on the same tile, alternate between them every 500 msecs.
 		TileType[] ttArr = t.getTileTypeLayersForBrowserPresentation((int)(ticks/5));
-		// TODO: LOW - I have hardcoded an assumption of a tick rate of 100 msecs per frame for the above line.
-		
-//		// [
-		
+		// Assumption: Tick rate of 100 msecs per frame for the above line.
+
 		for(int c = 0; c < ttArr.length; c++) {			
-//			JsonArrayBuilder tileLayer = Json.createArrayBuilder();
-			// [
 			
 			// For each tile layer
 			TileType tt = ttArr[c];
 		
 			if(tt.getRotation() != 0) {
-				// [ number, rotation], 
 				outer = outer.add(
 						factory.createArrayBuilder().add(tt.getNumber()).add(tt.getRotation())
 				);
 			} else{
-				// [ number],
 				outer = outer.add(
 						factory.createArrayBuilder().add(tt.getNumber())
 				);
 			}
-			
-			// ]
-//			outer = outer.add(tileLayer);
 		}
 		
-		// ]
 		return outer;
-		
 	}	
 }

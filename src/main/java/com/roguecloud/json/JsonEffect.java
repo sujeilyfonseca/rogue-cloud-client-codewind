@@ -21,12 +21,11 @@ import java.util.Map;
 public class JsonEffect {
 	
 	private String type;
-	
 	private int remainingTurns;
-	
 	private int magnitude;
 	
 	public JsonEffect() {
+		
 	}
 	
 	public JsonEffect(Map<?, ?> map) {
@@ -58,5 +57,4 @@ public class JsonEffect {
 	public final void setMagnitude(int magnitude) {
 		this.magnitude = magnitude;
 	}
-
 }

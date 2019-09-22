@@ -25,13 +25,16 @@ import javax.ws.rs.core.Response;
 import com.roguecloud.utils.HttpClientUtils;
 import com.roguecloud.utils.Logger;
 
-/** Utility methods */
+/** 
+ * Utility methods for the client.
+ */
 public class ClientContainerUtil {
 
 	private static Logger log = Logger.getInstance();
 	
-	
-	/** Get the list of tiles (in json format) from the user, see TileList servlet for details. */
+	/** 
+	 * Get the list of tiles (in json format) from the user, see TileList servlet for details. 
+	 */
 	public static String getTileListJson(String resourceUrl) {
 		
 		Client client = HttpClientUtils.generateJaxRsHttpClient();
@@ -52,10 +55,8 @@ public class ClientContainerUtil {
 		String tileListJson = response.readEntity(String.class);
 		
 		return tileListJson;
-		
 	}
-	
-	
+		
 	public static void loudlyInformUser(String str) {
 		String[] list = new String[] {
 				"",
@@ -83,8 +84,5 @@ public class ClientContainerUtil {
 		};
 		
 		Arrays.asList(list).forEach( e -> System.err.println(e));
-		
 	}
-	
-	
 }

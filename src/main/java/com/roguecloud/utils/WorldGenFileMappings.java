@@ -25,8 +25,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-/** See GitHub documentation for a description of mappings, their purpose, and the 
- * file format. */
+/** 
+ * See GitHub documentation for a description of mappings, their purpose, and the file format. 
+ */
 public class WorldGenFileMappings {
 	
 	private final List<WorldGenFileMappingEntry> mappings; 
@@ -64,7 +65,7 @@ public class WorldGenFileMappings {
 					}
 				}
 				
-				// valid name
+				// Valid name
 			} else {
 				name = null; 
 			}
@@ -75,8 +76,7 @@ public class WorldGenFileMappings {
 		
 		br.close();
 		
-		this.mappings = Collections.unmodifiableList(localMappings);
-		
+		this.mappings = Collections.unmodifiableList(localMappings);	
 	}
 	
 
@@ -88,8 +88,7 @@ public class WorldGenFileMappings {
 		return mappings.stream().filter( e -> e.getLetter().equals(letter)).findFirst().orElse(null);
 	}
 	
-	public WorldGenFileMappingEntry getByRoomName(String roomNameParam) {
-		
+	public WorldGenFileMappingEntry getByRoomName(String roomNameParam) {	
 		for(WorldGenFileMappingEntry curr : mappings) {
 			
 			for(String entryName : curr.getRoomNames()) {
@@ -100,18 +99,7 @@ public class WorldGenFileMappings {
 		}
 		
 		return null;
-		
-//		return mappings.stream().filter( e -> e.getRoomName().equals(roomName)).findFirst().orElse(null);
 	}
-	
-//	public static void main(String[] args) {
-//		
-//		List<String> tokens = tokenizeInto3Blocks("a  \t 4d08ff  \t  New House SE");
-//		
-//		tokens.forEach(e -> { System.out.println(e);});
-//		
-//	}
-	
 	
 	/*
 	 * A tokenization that preserves whitespace after the first two tokens.
@@ -148,9 +136,9 @@ public class WorldGenFileMappings {
 		return tokens;
 		
 	}
-	
-	
+
 	public static class WorldGenFileMappingEntry {
+		
 		private String letter;
 		private String colour;
 		private List<String> roomNames;
@@ -171,8 +159,6 @@ public class WorldGenFileMappings {
 
 		public List<String> getRoomNames() {
 			return roomNames;
-		}
-		
+		}	
 	}
-	
 }

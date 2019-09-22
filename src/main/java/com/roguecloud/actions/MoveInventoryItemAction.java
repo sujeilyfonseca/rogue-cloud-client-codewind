@@ -24,12 +24,10 @@ import com.roguecloud.json.actions.JsonMoveInventoryItemAction;
  * 
  * If you wish to pick up an item, use the MoveInventoryItemAction.Type.PICK_UP_ITEM.
  * If you wish to drop an item, use the MoveInventoryItemAction.Type.DROP_ITEM.
- *  
- **/
+ */
 public class MoveInventoryItemAction implements IAction {
 
 	public static enum Type { PICK_UP_ITEM, DROP_ITEM };
-	
 	private final long objectId;
 	private final boolean dropItem;
 	
@@ -44,8 +42,7 @@ public class MoveInventoryItemAction implements IAction {
 	}
 
 	
-	// Internal methods ------------------------------------------
-	
+	// Internal methods 
 	public boolean isDropItem() {
 		return dropItem;
 	}

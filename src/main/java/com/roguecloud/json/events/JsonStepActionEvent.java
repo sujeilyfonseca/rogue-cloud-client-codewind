@@ -25,7 +25,6 @@ import com.roguecloud.json.JsonPosition;
 public class JsonStepActionEvent extends JsonAbstractTypedMessage {
 
 	public static final String TYPE = "JsonStepActionEvent";
-
 	private JsonPosition from;
 	private JsonPosition to;
 	private long creatureId;
@@ -42,7 +41,6 @@ public class JsonStepActionEvent extends JsonAbstractTypedMessage {
 		creatureId = RCRuntime.convertToLong(map.get("creatureId"));
 		frame = RCRuntime.convertToLong(map.get("frame"));
 		eventId  = RCRuntime.convertToLong(map.get("eventId"));
-		
 	}
 	
 	public JsonStepActionEvent() {
@@ -88,5 +86,4 @@ public class JsonStepActionEvent extends JsonAbstractTypedMessage {
 	public void setEventId(long eventId) {
 		this.eventId = eventId;
 	}
-
 }

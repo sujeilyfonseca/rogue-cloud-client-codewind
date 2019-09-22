@@ -60,49 +60,35 @@ import com.roguecloud.utils.Logger;
  * in the same round it died in, but it is now running in a new "context" without any previously saved data.
  * 
  * This class is for internal server-side use only. 
- **/
+ */
 public class ClientState {	
 	
 	private static final Logger log = Logger.getInstance();
-	
 	private final String username;
-	
 	private final String password;
-	
 	private final String uuid;
-	
 	private final Object lock = new Object();
-	
 	private final ClientMessageReceiver messageReceiver;
-
 	private final LogContext logContext;
-	
 	private final ClientWorldState clientWorldState;
-	
 	private final RemoteClient remoteClient;
 
-	/* Messages to the server have a unique message ID; this counter keeps track of the next one */
+	// Messages to the server have a unique message ID; this counter keeps track of the next one 
 	private long nextSynchronousMessageId_synch_lock = 0; 
 	
-	/** When we send actions to the server, we expect a response w/ the original message ID; this keeps track
-	 * of actions we are waiting for responses for. */
+	//When we send actions to the server, we expect a response w/ the original message ID; this keeps track
+	// of actions we are waiting for responses for
 	private final HashMap<Long /* synchronous message id*/, ActionResponseFuture> mapMessageIdToFuture_synch = new HashMap<>();
 	
 	private final ISessionWrapper sessionWrapper;
-	
 	private Long currentRound_synch_lock;
-	
 	private boolean roundComplete_synch_lock = false;
 	
-	/** If the player dies, their agent is restarted;*/
+	// If the player dies, their agent is restarted
 	private boolean clientInterrupted_synch_lock = false;
-	
 	private final IWebsocketFactory factory;
-
 	private Integer nextRoundInXSeconds_synch_lock;
-	
 	private final PersistentKeyValueStore keyValueStore;
-	
 	private final int numberOfTimesPreviouslyInterrupted;
 	
 	public ClientState(String username, String password, String uuid, RemoteClient remoteClient, IWebsocketFactory websocketFactory, int numberOfTimesPreviouslyInterrupted) {
@@ -116,14 +102,14 @@ public class ClientState {
 		this.remoteClient = remoteClient;
 		
 		this.sessionWrapper = factory.createSessionWrapper(this);
-		if(this.sessionWrapper == null) {
+		
+		if (this.sessionWrapper == null) {
 			throw new IllegalStateException("Unable to create websocket session.");
 		}
 		
 		this.keyValueStore = new PersistentKeyValueStore(new File(new File(System.getProperty("user.home"), ".roguecloud"), "client-store"));
 		
 		this.numberOfTimesPreviouslyInterrupted = numberOfTimesPreviouslyInterrupted;
-		
 	}
 	
 	
@@ -139,7 +125,8 @@ public class ClientState {
 	
 	public void informInterrupted(long round, int interrupt) { 
 		synchronized(lock) {
-			// Ignore the interrupt if the round doesn't match.
+			
+			// Ignore the interrupt if the round doesn't match
 			if(currentRound_synch_lock == null || currentRound_synch_lock != round) {
 				return;
 			}
@@ -156,7 +143,6 @@ public class ClientState {
 	}
 	
 	public void informRoundIsComplete(int nextRoundInXSeconds) {
-		
 		synchronized(lock) {
 			this.nextRoundInXSeconds_synch_lock = nextRoundInXSeconds;
 
@@ -168,7 +154,6 @@ public class ClientState {
 		}
 
 		clientWorldState.informRoundComplete(nextRoundInXSeconds);
-		
 	}
 	
 	public Integer getNextRoundInXSeconds() {
@@ -236,9 +221,9 @@ public class ClientState {
 	}
 	
 	public void dispose() {
-		
 		clientWorldState.dispose();
 		remoteClient.internalDispose();
+		
 		synchronized(mapMessageIdToFuture_synch) {
 			mapMessageIdToFuture_synch.clear();
 		}
@@ -246,7 +231,7 @@ public class ClientState {
 		try {
 			sessionWrapper.dispose();
 		} catch(Exception e) {
-			/* ignore*/
+			// Do nothing
 		}
 		
 	}
@@ -254,8 +239,8 @@ public class ClientState {
 	public void processHealthCheck(JsonHealthCheck o) {
 		
 		JsonHealthCheckResponse response = new JsonHealthCheckResponse(o.getId());
-		
 		ObjectMapper om = new ObjectMapper();
+		
 		try {
 			sessionWrapper.write(om.writeValueAsString(response));
 		} catch (JsonProcessingException e) {
@@ -275,18 +260,16 @@ public class ClientState {
 		
 		if(arf == null) {
 			// TODO: LOW - Uncomment this and investigate.
-//			log.severe("Unable to find message id in message id map:"+messageId+" "+response.getClass().getName(), logContext);
+			// log.severe("Unable to find message id in message id map:"+messageId+" "+response.getClass().getName(), logContext);
 			return;
 		}
 		
 		arf.internalSetResponse(response);
-		
 	}
 	
 	public ActionResponseFuture sendAction(IAction action) throws JsonProcessingException {
 		
 		long id = getAndIncrementNextSynchronousMessageId();
-		
 		JsonActionMessage jam = new JsonActionMessage();
 		jam.setMessageId(id);
 		
@@ -336,9 +319,7 @@ public class ClientState {
 		}
 	}
 	
-	
 	public IKeyValueStore getKeyValueStore() {
 		return keyValueStore;
-	}
-		
+	}	
 }

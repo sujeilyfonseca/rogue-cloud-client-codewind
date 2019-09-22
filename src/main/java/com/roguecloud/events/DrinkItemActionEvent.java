@@ -22,8 +22,10 @@ import com.roguecloud.items.DrinkableItem;
 import com.roguecloud.json.JsonAbstractTypedMessage;
 import com.roguecloud.json.events.JsonDrinkItemActionEvent;
 
-/** When a character drinks a potion, this is recorded in this class as a world event. 
- * You can see who drank what, where they were, and what the effect was. */
+/** 
+ * When a character drinks a potion, this is recorded in this class as a world event. 
+ * You can see who drank what, where they were, and what the effect was. 
+ */
 public class DrinkItemActionEvent extends AbstractEvent {
 
 	private final ICreature creature;
@@ -42,25 +44,31 @@ public class DrinkItemActionEvent extends AbstractEvent {
 		return EventType.DRINK;
 	}
 
-	
-	/** The coordinates on the map at which the event occurred. */
+	/** 
+	 * The coordinates on the map at which the event occurred. 
+	 */
 	@Override
 	public Position getWorldLocation() {
 		return creature.getPosition();
 	}
-
 	
-	/** Return the item that was drank by the character. */
+	/** 
+	 * Return the item that was drank by the character. 
+	 */
 	public DrinkableItem getDrinkableItem() {
 		return di;
 	}
 	
-	/** Get the creature that drank the item. */
+	/** 
+	 * Get the creature that drank the item. 
+	 */
 	public ICreature getCreature() {
 		return creature;
 	}
 
-	/** Returns true if the specified creature was involved in this event, or false otherwise. */
+	/** 
+	 * Returns true if the specified creature was involved in this event, or false otherwise. 
+	 */
 	@Override
 	public boolean isCreatureInvolved(ICreature creature) {
 		if(creature == null) { throw new IllegalArgumentException(); }
@@ -70,17 +78,19 @@ public class DrinkItemActionEvent extends AbstractEvent {
 		}
 		
 		return false;
-		
 	}
 
-	/** Return a list of all the creatures involved in the event. */
+	/** 
+	 * Return a list of all the creatures involved in the event. 
+	 */
 	@Override
 	public ICreature[] getCreaturesInvolved() {
 		return new ICreature[] { creature };
 	}
 
-	// Internal methods ---------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public JsonAbstractTypedMessage toJson() {
 		JsonDrinkItemActionEvent result = new JsonDrinkItemActionEvent();
@@ -88,9 +98,6 @@ public class DrinkItemActionEvent extends AbstractEvent {
 		result.setId(id);
 		result.setPlayerId(creature.getId());
 		result.setObjectId(di.getId());
-		
 		return result;
 	}
-
-
 }

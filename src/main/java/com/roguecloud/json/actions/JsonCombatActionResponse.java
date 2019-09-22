@@ -25,7 +25,6 @@ import com.roguecloud.json.JsonActionMessageResponse;
 public class JsonCombatActionResponse extends JsonAbstractTypedMessage {
 	
 	public static final String TYPE = "JsonCombatActionResponse";
-		
 	
 	private String result;
 	
@@ -71,7 +70,5 @@ public class JsonCombatActionResponse extends JsonAbstractTypedMessage {
 
 	public void setTargetCreatureId(long targetCreatureId) {
 		this.targetCreatureId = targetCreatureId;
-	}
-
-	
+	}	
 }

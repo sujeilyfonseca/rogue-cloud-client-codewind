@@ -29,11 +29,12 @@ import javax.net.ssl.X509TrustManager;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 
-/** Utility to generate an untrusted JAX-RS client */
+/** 
+ * Utility to generate an untrusted JAX-RS client.
+ */
 public class HttpClientUtils {
 	
 	public static Client generateJaxRsHttpClient() {
-		
 		try {
 			SSLContext sslcontext = SSLContext.getInstance("TLS");
 			sslcontext.init(null, new TrustManager[]{new X509TrustManager() {
@@ -52,18 +53,17 @@ public class HttpClientUtils {
 			e.printStackTrace();
 		}
 		
-		return null;
-		 
+		return null; 
 	}
 
-	/** We trust all host names, regardless of certificate. Don't do this in production :P */
+	/** 
+	 * We trust all host names, regardless of certificate. Don't do this in production!!!
+	 */
 	private static class HNV implements HostnameVerifier {
 
 		@Override
 		public boolean verify(String hostname, SSLSession session) {
 			return true;
-		}
-		
+		}	
 	}
-
 }

@@ -33,8 +33,7 @@ import com.roguecloud.creatures.ICreature;
  * 
  * To switch to running this class (rather than SimpleAI), change the 'StartAgentServlet.constructMyAI()' method 
  * to return an instance of this class. 
- * 
- **/
+ */
 public class AdvancedAI extends RemoteClient {
 
 	private ActionResponseFuture waitingForActionResponse;
@@ -58,19 +57,14 @@ public class AdvancedAI extends RemoteClient {
 					// Our action succeeded, on to the next one.
 				} else {
 					// Handle the fact that the action failed, if necessary
-					
 				}
 			}
 		}
 		
-		IAction actionToPerform = NullAction.INSTANCE;
-		
 		// actionToPerform = ( what do you want your character to do? );
-		
+		IAction actionToPerform = NullAction.INSTANCE;		
 
 		// Send the action and store the response object 
 		waitingForActionResponse = sendAction(actionToPerform);
-
 	}
-
 }

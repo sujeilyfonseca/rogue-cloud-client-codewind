@@ -31,31 +31,23 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		setType(TYPE);
 	}
 
-	private List<String> newEventHtml = null;
-
 	private Long currentPlayerScore = null;
 	private Long currentPlayerRank = null;
-	
 	private Long currentPlayerBestTotalRank = null;
 	private Long currentPlayerBestTotalScore = null;
 
+	private List<String> newEventHtml = null;
 	private List<JsonScore> currentRoundScores = null;
-
 	private List<JsonServiceStatEntry> stats = null;
-
 	private List<JsonBrowserCombatEvent> combatEvents = null;
-	
 	private List<JsonItem> inventoryItems = null;
-	
 	private List<JsonItem> equipment = null;
 
-	/** Instance of either JsonActiveRoundInfo or JsonInactiveRoundInfo */
+	// Instance of either JsonActiveRoundInfo or JsonInactiveRoundInfo
 	private Object roundState = null;
 	
 	private long gameTicks = -1;
-	
-	// private List<CombatEvent>
-	
+		
 	public Object getRoundState() {
 		return roundState;
 	}
@@ -122,7 +114,6 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 
 	@JsonIgnore
 	public boolean utilContainsAnyData() {
-		
 		if(roundState != null) {
 			return true;
 		}
@@ -172,7 +163,6 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		this.currentPlayerBestTotalScore = currentPlayerBestTotalScore;
 	}
 
-
 	public static class JsonServiceStatEntry {
 		double actionsPerSecond;
 		int numberOfTimesDied;
@@ -219,11 +209,11 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		public void setPassLastHealthCheck(boolean passLastHealthCheck) {
 			this.passLastHealthCheck = passLastHealthCheck;
 		}
-		
-		
-
 	}
 
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Inner classes
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public static class JsonBrowserCombatEvent {
 		long x;
 		long y;
@@ -231,6 +221,7 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		long damage;
 		
 		public JsonBrowserCombatEvent() {
+			
 		}
 		
 		public JsonBrowserCombatEvent(long x, long y, long frame, long damage) {
@@ -271,7 +262,6 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		public void setDamage(long damage) {
 			this.damage = damage;
 		}
-
 	}
 
 	public static class JsonScore {
@@ -332,8 +322,6 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 		public void setName(String name) {
 			this.name = name;
 		}
-		
-		
 	}
 	
 	public List<JsonItem> getInventory() {
@@ -351,5 +339,4 @@ public class JsonUpdateBrowserUI extends JsonAbstractTypedMessage {
 	public void setEquipment(List<JsonItem> inventory) {
 		this.equipment = inventory;
 	}
-	
 }

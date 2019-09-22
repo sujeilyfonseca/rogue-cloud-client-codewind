@@ -23,6 +23,7 @@ public class JsonDoorProperty extends JsonAbstractTypedMessage{
 	public static final String TYPE = "JsonDoorProperty";
 	
 	JsonPosition position;
+	
 	boolean isOpen = false;
 	
 	public JsonDoorProperty(Map<String, Object> map) {
@@ -51,6 +52,4 @@ public class JsonDoorProperty extends JsonAbstractTypedMessage{
 	public void setPosition(JsonPosition position) {
 		this.position = position;
 	}
-	
-	
 }

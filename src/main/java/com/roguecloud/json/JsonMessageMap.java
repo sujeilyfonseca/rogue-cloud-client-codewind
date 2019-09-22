@@ -42,5 +42,4 @@ public final class JsonMessageMap {
 	public static HashMap<String, Class<?>> getMap() {
 		return map;
 	}
-	
 }
