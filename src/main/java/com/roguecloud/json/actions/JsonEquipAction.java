@@ -43,6 +43,4 @@ public class JsonEquipAction extends JsonAbstractTypedMessage {
 	public void setObjectId(long objectId) {
 		this.objectId = objectId;
 	}
-
-
 }

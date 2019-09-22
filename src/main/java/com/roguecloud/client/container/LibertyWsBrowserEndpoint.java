@@ -48,7 +48,7 @@ import com.roguecloud.utils.ResourceLifecycleUtil;
 /** 
  * WebSocket endpoint for the client browser UI. The only message that this endpoint expects to receive from the client is JsonBrowserConnect, at which
  * point LibertyWSClientWorldStateListener will write to the WebSocket whenever the world state changes.
- **/
+ */
 @ServerEndpoint("/api/browser")
 public class LibertyWsBrowserEndpoint {
 
@@ -60,7 +60,11 @@ public class LibertyWsBrowserEndpoint {
 		// If the client instance is disposed, then immediately close all opened Sessions 
 		if(LibertyClientInstance.getInstance().isDisposed()) {
 			log.interesting("Ignoring onOpen on an endpoint with a closed LibertyClientInstance", null);
-			try { session.close(); } catch (IOException e) {  /*ignore*/ }
+			try { 
+				session.close(); 
+			} catch (IOException e) {  
+				// Do nothing
+			}
 			return;
 		}
 
@@ -95,54 +99,46 @@ public class LibertyWsBrowserEndpoint {
 				JsonBrowserConnect jbc = (JsonBrowserConnect)om.readValue(message, JsonBrowserConnect.class);
 				
 				LibertyClientBrowserSessionWrapper wrapper = new LibertyClientBrowserSessionWrapper(session); 
-						//LibertyClientBrowserSessions.getInstance().addSession(jbc.getUuid(), session);
 				
 				ClientState cs = ClientMappingSingleton.getInstance().getClientState(jbc.getUuid());
 				if(cs == null || cs.getCurrentRound() == null) {
 					log.info("Closing browser web socket since round is currently not set.", null);
-					// If current round is null, wait 2 seconds then close the session immediately.
+					
+					// If current round is null, wait 2 seconds then close the session immediately
 					new Thread() {
 						public void run() {
 							RCUtils.sleep(2000);
 							try { session.close(); } catch (IOException e) {  /* ignore */ }
 						}
 					}.start();
+					
 					return;
 				} else {
 					LibertyWSClientWorldStateListener l = new LibertyWSClientWorldStateListener(wrapper, session);
-//					wrapper.setListener(l);
 					
 					WorldStateListeners.getInstance().addListener(l);
-					
-					
-//					cs.getClientWorldState().addListener( new LibertyWSClientWorldStateListener(wrapper, session) );	
-				}
-								
+				}					
 			} else {
 				log.severe("Unrecognized message type: "+messageType+" msg: "+message, null);
 				return;
 			}
 			
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.severe("Unexpected exception in WebSocketBrowserEndpoint", e, null);
 		}
-		
-		
 	}
-	
 
-	/** This class is informed whenever the Rogue Cloud server sends the client API new world state data. This class 
+	/** 
+	 * This class is informed whenever the Rogue Cloud server sends the client API new world state data. This class 
 	 * does minimal processing, and passes it along to the LiberyClientBrowserSessionWrapper, who is responsible
-	 * for sending that to the client's web browser (to be displayed in the Rogue Client Web UI). */
+	 * for sending that to the client's web browser (to be displayed in the Rogue Client Web UI). 
+	 */
 	public static class LibertyWSClientWorldStateListener implements ClientWorldStateListener {
 
 		private final LibertyClientBrowserSessionWrapper wrapper;
 		private final Session session;
-		
 		private final Object lock = new Object();
-		
 		private boolean threadStarted_synch_lock = false;
 		
 		public LibertyWSClientWorldStateListener(LibertyClientBrowserSessionWrapper wrapper, Session session) {
@@ -155,7 +151,7 @@ public class LibertyWsBrowserEndpoint {
 				int newWidth, int newHeight, IMap map, long ticks) {
 
 			// Every time ClientWorldState informs us that the world state has been updated, then convert the world state to JSON 
-			// and send it to the client browser connection.
+			// and send it to the client browser connection
 			if(session.isOpen()) {
 
 				String str = BrowserWebSocketClientShared.generateBrowserJson(currClientWorldX, currClientWorldY, newWorldPosX, newWorldPosY, 
@@ -190,8 +186,13 @@ public class LibertyWsBrowserEndpoint {
 			
 			new Thread() {
 				public void run() {
-					// TODO: LOW - Reconsider the logic behind this.
-					try { TimeUnit.SECONDS.sleep(nextRoundInXSeconds+2); } catch (InterruptedException e) { /* ignore*/ }
+					// TODO: LOW - Reconsider the logic behind this
+					try { 
+						TimeUnit.SECONDS.sleep(nextRoundInXSeconds+2); 
+					} catch (InterruptedException e) { 
+						// Do nothing 
+					}
+					
 					wrapper.dispose();		
 				}
 			}.start();
@@ -201,6 +202,5 @@ public class LibertyWsBrowserEndpoint {
 		public boolean isClientOpen() {
 			return session.isOpen();
 		}
-		
 	}
 }

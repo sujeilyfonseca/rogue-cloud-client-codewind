@@ -71,5 +71,4 @@ public class JsonDrinkItemActionResponse extends JsonAbstractTypedMessage {
 	public final void setEffect(JsonEffect effect) {
 		this.effect = effect;
 	}
-
 }

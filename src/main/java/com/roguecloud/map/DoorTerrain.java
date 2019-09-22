@@ -16,13 +16,14 @@
 
 package com.roguecloud.map;
 
-/** For internal use */
+/** 
+ * This class if for internal use.
+ */
 public class DoorTerrain implements ITerrain {
 	
 	// TODO: LOW - Remove this class once its replacement is in place.
 	
 	private final TileType tileType;
-	
 	private boolean isDoorOpen = false;
 	
 	public DoorTerrain(TileType tileType, boolean isDoorOpen) {
@@ -39,6 +40,4 @@ public class DoorTerrain implements ITerrain {
 	public boolean isPresentlyPassable() {
 		return isDoorOpen;
 	}
-	
-
 }

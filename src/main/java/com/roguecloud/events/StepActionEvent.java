@@ -23,7 +23,7 @@ import com.roguecloud.json.events.JsonStepActionEvent;
 
 /** 
  * When a creature moves from one position to another, this move will be recorded by this class.
- **/
+ */
 public class StepActionEvent extends AbstractEvent {
 
 	final ICreature creature;
@@ -50,17 +50,23 @@ public class StepActionEvent extends AbstractEvent {
 		return creature;
 	}
 
-	/** The source position */
+	/** 
+	 * The source position.
+	 */
 	public Position getFrom() {
 		return from;
 	}
 
-	/** The destination position (usually up, down, left or right of the source position )*/
+	/** 
+	 * The destination position (usually up, down, left or right of the source position).
+	 */
 	public Position getTo() {
 		return to;
 	}
 
-	/** The coordinates on the map at which that the event occurred. */
+	/** 
+	 * The coordinates on the map at which that the event occurred. 
+	 */
 	@Override
 	public Position getWorldLocation() {
 		return to;
@@ -71,7 +77,9 @@ public class StepActionEvent extends AbstractEvent {
 		return "("+id+") "+creature+" "+from+" -> "+to+" @ "+frame;
 	}
 
-	/** Returns true if the specified creature was involved in this event, or false otherwise. */
+	/** 
+	 * Returns true if the specified creature was involved in this event, or false otherwise. 
+	 */
 	@Override
 	public boolean isCreatureInvolved(ICreature creature) {
 		if(creature == null) { throw new IllegalArgumentException(); }
@@ -79,14 +87,17 @@ public class StepActionEvent extends AbstractEvent {
 		return this.creature.equals(creature);
 	}
 
-	/** Return a list of all the creatures involved in the event. */
+	/** 
+	 * Return a list of all the creatures involved in the event. 
+	 */
 	@Override
 	public ICreature[] getCreaturesInvolved() {
 		return new ICreature[] {  creature};
 	}
-
-	// Internal methods ------------------------------------------------------------------------------
 	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public JsonAbstractTypedMessage toJson() {
 		JsonStepActionEvent event = new JsonStepActionEvent();
@@ -97,6 +108,4 @@ public class StepActionEvent extends AbstractEvent {
 		event.setFrame(frame);
 		return event;
 	}
-
-
 }

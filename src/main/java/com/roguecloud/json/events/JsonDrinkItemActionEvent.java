@@ -26,11 +26,8 @@ public class JsonDrinkItemActionEvent extends JsonAbstractTypedMessage {
 	public static final String TYPE = "JsonDrinkItemActionEvent";
 
 	private long playerId;
-
 	private long objectId;
-
 	private long frame;
-
 	private long id;
 
 	public JsonDrinkItemActionEvent() {
@@ -76,5 +73,4 @@ public class JsonDrinkItemActionEvent extends JsonAbstractTypedMessage {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 }

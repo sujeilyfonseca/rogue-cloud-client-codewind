@@ -28,15 +28,15 @@ import javax.ws.rs.core.Response;
 import com.roguecloud.json.client.JsonUserRequest;
 import com.roguecloud.json.client.JsonUserRequestResponse;
 
-/** HTTP client utility method to register a new user in the server's user database if they are not already registered. */
+/** 
+ * HTTP client utility method to register a new user in the server's user database if they are not already registered. 
+ */
 public class RegisterUser {
 
 	public static ClientApiVersionReturn isClientApiVersionSupported(String apiVersion, String resourceUrl, long expireTimeInMsecs) {
 		
 		long expireTime = System.nanoTime() + TimeUnit.NANOSECONDS.convert(expireTimeInMsecs, TimeUnit.MILLISECONDS);
-		
 		boolean lastResult = false;
-		
 		boolean connectionSucceeded = false;
 		
 		Exception lastException = null;
@@ -49,7 +49,7 @@ public class RegisterUser {
 				httpResponseCode = issueClientApiVersionSupportedRequest(apiVersion, resourceUrl);
 				lastException = null;
 			} catch(Exception ce) {
-				/* unable to connect, try again after waiting. */
+				// Unable to connect, try again after waiting
 				RCUtils.sleep(1000);
 				lastException = ce;
 			}
@@ -59,7 +59,6 @@ public class RegisterUser {
 			}
 			
 			lastResult = (httpResponseCode == 200);
-			
 		}
 		
 		if(lastResult) {
@@ -67,7 +66,7 @@ public class RegisterUser {
 			return new ClientApiVersionReturn(true, null);
 		} 
 		
-		// API Version not supported, or unable to connect.
+		// API Version not supported, or unable to connect
 		return new ClientApiVersionReturn(lastResult, lastException);
 	}
 	
@@ -79,17 +78,17 @@ public class RegisterUser {
 		}
 		
 		WebTarget target = client.target(resourceUrl + "/services/apiVersion").path(apiVersion).path("supported");
-		
 		Invocation.Builder builder = target.request("application/json");		
 		
 		Response response = builder.get();
 
 		return response.getStatus();		
-
 	}
 
 	
-	/** Register a user if they don't already exist, otherwise check the password and return the user id.*/
+	/** 
+	 * Register a user if they don't already exist, otherwise check the password and return the user id.
+	 */
 	public static long registerAndGetUserId(String username, String password, String resourceUrl) {
 		
 		Client client = HttpClientUtils.generateJaxRsHttpClient();
@@ -99,7 +98,6 @@ public class RegisterUser {
 		}
 		
 		WebTarget target = client.target(resourceUrl + "/database/user/name").path(username);
-		
 		Invocation.Builder builder = target.request("application/json");
 		
 		JsonUserRequest userRequest = new JsonUserRequest();
@@ -121,11 +119,13 @@ public class RegisterUser {
 		JsonUserRequestResponse jsonResponse = response.readEntity(JsonUserRequestResponse.class);
 	
 		return jsonResponse.getUserId();
-		
 	}
 	
-	/** Return value for 'isClientApiVersionSupported' */
+	/** 
+	 * Return value for 'isClientApiVersionSupported'.
+	 */
 	public static class ClientApiVersionReturn {
+		
 		private final boolean supported;
 		private final Exception exception;
 		
@@ -134,7 +134,9 @@ public class RegisterUser {
 			this.exception = exception;
 		}
 
-		/** True if client api version is supported, false if not supported or an error occurred */
+		/** 
+		 * True if client api version is supported, false if not supported or an error occurred.
+		 */
 		public boolean isSupported() {
 			return supported;
 		}
@@ -142,7 +144,5 @@ public class RegisterUser {
 		public Exception getException() {
 			return exception;
 		}
-		
-		
 	}
 }

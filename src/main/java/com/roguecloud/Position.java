@@ -21,24 +21,36 @@ import com.roguecloud.map.IMap;
 
 /** 
  * A simple (x, y) coordinate. This class is immutable and thus will not change. 
- * 
- * In this class, there are a number of helper utility methods, such as: finding the distance between two positions, whether or not a position
- * is contained within a (x1, y1) to (x2, y2) rectangle, among others. 
- **/
+ * In this class, there are a number of helper utility methods, such as: finding the distance between two positions, 
+ * whether or not a position is contained within a (x1, y1) to (x2, y2) rectangle, among others. 
+ */
 public final class Position {
 
 	private final int x;
 	private final int y;
 	
+	/**
+	 * Constructor for the Position class.
+	 * @param x position
+	 * @param y position
+	 */
 	public Position(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Method to get the x position.
+	 * @return x position
+	 */
 	public final int getX() {
 		return x;
 	}
 
+	/**
+	 * Method to get the y position.
+	 * @return y position
+	 */
 	public final int getY() {
 		return y;
 	}
@@ -48,6 +60,9 @@ public final class Position {
 		return 32768*x + y;
 	}
 	
+	/** 
+	 * Whether the position is within the bounds of the world. 
+	 */
 	public static final boolean isValid(int x, int y, IMap m) {
 		if(x < 0) { return false; }
 		if(y < 0) { return false; } 
@@ -60,26 +75,14 @@ public final class Position {
 			return false;
 		}
 		
-		
 		return true;
 	}
 	
-	/** Whether the position is within the bounds of the world. */
+	/** 
+	 * Whether the position is within the bounds of the world. 
+	 */
 	public final boolean isValid(IMap m) {
 		return Position.isValid(this.x, this.y, m);
-//		if(x < 0) { return false; }
-//		if(y < 0) { return false; } 
-//		
-//		if(x > m.getXSize()-1) {
-//			return false;
-//		}
-//		
-//		if(y > m.getYSize()-1) {
-//			return false;
-//		}
-//		
-//		
-//		return true;
 	}
 	
 	
@@ -99,22 +102,30 @@ public final class Position {
 		return "("+x+", "+y+")";
 	}
 
-	/** Returns the Manhattan distance between two points: this is the distance without traveling diagonally. */
+	/** 
+	 * Returns the Manhattan distance between two points: this is the distance without traveling diagonally. 
+	 */
 	public static final int manhattanDistanceBetween(int x1, int y1, int x2, int y2) {
 		return Math.abs(x2 - x1) + Math.abs(y2 - y1);
 	}
 	
-	/** Returns the Manhattan distance between two points: this is the distance without traveling diagonally. */
+	/** 
+	 * Returns the Manhattan distance between two points: this is the distance without traveling diagonally. 
+	 */
 	public final int manhattanDistanceBetween(Position other) {
 		return Math.abs(getX() - other.getX()) + Math.abs(getY() - other.getY());
 	}
 	
-	/** Returns the absolute distance between two points */
+	/** 
+	 * Returns the absolute distance between two points .
+	 */
 	public final int distanceBetween(Position other) {
 		return (int)Math.sqrt( Math.pow( getX() - other.getX() , 2) + Math.pow( getY() - other.getY(), 2) );
 	}
 
-	/** Whether the given position is contained with a box: (startX, startY) -> (startX+width-1, startY+height-1)*/
+	/** 
+	 * Whether the given position is contained with a box: (startX, startY) -> (startX+width-1, startY+height-1).
+	 */
 	public final static boolean containedInBox(Position p, int startX, int startY, int width, int height) {
 		if(p.getX() < startX || p.getY() < startY) {
 			return false;
@@ -131,7 +142,9 @@ public final class Position {
 		return true;
 	}
 
-	/** Whether the given position is contained with a box: (startX, startY) -> (endX, endY), inclusive of endX and endY. */
+	/** 
+	 * Whether the given position is contained with a box: (startX, startY) -> (endX, endY), inclusive of endX and endY. 
+	 */
 	public final static boolean containedInBoxCoords(Position p, int startX, int startY, int endX, int endY) {
 
 		if(p.getX() < startX || p.getX() > endX) {
@@ -144,14 +157,14 @@ public final class Position {
 		
 		return true;
 	}
-
 	
-	/** Internal method onlu*/
+	/** 
+	 * This method is for internal method only.
+	 */
 	public final JsonPosition toJson() {
 		JsonPosition jp = new JsonPosition();
 		jp.setX(x);
 		jp.setY(y);
 		return jp;
 	}
-	
 }

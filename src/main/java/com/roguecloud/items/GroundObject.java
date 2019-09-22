@@ -21,15 +21,14 @@ import com.roguecloud.map.IMap;
 import com.roguecloud.map.Tile;
 import com.roguecloud.map.TileType;
 
-/** An object that exists on the ground in the world. See IGroundObject for public interface.  */
+/** 
+ * An object that exists on the ground in the world. See IGroundObject for public interface.  
+ */
 public class GroundObject implements IGroundObject {
 
 	private final Object lock = new Object();
-	
 	private Position position_synch_lock;
-	
 	private final IObject o;
-	
 	private final long id;
 	
 	public GroundObject(long id, IObject o, Position p) {
@@ -77,9 +76,7 @@ public class GroundObject implements IGroundObject {
 		if(other.getId() != this.id)  { return false; }
 		
 		if(!other.getPosition().equals(this.getPosition())) { return false; }
-		
-//		if(!other.o.equals(this.o)) { return false; }
-		
+				
 		return true;
 		
 	}
@@ -97,15 +94,16 @@ public class GroundObject implements IGroundObject {
 		}
 	}
 	
-	// Internal methods ---------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public int hashCode() {
 		return (int)(getId() + getPosition().hashCode());
 	}
 
 	public GroundObject shallowClone() {
-		// does not clone the contained object, but that SHOULD be immutable
+		// Does not clone the contained object, but that SHOULD be immutable
 		return new GroundObject(id, o, getPosition());
 	}
 	
@@ -114,5 +112,4 @@ public class GroundObject implements IGroundObject {
 			this.position_synch_lock = p;
 		}
 	}
-
 }

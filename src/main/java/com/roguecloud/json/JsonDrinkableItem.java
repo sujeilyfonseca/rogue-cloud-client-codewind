@@ -19,15 +19,12 @@ package com.roguecloud.json;
 public class JsonDrinkableItem {
 
 	private JsonEffect effect;
-	
 	private long id;
-	
 	private int tile;
 	
-	
 	public JsonDrinkableItem() {
+		
 	}
-	
 	
 	public JsonEffect getEffect() {
 		return effect;
@@ -52,6 +49,4 @@ public class JsonDrinkableItem {
 	public void setTile(int tile) {
 		this.tile = tile;
 	}
-	
-
 }

@@ -33,22 +33,20 @@ import com.roguecloud.utils.Logger;
  * passing it to the appropriate receive method.
  * 
  * For internal server use only.
- **/
+ */
 public class ClientMessageReceiver {
 	
 	private static final Logger log = Logger.getInstance();
-	
 
 	public ClientMessageReceiver() {
+		
 	}
 	
-	
-	// Called by endpoint message handler
+	// Called by end-point message handler
 	public void receiveJson(String messageType, Object o, String str, Session s, ClientState parent) {
 
 		try {
-			
-			if(messageType.equals(JsonFrameUpdate.TYPE) ) {
+			if(messageType.equals(JsonFrameUpdate.TYPE)) {
 				receiveMessage((JsonFrameUpdate)o, str, parent);
 				
 			} else if(messageType.equals(JsonActionMessageResponse.TYPE)) {
@@ -68,15 +66,12 @@ public class ClientMessageReceiver {
 			} else {
 				log.severe("Unrecognized JSON message type: "+str, parent.getLogContext());
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 			log.severe("Exception on receive json: "+str, e, null);
 		}
-		
 	}
 
-	
 	private void receiveMessage(JsonClientInterrupt o, ClientState parent) {
 		parent.informInterrupted(o.getRound(), o.getInterruptNumber());
 	}
@@ -85,16 +80,12 @@ public class ClientMessageReceiver {
 		parent.processHealthCheck(o);
 	}
 
-
 	public void receiveMessage(JsonFrameUpdate frameUpdate, String jsonText, ClientState state) {
-		
 		state.getClientWorldState().receiveFrameUpdate(frameUpdate);
 	}
 
 	public void receiveMessage(JsonActionMessageResponse o, ClientState state) {
-		
 		state.getClientWorldState().processActionResponse(o);
-		
 	}
 
 	public void receiveMessage(JsonRoundComplete o, ClientState state) {
@@ -102,9 +93,6 @@ public class ClientMessageReceiver {
 	}
 
 	public void receiveMessage(JsonUpdateBrowserUI o, ClientState state) {
-		
 		state.getClientWorldState().receiveBrowserUIUpdate(o);
-		
 	}
-	
 }

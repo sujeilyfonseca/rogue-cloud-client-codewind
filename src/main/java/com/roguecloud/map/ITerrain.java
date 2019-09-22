@@ -16,11 +16,12 @@
 
 package com.roguecloud.map;
 
-/** For internal server use only; to determine if a Tile is passable, call Tile's isPresentlyPassable() method. */
+/** 
+ * For internal server use only; to determine if a Tile is possible, call Tile's isPresentlyPassable() method. 
+ */
 public interface ITerrain {
 	
 	public TileType getTileType();
 	
 	public boolean isPresentlyPassable();
-
 }

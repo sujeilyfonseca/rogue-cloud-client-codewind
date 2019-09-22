@@ -25,8 +25,7 @@ package com.roguecloud.client;
  * - When your character dies, their code is restarted and all previous program state is lost. 
  * - This class can then be used to store objects across code restarts, so as to preserve that program state.
  * - This is similar to how a microservice must store data in an external database, which then must be reacquired on microservice restart.
- *    
- **/
+ */
 public interface IKeyValueStore {
 	
 	public void writeString(String key, String value);
@@ -36,5 +35,4 @@ public interface IKeyValueStore {
 	public String readString(String key);
 	
 	public Object readObject(String key);
-
 }

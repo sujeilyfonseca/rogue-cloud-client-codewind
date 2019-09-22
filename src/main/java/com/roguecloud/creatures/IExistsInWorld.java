@@ -19,12 +19,18 @@ package com.roguecloud.creatures;
 import com.roguecloud.Position;
 import com.roguecloud.map.TileType;
 
-/** A simple interface that exists on various entity classes in the universe. */
+/** 
+ * A simple interface that exists on various entity classes in the universe. 
+ */
 public interface IExistsInWorld {
 
-	/** Return the position of the entity in the world */
+	/** 
+	 * Return the position of the entity in the world.
+	 */
 	public Position getPosition();
 	
-	/** Return the tile sprite data values. */
+	/** 
+	 * Return the tile sprite data values. 
+	 */
 	public TileType getTileType();
 }

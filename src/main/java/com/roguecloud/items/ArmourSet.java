@@ -46,7 +46,9 @@ public class ArmourSet {
 		return result;
 	}
 	
-	/** Return an equipped piece of armour of the specified type, or null if no armour is equipped of that type. */
+	/** 
+	 * Return an equipped piece of armour of the specified type, or null if no armour is equipped of that type. 
+	 */
 	public Armour get(ArmourType at) {
 		if(at == null) { throw new IllegalArgumentException(); }
 		
@@ -55,8 +57,9 @@ public class ArmourSet {
 		}
 	}
 
-	// Internal methods only ----------------------------------------------------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public void put(Armour a) {
 		if(a == null) { throw new IllegalArgumentException(); }
 		synchronized(map_synch) {
@@ -70,7 +73,7 @@ public class ArmourSet {
 		synchronized(map_synch) {
 			Armour armourOfType = map_synch.remove(a.getType());
 			if(a == null || !armourOfType.equals(a)) { 
-				log.severe("Could not remove armour "+a +" from armour set.", null);
+				log.severe("Could not remove armour " + a + " from armour set.", null);
 				return false;
 			}
 			

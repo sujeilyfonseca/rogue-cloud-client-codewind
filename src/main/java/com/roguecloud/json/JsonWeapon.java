@@ -19,21 +19,19 @@ package com.roguecloud.json;
 public class JsonWeapon {
 
 	private String name;
+	private String type;
+	
 	private int numAttackDice;
 	private int attackDiceSize;
 	private int attackPlus;
-
 	private int hitRating;
-
-	private String type;
+	private int tile;
+	private int attackRange;
 
 	private long id;
 
-	private int tile;
-	
-	private int attackRange;
-
 	public JsonWeapon() {
+		
 	}
 	
 	public int getAttackRange() {
@@ -107,5 +105,4 @@ public class JsonWeapon {
 	public void setTile(int tile) {
 		this.tile = tile;
 	}
-
 }

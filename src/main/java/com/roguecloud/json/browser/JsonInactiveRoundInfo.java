@@ -50,5 +50,4 @@ public class JsonInactiveRoundInfo extends JsonAbstractTypedMessage {
 	public void setNextRoundStartInSecs(long nextRoundStartInSecs) {
 		this.nextRoundStartInSecs = nextRoundStartInSecs;
 	}
-
 }

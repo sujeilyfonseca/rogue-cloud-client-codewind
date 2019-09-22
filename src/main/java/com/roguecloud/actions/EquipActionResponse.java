@@ -21,19 +21,16 @@ import com.roguecloud.json.actions.JsonEquipActionResponse;
 
 /**
  * When a character equips an item (weapon/armour), the object will be returned indicating the result.
- * 
  * An equip item action can fail for the following reasons: 
  * 
  * - The item was not in the players inventory.
  * - The item is already equipped.
  * 
  * See the IActionResponse class for more information on action responses.
- *
- **/
+ */
 public class EquipActionResponse implements IActionResponse {
 
 	private final boolean success;
-	
 	private final long objectId;
 	
 	public EquipActionResponse(boolean success, long objectId) {
@@ -50,13 +47,11 @@ public class EquipActionResponse implements IActionResponse {
 		return success;
 	}
 
-	// Internal methods -----------------------------------------------------------
-	
+	// Internal method
 	public JsonAbstractTypedMessage toJson() {
 		JsonEquipActionResponse response = new JsonEquipActionResponse();
 		response.setObjectId(objectId);
 		response.setSuccess(success);
 		return response;
 	}
-
 }

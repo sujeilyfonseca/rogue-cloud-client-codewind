@@ -28,7 +28,6 @@ public class JsonActionMessageResponse extends JsonAbstractTypedMessage {
 	
 	public Object actionResponse;
 
-	
 	public long getMessageId() {
 		return messageId;
 	}

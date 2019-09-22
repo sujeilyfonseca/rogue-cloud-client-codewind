@@ -16,7 +16,9 @@
 
 package com.roguecloud.map;
 
-/** For internal server use only, see ITileProperty for public API. */
+/** 
+ * For internal server use only, see ITileProperty for public API. 
+ */
 public interface ITilePropertyMutable extends ITileProperty {
 
 	ITilePropertyMutable fullClone();

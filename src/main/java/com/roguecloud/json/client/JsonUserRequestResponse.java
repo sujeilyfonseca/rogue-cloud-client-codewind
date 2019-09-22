@@ -27,5 +27,4 @@ public class JsonUserRequestResponse {
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	
 }

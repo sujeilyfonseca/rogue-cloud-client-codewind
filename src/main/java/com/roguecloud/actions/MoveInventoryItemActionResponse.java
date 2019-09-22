@@ -28,13 +28,11 @@ import com.roguecloud.json.actions.JsonMoveInventoryItemActionResponse;
  * - The character attempted to drop an item that was not in their inventory.  
  * 
  * See the IActionResponse class for more information on action responses.
- *  
- **/
+ */
 public class MoveInventoryItemActionResponse implements IActionResponse {
 
 	final long objectId;
 	final boolean success;
-	
 	final boolean dropItem;
 	
 	public MoveInventoryItemActionResponse(long objectId, boolean success, boolean dropItem) {
@@ -58,11 +56,10 @@ public class MoveInventoryItemActionResponse implements IActionResponse {
 	
 	@Override
 	public String toString() {
-		return this.getClass().getName()+" - "+objectId+" success: "+success+" "+dropItem;
+		return this.getClass().getName() + " - " + objectId + " success: " + success + " " + dropItem;
 	}
 	
-	// Internal methods ---------------------------------------------------------------
-	
+	// Internal methods 
 	public long getObjectId() {
 		return objectId;
 	}
@@ -76,6 +73,4 @@ public class MoveInventoryItemActionResponse implements IActionResponse {
 		
 		return result;
 	}
-
-	
 }

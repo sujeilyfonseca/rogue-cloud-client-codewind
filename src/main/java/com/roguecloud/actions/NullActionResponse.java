@@ -20,18 +20,17 @@ package com.roguecloud.actions;
  * A null action response will always return false on actionPerformed(...). 
  * 
  * See the IActionResponse class for more information on action responses.
- *
- **/
+ */
 public class NullActionResponse implements IActionResponse {
 
 	public static final NullActionResponse INSTANCE = new NullActionResponse();
 	
 	private NullActionResponse() {
+		
 	}
 
 	@Override
 	public boolean actionPerformed() {
 		return false;
-	}
-	
+	}	
 }

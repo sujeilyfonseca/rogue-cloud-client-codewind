@@ -25,5 +25,4 @@ public class JsonNullActionResponse extends JsonAbstractTypedMessage {
 	public JsonNullActionResponse() {
 		setType(TYPE);
 	}
-	
 }

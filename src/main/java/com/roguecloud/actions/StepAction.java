@@ -24,8 +24,7 @@ import com.roguecloud.json.actions.JsonStepAction;
  * To move your character, create an instance of this action and call the client API's sendAction(...) command.
  * 
  * You may only move one step at a time, and may not move diagonally.  
- * 
- **/
+ */
 public class StepAction implements IAction {
 
 	final Position destPosition;
@@ -48,8 +47,7 @@ public class StepAction implements IAction {
 		return "StepAction: "+destPosition;
 	}
 	
-	// Internal methods -----------------------------------------
-	
+	// Internal methods 
 	public JsonStepAction toJson() {
 		JsonStepAction jsa = new JsonStepAction();
 		jsa.setDestination(destPosition.toJson());

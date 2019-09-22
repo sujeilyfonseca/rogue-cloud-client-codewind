@@ -27,7 +27,6 @@ public class JsonEquipActionEvent extends JsonAbstractTypedMessage {
 
 	private long creatureId;
 	private long objectId;
-
 	private long frame;
 	private long id;
 
@@ -72,5 +71,4 @@ public class JsonEquipActionEvent extends JsonAbstractTypedMessage {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 }

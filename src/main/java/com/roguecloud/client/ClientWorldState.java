@@ -94,48 +94,46 @@ import com.roguecloud.utils.Logger;
  * This class also receives BrowserUIUpdates, which are passed to the world state listeners.
  * 
  * This class is for internal server use only.
- **/
+ */
 public class ClientWorldState {
 	
 	private static final Logger log = Logger.getInstance();
-
 	private final Object lock = new Object();
-	
 	private final LogContext lc;
 	
-	/** Our parent class */
+	// Our parent class 
 	private final ClientState clientState;
 
-	/** The most recently received SelfState from the server */
+	// The most recently received SelfState from the server 
 	private SelfState selfState_synch_lock;
 	
-	/** Frame updates received from the server that we have not yet processed. */
+	// Frame updates received from the server that we have not yet processed
 	private final HashMap<Long /* frame id*/, JsonFrameUpdate> unprocessedFrames_synch_lock = new HashMap<>();
 
-	/** The id of the next frame that we _expect_ to received from the server. */
+	// The id of the next frame that we _expect_ to received from the server
 	private long nextFrame_synch_lock = 1;
 	
+	// Map synchronized lock
 	private RCCloneMap map_synch_lock = null;
 	
-	/** Players that our character has seen */
+	// Players that our character has seen 
 	private final HashMap<Long /* player id*/, PlayerCreature> playerDb_sync_lock = new HashMap<>();
 	
-	/** Monsters that our character has seen*/
+	// Monsters that our character has seen
 	private final HashMap<Long /* creature id*/, Monster> monsterDb_synch_lock = new HashMap<>();
 	
-	/** Objects that our character has seen*/
+	// Objects that our character has seen
 	private final HashMap<Long /* armour/weapon/drinkable id*/, IObject> objectDb_synch_lock = new HashMap<>();
 	
-	/** The X most recent events that occurred within our character's field of view */
+	// The X most recent events that occurred within our character's field of view 
 	private final EventLog event_log_synch_lock = new EventLog(200);
 	
-	/** An object that we pass to the client API, to allow the user to get the most recent map data. See that class description
-	 * for details. */
+	// An object that we pass to the client API, to allow the user to get the most recent map data. See that class description
+	// for details
 	private ClientMap clientMap;
 	
-	/** The most recently received world state */
+	// The most recently received world state 
 	private WorldState worldState;
-	// TODO: CURR - Why is this WorldState reference not synchronized (and with the appropriate naming convention)? 
 	
 	private boolean disposed = false;
 	
@@ -144,7 +142,9 @@ public class ClientWorldState {
 		this.lc = lc;
 	}
 
-	/** The server has replied to one of our player's action, so process it and pass it to the future */
+	/** 
+	 * The server has replied to one of our player's action, so process it and pass it to the future.
+	 */
 	public void processActionResponse(JsonActionMessageResponse o) {
 		if(disposed) { return; }
 		
@@ -167,15 +167,12 @@ public class ClientWorldState {
 			}
 			
 			CombatActionResponse car = new CombatActionResponse(CombatActionResponse.CombatActionResult.valueOf(r.getResult()), r.getDamageDealt(), creature);
-			
 			response = car;
 			
 		} else if(type.equals(JsonNullActionResponse.TYPE)) {
 			
 			NullActionResponse nar = NullActionResponse.INSTANCE;
-			
 			response = nar;
-			
 			
 		} else if(type.equals(JsonStepActionResponse.TYPE)) {
 			JsonStepActionResponse r = new JsonStepActionResponse(o);
@@ -215,11 +212,9 @@ public class ClientWorldState {
 		}
 		
 		clientState.forwardActionResponseToClient(o.getMessageId(), response);
-				
 	}
 	
 	public void informRoundComplete(int nextRoundInXSeconds) {
-		
 		WorldStateListeners.getInstance().getListeners().forEach( e -> {
 			e.roundComplete(nextRoundInXSeconds);
 		});
@@ -229,9 +224,7 @@ public class ClientWorldState {
 	public void receiveFrameUpdate(JsonFrameUpdate update) {
 		
 		if(disposed) { return; }
-		
-//		log.info("Processing frame: "+update.getFrame()+", game ticks: "+update.getGameTicks(), lc);
-		
+				
 		RCCloneMap mapToCallAIWith = null;
 	
 		JsonWorldState jws;
@@ -241,7 +234,6 @@ public class ClientWorldState {
 				// If the server has sent us a full frame, then we can throw away the delta frames.
 				unprocessedFrames_synch_lock.clear();
 				log.info("Throwing away delta frames, as we received a full frame: "+update.getFrame()+", with game ticks: "+update.getGameTicks(), lc);
-				
 				nextFrame_synch_lock = update.getFrame();
 				
 			} else if(update.getFrame() != nextFrame_synch_lock) {
@@ -298,9 +290,7 @@ public class ClientWorldState {
 						
 						Tile newTile = new Tile(passable, terrainList);
 						newTile.setLastTickUpdated(update.getGameTicks());
-						
 						localMap.putTile(worldPosX,  worldPosY, newTile);
-						
 						
 						index++;
 					}
@@ -308,7 +298,6 @@ public class ClientWorldState {
 			}
 			
 			// Update the object, player, and monster dbs, as well as the local map
-			
 			for(JsonArmour a : jws.getArmours()) {
 				Armour newArmour = new Armour(a);
 				objectDb_synch_lock.put(newArmour.getId(), newArmour);
@@ -359,8 +348,6 @@ public class ClientWorldState {
 						t.setLastTickUpdated(update.getGameTicks());
 						t.getCreaturesForModification().add(playerCreature);
 					}
-					
-					
 				} else {
 					
 					Monster monster = monsterDb_synch_lock.get(jvc.getCreatureId());
@@ -374,19 +361,17 @@ public class ClientWorldState {
 
 					Tile monsterTile = localMap.getTile(monster.getPosition());
 					if(monsterTile == null) {
-						/* ignore */
+						// Ignore 
 					} else {
 						monsterTile.setLastTickUpdated(update.getGameTicks());
 						monsterTile.getCreaturesForModification().add(monster);
-					}
-					
+					}	
 				}
-				
 			}
 			
 			for(JsonVisibleObject jvo : jws.getVisibleObjects()) {
-				
 				IObject containedObject = objectDb_synch_lock.get(jvo.getContainedObjectId());
+				
 				if(containedObject != null) {
 					GroundObject go = new GroundObject(jvo.getObjectId(), containedObject, jvo.getPosition().toPosition());
 					Tile t = localMap.getTile(go.getPosition());
@@ -401,12 +386,10 @@ public class ClientWorldState {
 				for(Object o : jws.getTileProperties()) {
 					
 					Map<String, Object> m = (Map<String, Object>)o;
-					
 					String type = (String)m.get("type");
 					
 					if(type.equals(JsonDoorProperty.TYPE)) {
 						JsonDoorProperty jdp = new JsonDoorProperty(m);
-						
 						Tile t = localMap.getTile(jdp.getPosition().getX(), jdp.getPosition().getY());
 						t.setLastTickUpdated(update.getGameTicks());
 						t.getTilePropertiesForModification().add(new DoorTileProperty(jdp));
@@ -415,18 +398,14 @@ public class ClientWorldState {
 			}
 			
 			// TODO: LOW - Add open door status indicator, because our client terrain does not currently communicate it.
-			
 			if(selfState_synch_lock == null) {
 				PlayerCreature playerCreature = playerDb_sync_lock.get(update.getSelfState().getPlayerId());
 				
 				selfState_synch_lock = new SelfState(playerCreature);
-			} else {
-//				selfState_synch_lock.internalUpdateFromJson(jss);				
-			}
+			} 
 			
 			// Update inventory
 			{
-				
 				List<OwnableObject> newInventory = new ArrayList<>();
 				update.getSelfState().getInventory().stream().forEach( e -> {
 					
@@ -453,7 +432,6 @@ public class ClientWorldState {
 				if(newInventory.stream().anyMatch( e -> !player.getInventory().contains(e))) {
 					log.severe("Could not locate one or more items in the updated player inventory.", lc);
 				}
-				
 			}
 			
 			// Process received world events
@@ -543,9 +521,7 @@ public class ClientWorldState {
 				event_log_synch_lock.internalClearOldEvents(update.getGameTicks());
 			}
 			
-			
 			nextFrame_synch_lock++;
-			
 			map_synch_lock = localMap;
 			
 			// If the next frame is already in the buffer, then process it now
@@ -558,15 +534,13 @@ public class ClientWorldState {
 				mapToCallAIWith = map_synch_lock;
 			}
 			
-		} // end synchronized on lock
+		} // End synchronized on lock
 		
 		if(mapToCallAIWith != null) {
 			
 			if(this.worldState == null) {
-				
 				this.clientMap = new ClientMap(mapToCallAIWith);
 				this.worldState = new WorldState(clientMap);
-				
 			} else {
 				this.clientMap.updateMap(mapToCallAIWith);
 			}
@@ -575,7 +549,7 @@ public class ClientWorldState {
 			this.worldState.setWorldWidth(jws.getWorldWidth());
 			this.worldState.setViewXPos(jws.getClientViewPosX());
 			this.worldState.setViewYPos(jws.getClientViewPosY());
-			this.worldState.setCurrentGameTick(update.getGameTicks()); // Yes, this is the correct game tick, even in the scenario where we have processed multiple frames.
+			this.worldState.setCurrentGameTick(update.getGameTicks()); // Yes, this is the correct game tick, even in the scenario where we have processed multiple frames
 			this.worldState.setViewWidth(jws.getClientViewWidth());
 			this.worldState.setViewHeight(jws.getClientViewHeight());
 			this.worldState.setRemainingSecondsInRound(jws.getRoundSecsLeft());
@@ -589,9 +563,7 @@ public class ClientWorldState {
 			WorldStateListeners.getInstance().getListeners().forEach( e -> {
 				e.worldStateUpdated(-1, -1, jws.getClientViewPosX(), jws.getClientViewPosY(), jws.getClientViewWidth(), jws.getClientViewHeight(), fmapToCallAIWith, update.getGameTicks());
 			});
-			
-		}
-		
+		}		
 	}
 	
 	private ICreature getCreatureFromDb(long id) {
@@ -605,18 +577,11 @@ public class ClientWorldState {
 	
 	private static ITerrain createTerrain(boolean passable, List<Integer> ints, LogContext lc) {
 		TileType tileType;
-//		TerrainType tt;
 		
 		if(ints.size() == 1) {
 			tileType = new TileType(ints.get(0));
-//			tt = TerrainType.NONE
-//			tt = TerrainTypeMap.getInstance().getTypeByValue(ints.get(1));
-			
 		} else if(ints.size() == 2) {
-			
-			tileType = new TileType(ints.get(0), ints.get(1));
-//			tt = TerrainTypeMap.getInstance().getTypeByValue(ints.get(1));			
-			
+			tileType = new TileType(ints.get(0), ints.get(1));			
 		} else {
 			log.severe("Invalid number of terrain values received", lc);
 			return null;
@@ -628,25 +593,7 @@ public class ClientWorldState {
 		} else {
 			terrain = new ImmutableImpassableTerrain(tileType);
 		}
-		
-		
-//		ITerrain terrain;
-//		if(tt == TerrainType.DOOR) {
-//			terrain = new DoorTerrain(tileType, false);
-//			
-//		} else if(tt == TerrainType.GENERIC_IMPASSABLE) {
-//			terrain = new ImmutableImpassableTerrain(tileType);
-//			
-//		} else if(tt == TerrainType.GENERIC_PASSABLE) {
-//			terrain = new ImmutableImpassableTerrain(tileType);
-//			
-//		} else if(tt == TerrainType.WALL) {
-//			terrain = null;
-//		} else {
-//			log.severe("Invalid terrain type: "+tt, lc);
-//			return null;
-//		}
-		
+	
 		return terrain;
 		
 	}
@@ -656,7 +603,6 @@ public class ClientWorldState {
 		WorldStateListeners.getInstance().getListeners().forEach( e -> {
 			e.receiveBrowserUIUpdate(o);
 		});
-		
 	}
 	
 	/** 
@@ -667,37 +613,35 @@ public class ClientWorldState {
 	 * This class ClientWorldStateListener, allows other sections of the client code to register themselves as listeners,
 	 * and to be inform when the world state is updated, a browser UI update is received, or the round completed.
 	 *  
-	 * Currently this interface is only implemented by LibertyWSClientWorldStateListener */
+	 * Currently this interface is only implemented by LibertyWSClientWorldStateListener 
+	 */
 	public static interface ClientWorldStateListener {
 		
-		/** Inform the implementing class that the world state has been updated. */
+		// Inform the implementing class that the world state has been updated. 
 		public void worldStateUpdated(int currClientWorldX, int currClientWorldY, int newWorldPosX, int newWorldPosY, int newWidth, int newHeight, IMap map, long ticks);
 		
-		/** Inform the implementing class that the browser UI has been updated with score/leaderboard stats/etc */
+		// Inform the implementing class that the browser UI has been updated with score/leaderboard stats/etc 
 		public void receiveBrowserUIUpdate(JsonUpdateBrowserUI u);
 
-		/** Inform the implementing class that the round has ended, and when the next round begins */
+		// Inform the implementing class that the round has ended, and when the next round begins 
 		public void roundComplete(int nextRoundInXSeconds);
 		
-		/**  Ask the implementing class if the session they are using is still open. */
+		// Ask the implementing class if the session they are using is still open
 		public boolean isClientOpen();
 	}
 
-
 	public void dispose() {
-		
 		synchronized(lock) {
+			
 			if(disposed) {
 				return;
 			}
+			
 			disposed = true;
-			
 			selfState_synch_lock = null;
-			
 			unprocessedFrames_synch_lock.clear();
 			
 			if(map_synch_lock != null) {
-//				map_synch_lock.dispose();
 				map_synch_lock = null;
 			}
 			
@@ -705,7 +649,6 @@ public class ClientWorldState {
 			monsterDb_synch_lock.clear();
 			objectDb_synch_lock.clear();
 			event_log_synch_lock.dispose();
-		}
-		
+		}	
 	}
 }

@@ -25,7 +25,9 @@ import javax.servlet.annotation.WebListener;
 import com.roguecloud.client.LibertyClientInstance;
 import com.roguecloud.client.utils.ClientUtil;
 
-/** Servlet context listener which starts the agent as soon as Liberty loads the application. */
+/** 
+ * Servlet context listener which starts the agent as soon as Liberty loads the application. 
+ */
 @WebListener
 public class AppListener implements ServletContextListener {
 
@@ -41,12 +43,10 @@ public class AppListener implements ServletContextListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void contextDestroyed(ServletContextEvent sce) {
 		LibertyClientInstance.getInstance().dispose();
 	}
-
 }

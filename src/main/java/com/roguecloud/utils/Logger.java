@@ -32,36 +32,29 @@ import java.util.concurrent.TimeUnit;
 import com.roguecloud.RCRuntime;
 
 /** 
- * For internal use only.
- * 
  * Utility class for standardized logging to console/file; this class is a thread-safe singleton.
+ * For internal use only.
  *
  * To log, add to class:
  * 		private static final Logger log = Logger.getInstance();
  * 
  * then:
  * 		log.[err/severe/info/interesting] (...)
- * 
  **/
 public class Logger {
 	
 	public static final boolean CLIENT_SENT = false;
 	public static final boolean CLIENT_RECEIVED = false;
-	
 
 	private Logger() {
+		
 	}	
+	
 	private static final Logger logger = new Logger();
-	
-	// -------
-	
+	private final LoggerCache lc = new LoggerCache();
 	private final Object lock = new Object();
 	
-	
 	private final Level currentLogLevel = Level.INTERESTING;
-	
-	private final LoggerCache lc = new LoggerCache();
-	
 	
 	public static Logger getInstance() {
 		return logger;
@@ -70,39 +63,37 @@ public class Logger {
 	private static String gameTicks() {
 		long ticks = RCRuntime.GAME_TICKS.get();
 		if(ticks > 0) {
-			return "["+ticks+"t] ";
+			return "[" + ticks + "t] ";
 		}
 		return "";
 	}
 	
 	public void severe(String str, LogContext context) {
-		
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
+			
 			if(rv.print) {
 				String throttled = rv.isThrottled ? "[throttled] " : "";
-				Console.err("[sever] "+gameTicks()+getTime()+throttled+str, context);
+				Console.err("[sever] " + gameTicks() + getTime() + throttled+str, context);
 			}
-
 		}
 	}
 	
 
 	public void severe(String str, Throwable t, LogContext context) {
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 
 			if(rv.print) {
 				String throttled = rv.isThrottled ? "[throttled] " : "";
-				Console.err("[sever] "+gameTicks()+getTime()+throttled+str+"\n Exception:"+convertStackTrace(t), context);
+				Console.err("[sever] " + gameTicks() + getTime() + throttled + str + "\n Exception:" + convertStackTrace(t), context);
 				t.printStackTrace();
 			}
 		}
-
 	}
-	
-
-	
+		
 	public void err(String str, LogContext context) {
 		if(currentLogLevel.getValue() < Level.ERROR.getValue()) {
 			return;
@@ -114,9 +105,8 @@ public class Logger {
 		
 			if(rv.print) {
 				String throttled = rv.isThrottled ? "[throttled] " : "";
-				Console.err("[error] "+gameTicks()+getTime()+throttled+str, context);
+				Console.err("[error] " + gameTicks() + getTime() + throttled + str, context);
 			}
-
 		}
 	}
 
@@ -126,12 +116,12 @@ public class Logger {
 		}
 
 		synchronized(lock) {
-
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 
 			if(rv.print) {
 				String throttled = rv.isThrottled ? "[throttled] " : "";
-				Console.err("[error] "+gameTicks()+getTime()+throttled+str+" Exception:"+convertStackTrace(t), context);
+				Console.err("[error] " + gameTicks() + getTime()+throttled + str + " Exception:" + convertStackTrace(t), context);
 				t.printStackTrace();
 			}
 		}
@@ -143,6 +133,7 @@ public class Logger {
 		}
 		
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 			
 			if(rv.print) {
@@ -150,7 +141,6 @@ public class Logger {
 				Console.println("[inter] "+gameTicks()+getTime()+throttled+str, context);
 			}
 		}
-		
 	}
 	
 	public void infoWithStackTrace(String str, LogContext context) {
@@ -159,6 +149,7 @@ public class Logger {
 		}
 		
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 			
 			if(rv.print) {
@@ -167,7 +158,6 @@ public class Logger {
 			}
 		}
 	}
-
 	
 	public void info(String str, LogContext context) {
 		if(currentLogLevel.getValue() < Level.INFO.getValue()) {
@@ -175,6 +165,7 @@ public class Logger {
 		}
 		
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 			
 			if(rv.print) {
@@ -190,6 +181,7 @@ public class Logger {
 		}
 		
 		synchronized(lock) {
+			
 			LoggerCache.ReturnVal rv = lc.shouldPrint(str);
 			
 			if(rv.print) {
@@ -199,23 +191,21 @@ public class Logger {
 		}
 	}
 
-	
-
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM-d HH:mm:ss.SSS", Locale.US);
 
-	
     private static String getTime() {
         Calendar calendar = Calendar.getInstance();
         return "["+dateFormat.format(calendar.getTime())+"] ";
     }
 
-	
 	public static enum Level {
+		
 	    DISABLED(0), 
-	    SEVERE(1), // Implies a bug in the code itself (eg a design/implementation issue, eg conditions that "should never occur"), or a serious user configuration error  
+	    SEVERE(1), // Implies a bug in the code itself (e.g., a design/implementation issue, such as conditions that "should never occur"), or a serious user configuration error  
 	    ERROR(2), 
 	    INTERESTING(3), 
 	    INFO(4);
+		
 	    private final int value;
 
 	    private Level(int value) {
@@ -240,13 +230,13 @@ public class Logger {
 	}
 
 	
-	/** Synchronize on lock before calling any of these methods. */
+	/** 
+	 * Synchronize on lock before calling any of these methods. 
+	 */
 	class LoggerCache {
 		
 		private final int MAX_LAST_MSGS_SIZE = 500;
-		
 		private final List<LoggerCacheEntry> lastMessages = new ArrayList<>();
-		
 		private final Map<String, LoggerCacheEntry> cacheMap = new HashMap<>();
 		
 		private void removeOld() {
@@ -265,11 +255,9 @@ public class Logger {
 			for(LoggerCacheEntry lce : removed) {
 				cacheMap.remove(lce.msg);
 			}
-			
 		}
 		
 		private void removeTooManyIfNeeded() {
-			
 			if(lastMessages.size() > MAX_LAST_MSGS_SIZE) {
 				
 				List<LoggerCacheEntry> removed = new ArrayList<>();
@@ -278,7 +266,6 @@ public class Logger {
 					LoggerCacheEntry lce = lastMessages.remove(lastMessages.size()-1);
 					removed.add(lce);
 				}
-				
 								
 				for(LoggerCacheEntry lce : removed) {
 					cacheMap.remove(lce.msg);
@@ -294,8 +281,6 @@ public class Logger {
 			if(e == null) {
 				e = new LoggerCacheEntry();
 				e.msg = str;
-				
-//				e.timeSinceFirstOutput = System.nanoTime();
 				e.timeSinceLastOutput = System.nanoTime();
 				lastMessages.add(0, e);
 				cacheMap.put(str, e);
@@ -334,10 +319,11 @@ public class Logger {
 
 				return new ReturnVal(true, false);
 			}
-			
 		}
 
-		/** Simple internal-only return value of shouldPrint(). */
+		/** 
+		 * Simple internal-only return value of shouldPrint(). 
+		 */
 		private class ReturnVal {
 			boolean print = false;
 			boolean isThrottled = false;
@@ -348,26 +334,23 @@ public class Logger {
 			}
 		}
 
-		/** We cache log messages based on when they were last seen, how many times seen, etc, to allow us
-		 * to throttle messages to keep from overflowing the log file. */
+		/** 
+		 * We cache log messages based on when they were last seen, how many times seen, etc, to allow us
+		 * to throttle messages to keep from overflowing the log file. 
+		 */
 		private class LoggerCacheEntry implements Comparable<LoggerCacheEntry> {
 			
-			String msg;
-			
-//			Long timeSinceFirstOutput = 0l;
-			
+			String msg;			
 			Long timeSinceLastOutput = 0l;
-			
 			Long timeSinceThrottling = 0l;
 			
 			int timesSeen = 0;
-			
 			int timesWrittenSinceFirstThrottling = 0;
-			
 			boolean throttling = false;
 
 			@Override
 			public int compareTo(LoggerCacheEntry o) {
+				
 				// Descending order
 				long l = o.timeSinceLastOutput - timeSinceLastOutput;
 				
@@ -376,11 +359,7 @@ public class Logger {
 				else {
 					return -1;
 				}
-				
 			}
-			
 		}
-			
 	}
-
 }

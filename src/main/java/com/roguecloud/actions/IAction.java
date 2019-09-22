@@ -22,16 +22,17 @@ package com.roguecloud.actions;
  * 
  * To perform an action, create the appropriate action object, and call sendAction(..) from the client class:
  * ```
- *   // where somePlayer is a nearby player from the worldState object.
- *   CombatAction ca = new CombatAction (somePlayer); 
- *   sendAction(ca);
+ *   where somePlayer is a nearby player from the worldState object
+ *   CombatAction ca = new CombatAction (somePlayer)
+ *   sendAction(ca)
  * ```
- **/
+ */
 public interface IAction {
 
-	/** To determine which type/class the action is, call getActionType() on an IAction. */
+	/** 
+	 * To determine which type/class the action is, call getActionType() on an IAction. 
+	 */
 	public static enum ActionType { STEP, COMBAT, MOVE_INVENTORY_ITEM, EQUIP,  DRINK, NULL };
 	
 	public ActionType getActionType();
-	
 }

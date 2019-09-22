@@ -28,7 +28,6 @@ public class JsonMoveInventoryItemActionEvent extends JsonAbstractTypedMessage {
 	private long creatureId;
 	private long objectId;
 	private boolean dropItem;
-
 	private long frame;
 	private long id;
 
@@ -45,7 +44,6 @@ public class JsonMoveInventoryItemActionEvent extends JsonAbstractTypedMessage {
 		frame = RCRuntime.convertToLong(map.get("frame"));
 		id = RCRuntime.convertToLong(map.get("id"));
 	}
-
 	
 	public long getCreatureId() {
 		return creatureId;
@@ -86,5 +84,4 @@ public class JsonMoveInventoryItemActionEvent extends JsonAbstractTypedMessage {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 }

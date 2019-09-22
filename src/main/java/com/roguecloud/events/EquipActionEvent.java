@@ -40,12 +40,16 @@ public class EquipActionEvent extends AbstractEvent {
 		this.creature = creature;
 	}
 
-	/** Returns the specific item that was equipped. */
+	/** 
+	 * Returns the specific item that was equipped. 
+	 */
 	public IObject getEquippedObject() {
 		return equippedObject;
 	}
 	
-	/** Returns the specific creature that equipped the item. */
+	/** 
+	 * Returns the specific creature that equipped the item.
+	 */
 	public ICreature getCreature() {
 		return creature;
 	}
@@ -55,28 +59,34 @@ public class EquipActionEvent extends AbstractEvent {
 		return EventType.EQUIP;
 	}
 
-	/** The coordinates on the map at which that the event occurred. */
+	/** 
+	 * The coordinates on the map at which that the event occurred. 
+	 */
 	@Override
 	public Position getWorldLocation() {
 		return creature.getPosition();
 	}
 
-	/** Returns true if the specified creature was involved in this event, or false otherwise. */
+	/** 
+	 * Returns true if the specified creature was involved in this event, or false otherwise. 
+	 */
 	@Override
 	public boolean isCreatureInvolved(ICreature creature) {
-
 		return creature.equals(this.creature);
 	}
 
-	/** Return a list of all the creatures involved in the event. */
+	/** 
+	 * Return a list of all the creatures involved in the event. 
+	 */
 	@Override
 	public ICreature[] getCreaturesInvolved() {
 		return new ICreature[] { creature };
 	}
 
 	
-	// Internal methods only -----------------------------------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public JsonAbstractTypedMessage toJson() {
 		JsonEquipActionEvent result = new JsonEquipActionEvent();
@@ -86,5 +96,4 @@ public class EquipActionEvent extends AbstractEvent {
 		result.setId(id);
 		return result;
 	}
-
 }

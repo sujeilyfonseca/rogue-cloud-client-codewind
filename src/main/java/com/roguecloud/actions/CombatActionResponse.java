@@ -23,19 +23,15 @@ import com.roguecloud.json.actions.JsonCombatActionResponse;
  * When a combat action occurs, this response indicates whether it succeeded (HIT/MISS), and if hit then 
  * how much damage was done.
  * 
- * See IActionResponse for a description of what an Action response is, and what that means.
- *  
- **/
+ * See IActionResponse for a description of what an Action response is, and what that means.  
+ */
 public class CombatActionResponse implements IActionResponse {
 
-	/** Whether the combat action succeeded, or failed (and why it failed) */
+	// Whether the combat action succeeded, or failed (and why it failed)
 	public static enum CombatActionResult { HIT, MISS, COULD_NOT_ATTACK, OTHER };
-	
 	private final CombatActionResult result;
-	
 	private final int damageDealt;
-	
-	private final ICreature creature; // may be null
+	private final ICreature creature; 
 	
 	public CombatActionResponse(CombatActionResult result, int damageDealt, ICreature creature) {
 		this.result = result;
@@ -43,21 +39,28 @@ public class CombatActionResponse implements IActionResponse {
 		this.creature = creature;
 	}
 
-	/** The amount of damage done in combat. */
+	/** 
+	 * The amount of damage done in combat. 
+	 */
 	public int getDamageDealt() {
 		return damageDealt;
 	}
 	
-	/** Whether the attack was successful */
+	/** 
+	 * Whether the attack was successful.
+	 */
 	public CombatActionResult getResult() {
 		return result;
 	}
 	
-	/** The creatue attacked. */
+	/** 
+	 * The creature attacked. 
+	 */
 	public ICreature getCreature() {
 		return creature;
 	}
 	
+	// Internal methods
 	public JsonCombatActionResponse toJson() {
 		JsonCombatActionResponse result = new JsonCombatActionResponse();
 		result.setDamageDealt(damageDealt);
@@ -80,5 +83,4 @@ public class CombatActionResponse implements IActionResponse {
 		
 		return true;
 	}
-	
 }

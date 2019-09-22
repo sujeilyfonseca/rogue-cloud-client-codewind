@@ -29,8 +29,7 @@ package com.roguecloud.utils;
  * This is currently used to automatically close websockets that are open for too long.
  * 
  * This class is an internal class, for server use only. 
- *  
- **/
+ */
 public interface IManagedResource {
 
 	void dispose();

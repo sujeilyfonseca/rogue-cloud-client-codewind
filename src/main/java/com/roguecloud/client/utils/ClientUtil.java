@@ -34,11 +34,10 @@ import com.roguecloud.utils.Logger;
  * are used by ResourceLifecycleUtil.
  *   
  * For internal use only.
- **/
+ */
 public class ClientUtil {
 	
 	public static final Logger log = Logger.getInstance();
-
 	private static final Object lock = new Object(); 
 	
 	public static String getOrCreateClientUuid() {
@@ -87,9 +86,7 @@ public class ClientUtil {
 			}
 			
 			return uuid;
-			
-			
-		} // end lock
+		} // End lock
 	}
 	
 	public static IManagedResource convertSessionToManagedResource(Session s) {
@@ -100,16 +97,15 @@ public class ClientUtil {
 		return new SessionManagedResource(s, expireDurationInNanos);
 	}
 	
-	/** Implements a IManagedResource for a WebSocket Session object. */
+	/** 
+	 * Implements a IManagedResource for a WebSocket Session object. 
+	 */
 	private static class SessionManagedResource implements IManagedResource {
 		
 		private final Session s;
-		private final long expireTimeInNanos;
-		
+		private final long expireTimeInNanos;	
 		private final Object lock = new Object();
-		
 		private boolean disposed_synch_lock = false;
-		
 		
 		public SessionManagedResource(Session s, long expireDurationInNanos) {
 			this.s = s;
@@ -126,7 +122,6 @@ public class ClientUtil {
 			synchronized (lock) {
 				return disposed_synch_lock;
 			}
-			
 		}
 		
 		@Override
@@ -142,10 +137,10 @@ public class ClientUtil {
 			}
 
 			try {
-			
 				s.close();
-				
-			} catch(Exception e)  { /* ignore */ }
+			} catch(Exception e)  { 
+				// Do nothing
+			}
 		}
 		
 		@Override
@@ -163,11 +158,10 @@ public class ClientUtil {
 			if(!(obj instanceof SessionManagedResource)) {
 				return false;
 			}
+			
 			SessionManagedResource smr = (SessionManagedResource)obj;
 			
 			return smr.s.getId().equals(s.getId());
 		}
 	}
-
-	
 }

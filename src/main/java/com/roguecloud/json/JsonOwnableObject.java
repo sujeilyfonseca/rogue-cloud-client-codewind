@@ -19,10 +19,10 @@ package com.roguecloud.json;
 public class JsonOwnableObject {
 
 	long id;
-	
 	long containedObject;
 	
 	public JsonOwnableObject() {
+		
 	}
 
 	public long getId() {
@@ -39,7 +39,5 @@ public class JsonOwnableObject {
 
 	public void setContainedObject(long containedObject) {
 		this.containedObject = containedObject;
-	}
-	
-	
+	}	
 }

@@ -19,11 +19,9 @@ package com.roguecloud.json;
 public class JsonClientConnectResponse extends JsonAbstractTypedMessage {
 
 	public static final String TYPE = "ClientConnectResponse";
-	
 	public static enum ConnectResult { SUCCESS, FAIL_INVALID_CREDENTIALS, FAIL_ROUND_OVER, FAIL_ROUND_NOT_STARTED, FAIL_OTHER, FAIL_INVALID_CLIENT_API_VERSION }
 	
 	private String connectResult;
-	
 	private Long roundEntered;
 	
 	public JsonClientConnectResponse() {

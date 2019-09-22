@@ -30,7 +30,6 @@ import java.util.List;
 
 /**
  * Various miscellaneous utility methods.
- * 
  * This class is an internal class, for server use only.
  */
 public class RCUtils {
@@ -44,7 +43,7 @@ public class RCUtils {
 			w.close();
 			
 		} catch(Exception e) {
-			/* ignore*/ 
+			// Do nothing
 		}
 		
 	}
@@ -55,28 +54,27 @@ public class RCUtils {
 				os.close();
 			}
 		} catch(Exception e) {
-			/* ignore*/
+			// Do nothing
 		}
 	
 	}
 	
 	public static void safeClose(InputStream is) {
-		
 		try {
 			if(is != null) {
 				is.close();
 			}
 		} catch(Exception e) {
-			/* ignore*/
+			// Do nothing
 		}
 		
 	}
 
 	public static List<String> readIntoStringListAndClose(InputStream is) throws IOException {
-		
 		List<String>  result = new ArrayList<>();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		String str;
+		
 		while (null != (str = br.readLine())) {
 			result.add(str);				
 		}
@@ -84,21 +82,21 @@ public class RCUtils {
 		safeClose(is);
 		
 		return result;
-		
 	}
 	
 	public static String readIntoString(InputStream is) throws IOException {
-
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		
 		byte[] barr = new byte[64 * 1024];
 		int c;
+		
 		while (-1 != (c = is.read(barr))) {
 			baos.write(barr, 0, c);
 		}
+		
 		baos.close();
 		
 		return baos.toString();
-		
 	}
 
 	public static void sleep(long msecs) {

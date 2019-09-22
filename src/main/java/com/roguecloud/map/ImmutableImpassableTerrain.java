@@ -16,7 +16,9 @@
 
 package com.roguecloud.map;
 
-/** Terrain that cannot be moved on to. */
+/** 
+ * Terrain that cannot be moved on to. 
+ */
 public class ImmutableImpassableTerrain implements ITerrain {
 	
 	private final TileType tileType;
@@ -34,5 +36,4 @@ public class ImmutableImpassableTerrain implements ITerrain {
 	public boolean isPresentlyPassable() {
 		return false;
 	}
-
 }

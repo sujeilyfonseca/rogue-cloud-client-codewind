@@ -22,13 +22,11 @@ import com.roguecloud.map.TileType;
 /** An item that can be drank, such as a potion, and that has a positive or negative effect on the affected character. 
  * 
  * The effect of drinking the potion may be retrieved by calling getEffect(...).
- **/
+ */
 public class DrinkableItem implements IObject {
 
 	private final TileType tileType;
-	
 	private final Effect effect;
-	
 	private final long id;
 	
 	public DrinkableItem(TileType tileType, Effect currentEffect, long id) {
@@ -45,12 +43,15 @@ public class DrinkableItem implements IObject {
 
 	/**
 	 * The effect of drinking the potion may be retrieved by calling this method.  
-	 * (Internal note only: Object may be mutated through the returned reference) */
+	 * Internal note only: Object may be mutated through the returned reference
+	 */
 	public Effect getEffect() {
 		return effect;
 	}
 	
-	/** Return a user friendly description of the potion, it's effect, magnitude, and duration. */
+	/** 
+	 * Return a user friendly description of the potion, it's effect, magnitude, and duration. 
+	 */
 	public String getName() {
 		return "Vial of "+effect.getName()+" ("+effect.getMagnitude()+" for "+effect.getRemainingTurns()+" turn"+(effect.getRemainingTurns() != 1 ? "s" : "")+")";
 	}
@@ -60,15 +61,17 @@ public class DrinkableItem implements IObject {
 		return ObjectType.ITEM;
 	}
 
-	/** A unique ID for this specific item. */
+	/** 
+	 * A unique ID for this specific item. 
+	 */
 	@Override
 	public long getId() {
 		return id;
 	}
 
-	
-	// Internal methods ----------------------------------------------------------
-
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public TileType getTileType() {
 		return tileType;
@@ -79,8 +82,6 @@ public class DrinkableItem implements IObject {
 		result.setEffect(effect.toJson());
 		result.setId(this.id);
 		result.setTile(tileType.getNumber());
-		
 		return result;
 	}
-
 }

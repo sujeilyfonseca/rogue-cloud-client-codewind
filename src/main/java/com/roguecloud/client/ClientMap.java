@@ -28,7 +28,7 @@ import com.roguecloud.map.Tile;
  * always contain the most up-to-date map data.
  * 
  * See IMap interface for details on the available methods. 
- **/
+ */
 public class ClientMap implements IMap {
 
 	private final Object lock = new Object();
@@ -72,5 +72,4 @@ public class ClientMap implements IMap {
 			return internalMap_synch_lock.getYSize();
 		}
 	}
-	
 }

@@ -54,5 +54,4 @@ public class JsonMoveInventoryItemAction extends JsonAbstractTypedMessage {
 	public boolean isDropItem() {
 		return dropItem;
 	}
-	
 }

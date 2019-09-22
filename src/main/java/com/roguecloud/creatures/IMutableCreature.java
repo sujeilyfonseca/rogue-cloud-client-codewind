@@ -21,23 +21,26 @@ import com.roguecloud.items.Effect;
 import com.roguecloud.items.OwnableObject;
 import com.roguecloud.items.Weapon;
 
-/** Server-side interface for internal use only, see ICreature for the public client API */
+/** 
+ * Server-side interface for internal use only, see ICreature for the public client API.
+ */
 public interface IMutableCreature extends ICreature {
 
 	public void setPosition(Position p);
-
+	
 	public void setMaxHp(int maxHp);
 	
 	public void setCurrHp(int currHp);
 	
 	public void setWeapon(Weapon weapon);
-
+	
 	public void addToInventory(OwnableObject o);
+	
 	public boolean removeFromInventory(OwnableObject o);
 	
 	public IMutableCreature fullClone();
 	
 	public void addEffect(Effect e);
-	public boolean removeEffect(Effect e);
 	
+	public boolean removeEffect(Effect e);
 }

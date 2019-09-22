@@ -20,9 +20,9 @@ import com.roguecloud.json.JsonDoorProperty;
 
 /** For internal use */
 public class DoorTileProperty implements ITilePropertyMutable {
-
 	
 	public DoorTileProperty() {
+		
 	}
 	
 	public DoorTileProperty(JsonDoorProperty jdp ) {
@@ -33,12 +33,9 @@ public class DoorTileProperty implements ITilePropertyMutable {
 		this.isOpen_synch_lock = isOpen;
 	}
 
-	
 	private final Object lock = new Object();
-	
 	private boolean isOpen_synch_lock;
-	
-	
+
 	public boolean isOpen() {
 		synchronized(lock) {
 			return isOpen_synch_lock;
@@ -61,5 +58,4 @@ public class DoorTileProperty implements ITilePropertyMutable {
 	public TilePropertyType getType() {
 		return TilePropertyType.DOOR;
 	}
-
 }

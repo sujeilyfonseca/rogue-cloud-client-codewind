@@ -35,48 +35,74 @@ import com.roguecloud.map.IMap;
  * - What weapons/armour are they using?
  * - Where are they located on the map?
  * - What experience level are they? (monsters only) 
- * 
- **/
+ */
 public interface ICreature extends IExistsInWorld  {
 
-	/** The maximum health of a character  */
+	/*
+	 * The maximum health of a character. 
+	 */
 	public int getMaxHp();
 	
-	/** The current health of a character; is this value is 0 then the character is dead. */
+	/*
+	 * The current health of a character; is this value is 0 then the character is dead.
+	 */
 	public int getHp();
 	
-	/** What armour does the creature have equipped? */
+	/** 
+	 * What armour does the creature have equipped? 
+	 * @return armour set
+	 */
 	public ArmourSet getArmour();
 	
-	/** What weapon does the creature have equipped? */
+	/** 
+	 * What weapon does the creature have equipped? 
+	 * @return weapon
+	 */
 	public Weapon getWeapon();
 
-	/** Return a list of objects are in the creature's inventory (NOTE: You can only see _your own_ inventory, not other creatures!) */
+	/** 
+	 * Return a list of objects are in the creature's inventory (NOTE: You can only see _your own_ inventory, not other creatures!).
+	 */
 	public List<OwnableObject> getInventory();
 
-	/** A unique id for the creature; this will not change, and no other creatures will have this same ID. */
+	/** 
+	 * A unique id for the creature; this will not change, and no other creatures will have this same ID. 
+	 */
 	public long getId();
 	
-	/** (Monsters only) What is the level of this character? A higher level implies they are better equipped to give and receive damage. */
+	/** 
+	 * (Monsters only) What is the level of this character? A higher level implies they are better equipped to give and receive damage. 
+	 */
 	public int getLevel();
 	
-	/** Returns true if the character is no longer alive, and false otherwise. Note: Some characters (such as other players) may come back to life. */
+	/** 
+	 * Returns true if the character is no longer alive, and false otherwise. Note: Some characters (such as other players) may come back to life. 
+	 */
 	public boolean isDead();
 	
-	/** Whether or not the character is controlled by another player. */
+	/**
+	 * Whether or not the character is controlled by another player. 
+	 */
 	public boolean isPlayerCreature();
 	
-	/** The position in the world of the creature. */
+	/** 
+	 * The position in the world of the creature. 
+	 */
 	public Position getPosition();
 	
-	/** Return the active effects that are on the creature. */
+	/** 
+	 * Return the active effects that are on the creature. 
+	 */
 	public List<Effect> getActiveEffects();
 
-	/** Returns the name of the creature, for example, the name of another player. */
+	/** 
+	 * Returns the name of the creature, for example, the name of another player. 
+	 */
 	public String getName();
 	
-	
-	/** If a creature has not been recently seen by the character, it is called 'stale'. 
-	 * More information on staleness is available from the Github documentation. */
+	/** 
+	 * If a creature has not been recently seen by the character, it is called 'stale'. 
+	 * More information on staleness is available from the Github documentation. 
+	 */
 	public long getLastTickUpdated(IMap map);
 }

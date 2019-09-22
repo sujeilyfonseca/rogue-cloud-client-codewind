@@ -22,9 +22,8 @@ import com.roguecloud.json.actions.JsonDrinkItemAction;
 /**
  * To drink a potion that is in your inventory, create this object and send it with client sendAction(...) method.
  * 
- * This will cause your character to drink the inventory item (and grant you the effect of the potion, such as healing or damage reduction.)
- *  
- **/
+ * This will cause your character to drink the inventory item (and grant you the effect of the potion, such as healing or damage reduction).  
+ */
 public class DrinkItemAction implements IAction {
 
 	private OwnableObject oo;
@@ -43,12 +42,10 @@ public class DrinkItemAction implements IAction {
 		return oo;
 	}
 	
-	// Internal methods --------------------------------------------------------
-	
+	// Internal method
 	public JsonDrinkItemAction toJson() {
 		JsonDrinkItemAction jdia = new JsonDrinkItemAction();
 		jdia.setId(oo.getId());
 		return jdia;
 	}
-	
 }

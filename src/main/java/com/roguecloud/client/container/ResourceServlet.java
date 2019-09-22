@@ -25,7 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.roguecloud.resources.Resources;
 
-/** This is a simple servlet which serves images/jsp/js from the RogueCloudResources project */
+/** 
+ * This is a simple servlet which serves images/jsp/js from the RogueCloudResources project. 
+ */
 @WebServlet("/resources/*")
 public class ResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,5 +53,4 @@ public class ResourceServlet extends HttpServlet {
 		
 		response.getOutputStream().write(barr);
 	}
-
 }

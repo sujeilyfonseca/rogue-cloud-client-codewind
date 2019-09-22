@@ -50,5 +50,4 @@ public class JsonActiveRoundInfo extends JsonAbstractTypedMessage {
 	public void setTimeLeftInSeconds(long timeLeftInSeconds) {
 		this.timeLeftInSeconds = timeLeftInSeconds;
 	}
-
 }

@@ -41,8 +41,6 @@ import com.roguecloud.utils.Logger;
  * Hit rating determines how likely you are to hit the creature you are attacking:
  * 
  *   * Hit chance % = hitRating of attacker's weapon / (sum of defense value for all defender's armour)  
- * 
- * 
  */
 public class Weapon implements IObject {
 	
@@ -56,11 +54,8 @@ public class Weapon implements IObject {
 	private final int hitRating;
 	private final int attackRange;
 
-	
 	private final WeaponType type;
-	
 	private final TileType tileType;
-
 	private final long id;
 	
 	public Weapon(long id, String name, int numAttackDice, int attackDiceSize, int attackPlus, int hitRating, int attackRange, WeaponType type, TileType tileType) {
@@ -97,42 +92,55 @@ public class Weapon implements IObject {
 		return name;
 	}
 	
-	/** The number of tiles away a weapon can hit */
+	/** 
+	 * The number of tiles away a weapon can hit.
+	 */
 	public int getAttackRange() {
 		return attackRange;
 	}
 
-	/** The number of rolls of the attack dice (see class description for details.) */
+	/** 
+	 * The number of rolls of the attack dice (see class description for details). 
+	 */
 	public int getNumAttackDice() {
 		return numAttackDice;
 	}
 
-	/** The size of the attack dice (see class description for details.) */
+	/** 
+	 * The size of the attack dice (see class description for details). 
+	 */
 	public int getAttackDiceSize() {
 		return attackDiceSize;
 	}
 
-	/** The damage addition after the attack dice rolls (see class description for details.) */
+	/** 
+	 * The damage addition after the attack dice rolls (see class description for details) 
+	 */
 	public int getAttackPlus() {
 		return attackPlus;
 	}
 
-	/** How likely a weapon is to hit armour (see class description for details.)  */
+	/** 
+	 * How likely a weapon is to hit armour (see class description for details).  
+	 */
 	public int getHitRating() {
 		return hitRating;
 	}
 
-	/** A weapon may be one-handed or two-handed. */
+	/** 
+	 * A weapon may be one-handed or two-handed. 
+	 */
 	public WeaponType getType() {
 		return type;
 	}
-	
 
 	public final long getId() {
 		return id;
 	}
-
-	/** May be used to determine how good a weapon is (the higher the better). */
+	
+	/**
+	 * May be used to determine how good a weapon is (the higher the better). 
+	 */
 	public int calculateWeaponRating() {
 		return (getAttackDiceSize()*getNumAttackDice())+getAttackPlus();
 	}
@@ -142,7 +150,9 @@ public class Weapon implements IObject {
 		return "("+id+") name: "+name;
 	}
 	
-	/** Weapons may require one or both hands -- this is not currently used by combat calculations. */
+	/** 
+	 * Weapons may require one or both hands -- this is not currently used by combat calculations. 
+	 */
 	public static enum WeaponType {
 		ONE_HANDED("One-handed"), TWO_HANDED("Two-handed");
 		
@@ -180,8 +190,9 @@ public class Weapon implements IObject {
 		
 	}
 
-	// Internal methods ----------------------------------------------------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public JsonWeapon toJson() {
 		JsonWeapon jw = new JsonWeapon();
 
@@ -201,5 +212,4 @@ public class Weapon implements IObject {
 	public TileType getTileType() {
 		return tileType;
 	}
-
 }

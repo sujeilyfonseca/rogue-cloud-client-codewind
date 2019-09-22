@@ -26,21 +26,21 @@ import java.util.Map;
  * - Written to by StartAgentServlet and ClientStandaloneMain
  * - Read from by LibertyWsBrowserEndpoint
  * 
- * For internal server-side use only */
+ * For internal server-side use only 
+ */
 public class ClientMappingSingleton {
 	
 	private static final ClientMappingSingleton instance = new ClientMappingSingleton(); 
 	
 	private ClientMappingSingleton() {
+		
 	}
 	
 	public static ClientMappingSingleton getInstance() {
 		return instance;
 	}
-	// -----------------------------
 	
 	private final Object lock = new Object();
-	
 	private final Map<String /* player uuid (lowercase) */, ClientState> stateMap_synch_lock = new HashMap<>(); 
 
 	public void putClientState(String uuid, ClientState state) {
@@ -60,5 +60,4 @@ public class ClientMappingSingleton {
 			return stateMap_synch_lock.get(uuid.toLowerCase());
 		}
 	}
-	
 }

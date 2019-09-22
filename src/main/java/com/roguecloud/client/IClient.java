@@ -25,10 +25,13 @@ import com.roguecloud.actions.IAction;
  */
 public interface IClient {
 
-	/** This method is called by the agent API to inform the agent code of the latest state of the world and their character. */
+	/** 
+	 * This method is called by the agent API to inform the agent code of the latest state of the world and their character. 
+	 */
 	public void stateUpdate(SelfState selfState, WorldState worldState, IEventLog eventLog);
 	
-	/** This method is called by agent code to have the character perform an action in the world (such as attacking, moving, etc). */
+	/** 
+	 * This method is called by agent code to have the character perform an action in the world (such as attacking, moving, etc). 
+	 */
 	public ActionResponseFuture sendAction(IAction action);
-	
 }
