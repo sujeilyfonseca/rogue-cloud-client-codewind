@@ -325,7 +325,6 @@ public class AIUtils {
 		return null;
 	}
 	
-	
 	/** 
 	 * Return a valid list of Positions that can be reached, or moved to, from the position 'p' on the map. 
 	 */
@@ -349,7 +348,6 @@ public class AIUtils {
 		return result;
 	}
 
-	
 	/** 
 	 * Simple utility class containing route data to creature or object.
 	 */

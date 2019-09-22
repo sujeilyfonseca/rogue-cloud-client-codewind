@@ -102,7 +102,7 @@ public interface ICreature extends IExistsInWorld  {
 	
 	/** 
 	 * If a creature has not been recently seen by the character, it is called 'stale'. 
-	 * More information on staleness is available from the Github documentation. 
+	 * More information on staleness is available from the GitHub documentation. 
 	 */
 	public long getLastTickUpdated(IMap map);
 }
