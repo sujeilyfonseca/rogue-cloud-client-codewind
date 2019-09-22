@@ -327,7 +327,7 @@ public class StartAgentServlet extends HttpServlet {
 
 	/** 
 	 * Used by doInitialConnect(...), keeps track of the # of times we have been interrupted during the round. 
-	 * */
+	 */
 	private static class ConnectData {
 		@SuppressWarnings("unused")
 		boolean roundComplete = false;

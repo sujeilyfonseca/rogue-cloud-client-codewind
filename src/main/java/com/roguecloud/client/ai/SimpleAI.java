@@ -57,41 +57,41 @@ import com.roguecloud.utils.AStarSearch;
 /** 
  * Each turn, the simple agent implementation code asks your implementation code the following, to determine the next action to perform:
  * 
- * ```
  * 1) If someone is attacking us (and the attack is unprovoked), ask if we should attack back.
- * 	- If yes, attack back, then goto 1 (if no, goto 2)
+ * 	  - If yes, attack back, then goto 1 (if no, goto 2)
  * 2) Do you want me to drink a potion?
- * 	- If yes, drink the potion then goto 1 (if no, goto 2)
+ * 	  - If yes, drink the potion then goto 1 (if no, goto 2)
  * 3) Do you want me to attack any of the creatures around you? 
- *  	- If yes, walk to it and attack, then goto 1 (If no, goto 4)
+ *    - If yes, walk to it and attack, then goto 1 (If no, goto 4)
  * 4) Do want me to pick up any of the items around you?
- *  	 - If yes, walk to it and pick it up, then goto 1 (If no, goto 5)
- *  	 	- If picked up item, ask if it should be equipped 
- *  	 		- If yes, equip it. If no, goto 1.
+ *    - If yes, walk to it and pick it up, then goto 1 (If no, goto 5)
+ *    - If picked up the item, ask if it should be equipped 
+ *    - If yes, equip it. If no, goto 1
  * 5) Where do you want me to go?
- * 	- If the user specified a position, then walk to it, then goto 1 (otherwise goto 1)
+ * 	  - If the user specified a position, then walk to it, then goto 1 (otherwise goto 1)
  * 
- * Each of the questions above correspond to methods below. More information on improving your code from the default behaviours
+ * Each of the questions above correspond to methods below. More information on improving your code from the default behaviors
  * can be found on the Github project pages.
- * ```
-*/
+ */
 @SuppressWarnings("unused")
 public class SimpleAI extends RemoteClient {
 	
-	/** 
-	 * This method is given the list of ALL items on the ground in your current view, and is asked, do you want to pick any of these up?
-	 * If you see an item in the list that you want to pick up, return the IGroundObject that contains it!
-	 **/
+	/**
+	 * This method received the list of all items on the ground in your current view; and is asked, do you want to pick any of these up?
+	 * If you see an item in the list that you want to pick up, return the IGroundObject that contains it.
+	 * @param allVisibleGroundObjects - All items on the ground in your current view
+	 * @return item in the list that you want to pick up
+	 */
 	public IGroundObject shouldIPickUpItem(List<IGroundObject> allVisibleGroundObjects) {
 
 		SelfState selfState = getSelfState();
 		WorldState worldState = getWorldState();
 
-		// Look at all the objects the agent can see, and decide which, if any, they should go and pick up.
+		// Look at all the objects the agent can see and decide which, if any, should go and pick up.
 		// Be careful, some objects might be guarded by monsters! 
-		// You can see monsters by calling AIUtils.findCreaturesInRange(...).
+		// You can see monsters by calling AIUtils.findCreaturesInRange(...)
 
-		// Default behaviour: pick up the first thing I see...
+		// Default behavior: pick up the first thing I see...
 		for(IGroundObject visibleGroundObjectContainer : allVisibleGroundObjects) {
 			IObject objectOnGround = visibleGroundObjectContainer.get();
 			
@@ -109,18 +109,19 @@ public class SimpleAI extends RemoteClient {
 				DrinkableItem i = (DrinkableItem)objectOnGround;
 				
 				return visibleGroundObjectContainer;
-			}
-			
+			}	
 		}
 		
 		return null;
 	}
 	
-	/** While your character is wandering around the world, it will see other monsters, which it may optionally attack.
-	 *
+	/**
+	 * While your character is wandering around the world, it will see other monsters, which it may optionally attack.
 	 * This method is called each tick with a list of all monsters currently on screen. If you wish to 
-	 * attack one of them, return the creature object you wish to attack. 
-	 **/
+	 * attack one of them, return the creature object you wish to attack.
+	 * @param visibleMonsters - All visible monsters
+	 * @return the creature to be attacked
+	 */
 	public ICreature shouldIAttackCreature(List<ICreature> visibleMonsters) {
 		
 		SelfState selfState = getSelfState();
@@ -128,13 +129,13 @@ public class SimpleAI extends RemoteClient {
 		
 		ICreature creatureToAttack = null;
 		
-		// Default behaviour: Attack the first creature that I see.
+		// Default behavior: Attack the first creature that I see.
 		for(ICreature c : visibleMonsters) {
 			
 			int creatureLevel = c.getLevel();
 			
 			if(creatureToAttack == null) {
-				creatureToAttack = c;
+				creatureToAttack = c; // Attack the creature! Might want to check their level first!
 			}
 		}
 		
@@ -142,10 +143,10 @@ public class SimpleAI extends RemoteClient {
 		
 	}
 	
-
 	/**
 	 * When your character has nothing else it do it (no items to pick up, or creatures to attack), it will call
 	 * this method. The coordinate on the map you pick is the coordinate that the code will move to.
+	 * @return desired coordinate on the map
 	 */
 	public Position whereShouldIGo() {
 
@@ -172,34 +173,33 @@ public class SimpleAI extends RemoteClient {
 			y2 = worldState.getWorldHeight();
 		}
 		
-		// Default behaviour: Pick a random spot in the world and go there.
+		// Default behavior: Pick a random spot in the world and go there
 		Position p  = AIUtils.findRandomPositionOnMap(x1, y1, x2, y2, !randomPositionInView, whatWeHaveSeenMap);
 		
-		System.out.println("Going to "+p);
+		System.out.println("Going to: " + p);
 		if(p != null) {
 			return p;
 		}
 		
 		return null;
-		
 	}
 
-	/** Each turn, we call this method to ask if you character should drink a potion (and which one it should drink). 
-	 *
+	/** 
+	 * Each turn, we call this method to ask if you character should drink a potion (and which one it should drink). 
 	 * To drink a potion, return the inventory object for the potion (ownable object). 
 	 * To drink no potions this turn, return null. 
-	 **/
+	 * @return potion the player must drink, or null otherwise
+	 */
 	public OwnableObject shouldIDrinkAPotion() {
 		
-		ICreature me = getSelfState().getPlayer();
+		ICreature mainPlayer = getSelfState().getPlayer();
 		WorldState worldState = getWorldState();
 		List<OwnableObject> ourInventory = selfState.getPlayer().getInventory();
 
-		int percentHealthLeft = (int)(100d * (double)me.getHp() / (double)me.getMaxHp()); 
+		int percentHealthLeft = (int)(100d * (double)mainPlayer.getHp() / (double)mainPlayer.getMaxHp()); 
 
-		// Default behaviour: if our health is less than 50, then drink the first potion 
-		// in our inventory (but it might not be helpful in this situation!) 
-
+		// Default behavior: if our health is less than 50, then drink the first potion 
+		// in our inventory, but it might not be helpful in this situation 
 		if(percentHealthLeft < 50) {
 			
 			for(OwnableObject oo : ourInventory) {
@@ -211,57 +211,57 @@ public class SimpleAI extends RemoteClient {
 			}			
 		}
 		
-		// Otherwise drink no potions
+		// Otherwise, drink no potions
 		return null;
 	}
 	
-	/** When your character picks up a new item (weapon or armour), they have a choice on whether or not to equip it.
-	 * 
-	 * Return true if you wish to put on or use this new item, or false otherwise.
-	 * 
-	 **/
+	/** 
+	 * When your character picks up a new item (weapon or armour), they have a choice on whether or not to equip it.
+	 * @param newItem - New weapon or armour
+	 * @return true if you wish to put on or use this new item, or false otherwise
+	 */
 	public boolean shouldIEquipNewItem(IObject newItem) {
-		ICreature me = getSelfState().getPlayer();
+		ICreature mainPlayer = getSelfState().getPlayer();
 		
 		if(newItem.getObjectType() == ObjectType.ARMOUR) {
 			Armour a = (Armour) newItem;			
+			Armour previouslyEquipped = mainPlayer.getArmour().get(a.getType());
 			
-			Armour previouslyEquipped = me.getArmour().get(a.getType());
 			if(previouslyEquipped != null) {
-				// Put your own logic here... compare what you have equipped with what you just picked up!
+				// Put your own logic here... Compare what you have equipped with what you just picked up!
 			}
 			
-			// Default behaviour: Always equip everything we pick up
+			// Default behavior: Always equip everything we pick up
 			return true;
-			
 			
 		} else if(newItem.getObjectType() == ObjectType.WEAPON) {
 			Weapon w = (Weapon) newItem;
+			Weapon previouslyEquipped = mainPlayer.getWeapon();
 			
-			Weapon previouslyEquipped = me.getWeapon();
 			if(previouslyEquipped != null) {
-				// Put your own logic here... compare what you have equipped with what you just picked up!
+				// Put your own logic here... Compare what you have equipped with what you just picked up!
 			}
 
-			// Default behaviour: Always equip everything we pick up
+			// Default behavior: Always equip everything we pick up
 			return true;
-
 		}
 		
 		return false;
 	}
 	
-	/** If a creature is attacking us (and we did not initiate the combat through the shouldIAttackCreature method), we 
-	 * can choose whether to attack back or to ignore them. 
+	/** 
+	 * If a creature is attacking us (and we did not initiate the combat through the shouldIAttackCreature method), 
+	 * we can choose whether to attack back or to ignore them. 
 	 * 
-	 * Your attacking an attacking creature back is not always the best course of action, 
+	 * Attack an attacking creature back is not always the best course of action, 
 	 * as some creatures will stop attacking once you leave their territory.
 	 * 
-	 * If you wish to attack back, return a creature from the list, otherwise return null.
-	 **/
+	 * @param creaturesAttackingUs - List of creatures attacking the mainPlayer
+	 * @return creature from the list to be attacked, otherwise return null
+	 */
 	public ICreature unprovokedAttackShouldIAttackBack(List<ICreature> creaturesAttackingUs) {
 		
-		ICreature me = getSelfState().getPlayer();
+		ICreature mainPlayer = getSelfState().getPlayer();
 		WorldState worldState = getWorldState();
 		
 		Collections.shuffle(creaturesAttackingUs);
@@ -270,32 +270,28 @@ public class SimpleAI extends RemoteClient {
 			
 			int monsterLevel = c.getLevel();
 			
-			// Default behaviour: Attack the first creature in the list, after shuffling the list 
+			// Default behavior: Attack the first creature in the list, after shuffling the list 
 			return c;
-			
 		}
 
 		return null;
 	}
 	
-	// ------------------------------- ( Agent implementation) ------------------------------------------------------------
 	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Agent implementation
+	///////////////////////////////////////////////////////////////////////////////////////////
 	private static final boolean SYNC_DEBUG = false; 
 	
-	public static enum State { WANDERING, GETTING_ITEM, KILLING_MONSTER };
-	
+	public static enum State { WANDERING, GETTING_ITEM, KILLING_MONSTER };	
 	private State currentState = State.WANDERING;
 	
 	private WanderingStateData wanderingStateDate = null;
-	
 	private AttackingStateData attackingStateData = null;
-	
 	private PickUpItemData pickUpItemData = null;
 	
 	private List<ARFEntry> waitingForActionResponse = new ArrayList<>();
-//	private ActionResponseFuture waitingForActionResponse;
-	
-	
+		
 	private static class ARFEntry {
 		final ActionResponseFuture arf;
 		final long gameTick;
@@ -332,7 +328,6 @@ public class SimpleAI extends RemoteClient {
 		}
 		
 		return result;
-		
 	}
 	
 	
@@ -344,6 +339,7 @@ public class SimpleAI extends RemoteClient {
 		if(me.isDead()) {
 			return;
 		}
+		
 		if(SYNC_DEBUG) { System.out.println("stateUpdate:  size: "+waitingForActionResponse.size()); }
 		
 		for(Iterator<ARFEntry> it = waitingForActionResponse.iterator(); it.hasNext();) {
@@ -354,7 +350,7 @@ public class SimpleAI extends RemoteClient {
 				if(SYNC_DEBUG) {  System.err.println("action performed: "+response.actionPerformed()+" "+response.getClass().getName()+" game time:"+arfEntry.getGameTick()+" action:" +arfEntry.getAction()); }
 				
 				if(response.actionPerformed()) {
-					// Success
+					// Success!!!
 					it.remove();
 					
 					if(response instanceof MoveInventoryItemActionResponse) {
@@ -373,7 +369,6 @@ public class SimpleAI extends RemoteClient {
 							}
 						}
 					}
-					
 				}
 				
 				// If a wander action fails, then restart from scratch
@@ -381,7 +376,7 @@ public class SimpleAI extends RemoteClient {
 					
 					if(response instanceof NullActionResponse) {
 						it.remove();
-						/* ignore, this is expected - null actions are never performed by definition. */
+						// Null actions are never performed by definition
 						break;
 					} else if(currentState == State.WANDERING) {
 						wanderingStateDate = null;
@@ -398,13 +393,9 @@ public class SimpleAI extends RemoteClient {
 					waitingForActionResponse.clear();
 					
 					break;
-					
 				}
-				
 			} 			
-		}
-		
-			
+		}	
 		
 		OwnableObject oo = shouldIDrinkAPotion();
 		if(oo != null) {
@@ -425,8 +416,7 @@ public class SimpleAI extends RemoteClient {
 			IAction action = doPickUpItem(selfState, worldState, eventLog);
 			sendActionAndAddToList(action);
 			return;
-		}
-				
+		}		
 	}
 	
 	private void sendActionAndAddToList(IAction action) {
@@ -434,7 +424,6 @@ public class SimpleAI extends RemoteClient {
 		waitingForActionResponse.add(new ARFEntry(arf, action, worldState.getCurrentGameTick()));
 		if(SYNC_DEBUG) { System.out.println("["+currentState.name()+"] adding action: "+action+" | "+worldState.getCurrentGameTick()); }
 	}
-
 	
 	private IAction doPickUpItem(SelfState selfState, WorldState worldState, IEventLog eventLog) {
 
@@ -476,7 +465,6 @@ public class SimpleAI extends RemoteClient {
 			return new MoveInventoryItemAction(go.getId(), Type.PICK_UP_ITEM );
 		}
 		
-		
 		if(pickUpItemData.ourCurrentRoute != null && pickUpItemData.ourCurrentRoute.size() == 0) {
 			pickUpItemData.ourCurrentRoute = null;
 		}
@@ -491,9 +479,7 @@ public class SimpleAI extends RemoteClient {
 				routeToDestination.remove(0);
 				
 				pickUpItemData.ourCurrentRoute = routeToDestination;
-
 			}
-	
 		}
 		
 		if(pickUpItemData.ourCurrentRoute != null && pickUpItemData.ourCurrentRoute.size() > 0) {
@@ -502,7 +488,6 @@ public class SimpleAI extends RemoteClient {
 		}
 		
 		return NullAction.INSTANCE;	
-		
 	}
 	
 	private IAction doAttacking(SelfState selfState, WorldState worldState, IEventLog eventLog) {
@@ -551,7 +536,7 @@ public class SimpleAI extends RemoteClient {
 		}
 		
 		if(attackingStateData.ourCurrentRoute != null && attackingStateData.ourCurrentRoute.size() == 0) {
-			// If we have a route, but we have completed it, then reset to null.
+			// If we have a route, but we have completed it, then reset to null
 			attackingStateData.ourCurrentRoute = null;
 		}
 		
@@ -559,25 +544,7 @@ public class SimpleAI extends RemoteClient {
 		
 		// If we already have a route to the creature, and then creature hasn't moved, then continue to use the route
 		if(attackingStateData.ourCurrentRoute != null && attackingStateData.ourCurrentRoute.size() > 0 
-				&& attackingStateData.creatureToAttackLastPosition != null
-				
-				/*&& attackingStateData.creatureToAttackLastPosition.manhattanDistanceBetween(creatureToAttack.getPosition()) < 10*/  ) {
-
-			// Continue on our current path if it gets us closer
-//			Position nextPosition = attackingStateData.ourCurrentRoute.get(0);
-	
-//			{
-//				ArrayList<Position> routePositions = new ArrayList<>();
-//				routePositions.addAll(attackingStateData.ourCurrentRoute);
-//				Collections.reverse(routePositions);
-//				for(int x = 0; x < routePositions.size(); x++) {
-//					Position currPos = routePositions.get(x);
-//				}
-//				for(Iterator<Position> it = routePositions.iterator(); it.hasNext();) {
-//					
-//				}
-//				
-//			}
+				&& attackingStateData.creatureToAttackLastPosition != null) {
 
 			if(false) {
 				int closestPosition = Integer.MAX_VALUE;
@@ -588,25 +555,16 @@ public class SimpleAI extends RemoteClient {
 					}
 				}
 				if(closestPosition < distance) {
-					if(SYNC_DEBUG) {  System.err.println("still good: "+attackingStateData.ourCurrentRoute+" "+creatureToAttack.getPosition()); }
+					if(SYNC_DEBUG) {  System.err.println("Still good: "+attackingStateData.ourCurrentRoute + " " + creatureToAttack.getPosition()); }
 					Position nextMove = attackingStateData.ourCurrentRoute.remove(0);
 					return new StepAction(nextMove);					
 				} else {
-					if(SYNC_DEBUG) {   System.err.println("no longer good: "+attackingStateData.ourCurrentRoute+" "+creatureToAttack.getPosition()); }
+					if(SYNC_DEBUG) {   System.err.println("No longer good: "+attackingStateData.ourCurrentRoute + " " + creatureToAttack.getPosition()); }
 				}
 			}
 			
 		}
 
-		
-//		List<Position> fastPathSearchResult = AStarSearch.findPath(ourPosition, creatureToAttack.getPosition(), worldState.getMap());
-//		if(fastPathSearchResult.size() > 1) {
-//			fastPathSearchResult.remove(0);
-//			attackingStateData.ourCurrentRoute = fastPathSearchResult;
-//			attackingStateData.creatureToAttackLastPosition = creatureToAttack.getPosition();
-//			if(SYNC_DEBUG) { System.err.println("setting current route in fast path: "+fastPathSearchResult+" ["+worldState.getCurrentGameTick()+"]"); }
-//		
-//		} else 
 		if(attackingStateData.ourCurrentRoute == null || distance < 15) {
 			// Find a new route to the creature
 			List<Position> routeToDestination = AStarSearch.findPath(ourPosition, creatureToAttack.getPosition(), worldState.getMap());
@@ -618,7 +576,6 @@ public class SimpleAI extends RemoteClient {
 				attackingStateData.creatureToAttackLastPosition = creatureToAttack.getPosition();
 				if(SYNC_DEBUG) {  System.err.println("setting current route in slow path: "+routeToDestination+" ["+worldState.getCurrentGameTick()+"]"); }
 			}
-			
 		}
 		
 		// We have a valid route, so take the next step on it
@@ -626,7 +583,6 @@ public class SimpleAI extends RemoteClient {
 			Position nextMove = attackingStateData.ourCurrentRoute.remove(0);
 			return new StepAction(nextMove);	
 		}
-		
 		
 		return NullAction.INSTANCE;
 	}
@@ -654,7 +610,6 @@ public class SimpleAI extends RemoteClient {
 				}
 			}
 		}
-		
 		
 		// Are there any creatures we might want to attack?
 		{
@@ -705,7 +660,7 @@ public class SimpleAI extends RemoteClient {
 			
 			List<Position> routeToDestination = AStarSearch.findPath(ourPosition, destination, worldState.getMap());
 			if(routeToDestination.size() > 1) {
-				// Success!
+				// Success!!!
 				
 				// Remove the first item, which is our current position
 				routeToDestination.remove(0);
@@ -726,15 +681,18 @@ public class SimpleAI extends RemoteClient {
 		
 	}
 	
-	/** When we are in the GETTING_ITEM state, this contains the object we are trying to pick up, and 
-	 * the step-by-step route to get there (if it has been calculated) */
+	/** 
+	 * When we are in the GETTING_ITEM state, this contains the object we are trying to pick up, and 
+	 * the step-by-step route to get there (if it has been calculated).
+	 */
 	private static class PickUpItemData {
 		IGroundObject objectToPickUp;
 		List<Position> ourCurrentRoute = new ArrayList<Position>();
 	}
 	
-	/** When we are in the KILLING_MONSTER state, this contains the create we want to attack, their last position,
-	 * and our step-by-step route to them (if it has been calculated)
+	/** 
+	 * When we are in the KILLING_MONSTER state, this contains the creature we want to attack, their last position,
+	 * and our step-by-step route to them (if it has been calculated).
 	 */
 	private static class AttackingStateData {
 		ICreature creatureToAttack = null;
@@ -742,11 +700,11 @@ public class SimpleAI extends RemoteClient {
 		List<Position> ourCurrentRoute = new ArrayList<Position>();
 	}
 
-	/** When we are in the WANDERING state, this contains the step-by-step route to our next position */
-	private static class WanderingStateData {
+	/** 
+	 * When we are in the WANDERING state, this contains the step-by-step route to our next position. 
+	 */	private static class WanderingStateData {
 		List<Position> ourCurrentRoute = new ArrayList<Position>();
 	}
-	
 }
 
 
