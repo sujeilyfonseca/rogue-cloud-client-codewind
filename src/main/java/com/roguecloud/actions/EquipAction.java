@@ -24,8 +24,7 @@ import com.roguecloud.json.actions.JsonEquipAction;
  * 
  * The piece of weapon/armour must be in your inventory before the action is performed. Items may be moved into your
  * inventory using the MoveInventoryItemAction.
- *  
- **/
+ */
 public class EquipAction implements IAction {
 
 	private final OwnableObject ownableObject;
@@ -43,12 +42,10 @@ public class EquipAction implements IAction {
 		return ActionType.EQUIP;
 	}
 	
-	// Internal methods---------------------------------------------------
-
+	// Internal method
 	public JsonEquipAction toJson() {
 		JsonEquipAction result = new JsonEquipAction();
 		result.setObjectId(ownableObject.getId());
 		return result;
 	}
-
 }

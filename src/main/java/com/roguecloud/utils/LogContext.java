@@ -84,5 +84,4 @@ public class LogContext {
 	public String toString() {
 		return getContext();
 	}
-	
 }

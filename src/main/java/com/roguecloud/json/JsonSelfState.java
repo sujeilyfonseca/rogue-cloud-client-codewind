@@ -25,6 +25,7 @@ public class JsonSelfState {
 	private long playerId;
 	
 	public JsonSelfState() {
+		
 	}
 	
 	public List<JsonOwnableObject> getInventory() {

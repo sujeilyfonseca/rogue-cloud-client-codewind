@@ -8,6 +8,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 
+/**
+ * Example class for the repository.
+ */
 @Path("v1/example")
 public class Example {
 
@@ -15,7 +18,6 @@ public class Example {
     @Produces(MediaType.TEXT_PLAIN)
     public Response example() {
         List<String> list = new ArrayList<>();
-        //return a simple list of strings
         list.add("Congratulations, your application is up and running");
         return Response.ok(list.toString()).build();
     }

@@ -10,6 +10,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+
+/**
+ * The RootEndpoint class is the ‘homepage’ of the API. From this API call, the code should be able to reach all other API 
+ * endpoints and all resources by simply following the hypertext links provided in each response.
+ */
 @Path("/")
 public class RootEndpoint {
 

@@ -1,7 +1,8 @@
 'use strict';
 
-// Global utility functions -----------------------
-
+///////////////////////////////////////////////////////////////////////////////////////////
+// Global utility functions
+///////////////////////////////////////////////////////////////////////////////////////////
 function generateUuid() {
 	function gen_rand4() {
 		return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -20,13 +21,12 @@ function convertSecondsToMinutes(totalSeconds) {
 	
 	var seconds = totalSeconds - (minutes*60);
 	
-	
 	return minutes+":"+(seconds < 10 ? "0"+seconds : seconds);
-	
 }
 
-// Global constants -------------------------
-
+///////////////////////////////////////////////////////////////////////////////////////////
+// Global constants
+///////////////////////////////////////////////////////////////////////////////////////////
 var SPREAD = [
 	[0, -1], // N
 	[1, -1], // NE

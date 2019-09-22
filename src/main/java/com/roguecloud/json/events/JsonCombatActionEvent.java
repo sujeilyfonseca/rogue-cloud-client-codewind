@@ -27,12 +27,9 @@ public class JsonCombatActionEvent extends JsonAbstractTypedMessage {
 
 	private long attackerId;
 	private long defenderId;
-
 	private boolean hit;
 	private long damageDone;
-
 	private long frame;
-
 	private long id;
 
 	public JsonCombatActionEvent() {
@@ -96,5 +93,4 @@ public class JsonCombatActionEvent extends JsonAbstractTypedMessage {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 }

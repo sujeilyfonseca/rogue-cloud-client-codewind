@@ -63,6 +63,5 @@ class RedrawManager {
 	clear() {
 		this.map.clear();
 	}
-
 }
 

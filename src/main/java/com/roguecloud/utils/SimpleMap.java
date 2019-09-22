@@ -16,11 +16,12 @@
 
 package com.roguecloud.utils;
 
-/** A utility class that may be used to store/retrieve elements from a map-style grid of an arbitrary elements. */
+/** 
+ * A utility class that may be used to store/retrieve elements from a map-style grid of an arbitrary elements. 
+ */
 public final class SimpleMap<T> {
 
 	private final int xSize, ySize;
-
 	private final T[] tileArray;
 
 	@SuppressWarnings("unchecked")
@@ -71,7 +72,9 @@ public final class SimpleMap<T> {
 		});
 	}
 	
-	/** Return true if the rectangle (x, y) to (x + width-1, y+height-1) all contain the same object */
+	/** 
+	 * Return true if the rectangle (x, y) to (x + width-1, y+height-1) all contain the same object.
+	 */
 	public boolean rectangleMatchesParam(int xParam, int yParam, int width, int height, T object) {
 		for (int x = xParam; x < xParam+width; x++) {
 			for(int y = yParam; y < yParam+height; y++) {
@@ -84,7 +87,9 @@ public final class SimpleMap<T> {
 		return true;
 	}
 	
-	/** Put the same object to the rectangle from (x, y) to (x + width - 1, y + height - 1) */
+	/** 
+	 * Put the same object to the rectangle from (x, y) to (x + width - 1, y + height - 1).
+	 */
 	public void putParamToRectangle(int xParam, int yParam, int width, int height, T object) {
 		for (int x = xParam; x < xParam+width; x++) {
 			for(int y = yParam; y < yParam+height; y++) {
@@ -110,10 +115,11 @@ public final class SimpleMap<T> {
 		}
 		
 		return str.toString();
-
 	}
 	
-	/** See parent class for details. */
+	/** 
+	 * See parent class for details. 
+	 */
 	public static interface SimpleMapPrettyPrint<T> {
 		public String convertTileToString(T a);
 	}

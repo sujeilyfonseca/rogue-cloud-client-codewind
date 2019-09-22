@@ -19,7 +19,6 @@ package com.roguecloud.json;
 public class JsonRoundComplete extends JsonAbstractTypedMessage {
 
 	public static final String TYPE = "JsonRoundComplete";
-
 	private int nextRoundInSeconds;
 	
 	@Override
@@ -41,6 +40,5 @@ public class JsonRoundComplete extends JsonAbstractTypedMessage {
 	
 	public void setNextRoundInSeconds(int nextRoundInSeconds) {
 		this.nextRoundInSeconds = nextRoundInSeconds;
-	}
-	
+	}	
 }

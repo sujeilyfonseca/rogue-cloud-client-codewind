@@ -24,23 +24,20 @@ import com.roguecloud.Position;
  * A simple implementation of IMap that is backed by a HashMap. While it is not thread safe, it can be fully cloned 
  * by calling cloneMap(...); the returned object will be a clone of the map (with a shallow clone of the tile contents) 
  * 
- *  For internal use only - see IMap for the public API of map. 
+ * For internal use only - see IMap for the public API of map. 
  *  
  * This class implements IMutableMap, but only supports a small subset of the IMutableMap methods. For 
- * unsupported methods, an UnsupportedOperationException will be thrown.
- *  
- **/
+ * unsupported methods, an UnsupportedOperationException will be thrown.  
+ */
 public class RCCloneMap implements IMutableMap {
 
 	private final int xSize, ySize;
-	
 	private final HashMap<InnerMapCoord, Tile> map = new HashMap<>();
 	
 	public RCCloneMap(int xSize, int ySize) {
 		this.xSize = xSize;
 		this.ySize = ySize;
 	}
-	
 	
 	public final RCCloneMap cloneMap() {
 		
@@ -51,14 +48,11 @@ public class RCCloneMap implements IMutableMap {
 			Tile t = e.getValue().shallowCloneUnchecked();
 			
 			map.putTile(e.getKey().x, e.getKey().y, t);
-			
 		});
 		
 		return map;
-		
 	}
-	
-	
+
 	public final void putTile(Position p, Tile t) {
 		putTile(p.getX(), p.getY(), t);
 	}
@@ -91,7 +85,9 @@ public class RCCloneMap implements IMutableMap {
 		map.clear();
 	}
 
-	/** Simple (x, y) coordinate class */
+	/** 
+	 * Simple (x, y) coordinate class.
+	 */
 	private final static class InnerMapCoord {
 		final int x;
 		final int y;
@@ -114,9 +110,7 @@ public class RCCloneMap implements IMutableMap {
 			if(y != imc.y) { return false; }
 			
 			return true;
-			
 		}
-		
 	}
 
 	@Override
@@ -124,18 +118,15 @@ public class RCCloneMap implements IMutableMap {
 		throw new UnsupportedOperationException();
 	}
 
-
 	@Override
 	public Tile getTileForWrite(int x, int y) {
 		throw new UnsupportedOperationException();
 	}
 
-
 	@Override
 	public Tile getTileForWrite(Position p) {
 		throw new UnsupportedOperationException();
 	}
-
 
 	@Override
 	public Tile getTileForWriteUnchecked(Position p) {

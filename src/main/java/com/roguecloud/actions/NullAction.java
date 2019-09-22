@@ -22,13 +22,13 @@ import com.roguecloud.json.actions.JsonNullAction;
  * A null action may be sent by the player to indicate that they wish their character to not perform an action this turn. 
  * 
  * Since this action is a no-op on the server side, this is also equivalent to not sending an action at all.
- * 
- **/
+ */
 public class NullAction implements IAction {
 
 	public static final NullAction INSTANCE = new NullAction();
 	
 	private NullAction() {
+		
 	}
 
 	@Override
@@ -41,8 +41,7 @@ public class NullAction implements IAction {
 		return "NullAction";
 	}
 	
-	// Internal methods -------------------------------------------
-	
+	// Internal methods 
 	public JsonNullAction toJson() {
 		return new JsonNullAction();
 	}

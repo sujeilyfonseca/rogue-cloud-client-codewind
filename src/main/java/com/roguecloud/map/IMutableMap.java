@@ -26,7 +26,7 @@ import com.roguecloud.Position;
  * such as thread safety on certain operations, or detecting writes which occur on disallowed threads (for example, see RCArrayMap)
  * 
  * For internal use - see IMap for the public API of map.
- **/
+ */
 public interface IMutableMap extends IMap {
 	
 	public IMap cloneForRead();

@@ -29,27 +29,38 @@ import com.roguecloud.creatures.ICreature;
  * - DrinkItemActionEvent (EventType of DRINK)
  * - EquipActionEvent (EventType of EQUIP)
  * - MoveInventoryItemActionEvent (EventType of MOVE_INVENTORY_ITEM) 
- * */
+ */
 public interface IEvent {
 	
-	/** All the type of events that may occur in the world, corresponding to player/creature actions. */
+	/** 
+	 * All the type of events that may occur in the world, corresponding to player/creature actions. 
+	 */
 	public static enum EventType { STEP, COMBAT, DRINK, EQUIP, MOVE_INVENTORY_ITEM };
 	
-	/** What type of event is it? This will match one of the event types in the com.roguecloud.events package. */	
+	/** 
+	 * What type of event is it? This will match one of the event types in the com.roguecloud.events package. 
+	 */	
 	public EventType getActionType();
 
-	/** What specific tile did this event occur at? (For example, where was the character when they were attacked?) */
+	/** 
+	 * What specific tile did this event occur at? (For example, where was the character when they were attacked?)
+	 */
 	public Position getWorldLocation();
 	
-	/** Which frame (also known as a tick) of the game did the event occur at? */
+	/** 
+	 * Which frame (also known as a tick) of the game did the event occur at? 
+	 */
 	public long getFrame();
 	
-	/** Was the specified creature involved with this event? Returns true if the character was actively involved (attacked/defended/moved/etc), or false otherwise. 
-	 * Thus it returns false if the event does not apply to the creature. */
+	/** 
+	 * Was the specified creature involved with this event? Returns true if the character was actively involved (attacked/defended/moved/etc), or false otherwise. 
+	 * Thus it returns false if the event does not apply to the creature. 
+	 */
 	public boolean isCreatureInvolved(ICreature creature);
 
-	/** Return all creatures involved in this event: for an attack event this is both the attacker/defender, while for other actions this will only
-	 * include the character that performed the action (for example, for a move action, the character that moved). */
+	/** 
+	 * Return all creatures involved in this event: for an attack event this is both the attacker/defender, while for other actions this will only
+	 * include the character that performed the action (for example, for a move action, the character that moved). 
+	 */
 	public ICreature[] getCreaturesInvolved();
-	
 }

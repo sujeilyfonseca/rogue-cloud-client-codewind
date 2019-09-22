@@ -44,5 +44,4 @@ public class JsonCombatAction extends JsonAbstractTypedMessage {
 	public void setTargetCreatureId(long targetCreatureId) {
 		this.targetCreatureId = targetCreatureId;
 	}
-	
 }

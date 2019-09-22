@@ -23,25 +23,23 @@ public class JsonVisibleCreature {
 
 	JsonPosition position;
 
-	long creatureId;
 	int maxHp;
 	int currHp;
-
 	int level;
-
+	
 	long weaponId;
-
-	boolean isPlayer = false;
-
+	long creatureId;
 	long tileTypeNumber;
+	
+	boolean isPlayer = false;
 
 	String name = "";
 
 	List<Long> armourIds = new ArrayList<>();
-
 	List<JsonEffect> effects = new ArrayList<>();
 
 	public JsonVisibleCreature() {
+		
 	}
 
 	public long getCreatureId() {
@@ -131,5 +129,4 @@ public class JsonVisibleCreature {
 	public String getName() {
 		return name;
 	}
-
 }

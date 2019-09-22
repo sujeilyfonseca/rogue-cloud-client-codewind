@@ -16,11 +16,12 @@
 
 package com.roguecloud.events;
 
-/** Server-side interface, for internal use only! For the public client API, see IEvent. */
+/** 
+ * Server-side interface, for internal use only! For the public client API, see IEvent. 
+ */
 public abstract class AbstractEvent implements IMutableEvent {
 
 	final long frame;
-
 	final long id;
 
 	public AbstractEvent(long frame, long id) {
@@ -38,5 +39,4 @@ public abstract class AbstractEvent implements IMutableEvent {
 	public long getEventId() {
 		return id;
 	}
-
 }

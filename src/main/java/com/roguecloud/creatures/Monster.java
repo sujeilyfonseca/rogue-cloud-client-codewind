@@ -37,31 +37,16 @@ import com.roguecloud.map.TileType;
 public final class Monster implements ICreature, IMutableCreature {
 
 	private final Object lock = new Object();
-	
 	private int currHp_synch_lock = -1;
-	
 	private int maxHp = -1;
-	
 	private Weapon weapon = null;
-	
 	private Position position_synch_lock = null;
-	
 	private final ArmourSet armourSet;
-	
 	private final ArrayList<OwnableObject> ownableObject_sync_lock = new ArrayList<>();
-	
 	private final TileType tileType;
-	
 	private final ArrayList<Effect> activeEffects_synch_lock = new ArrayList<>();
-
-//	private final MonsterTemplate template;
-	
-//	private AIContext aiContext;
-	
 	private int level;
-	
 	private final long id;
-	
 	private final String name;
 	
 	public Monster(JsonVisibleCreature json, ArmourSet armourSet, Weapon weapon) {
@@ -85,18 +70,14 @@ public final class Monster implements ICreature, IMutableCreature {
 	
 	public Monster(String name, long id, Position pos, TileType tileType, /*MonsterTemplate template,*/ Weapon startingWeapon, int level, ArmourSet armourSet) {
 		if(name == null || tileType == null || armourSet == null || pos == null || startingWeapon == null) { throw new IllegalArgumentException(); }
-		
-		this.name = name;
-		this.id = id;
-		this.position_synch_lock = pos;
-		
-//		this.template = template;
-		this.level = level;
-		this.weapon = startingWeapon;
-		this.tileType = tileType;
-		this.armourSet = armourSet;
+			this.name = name;
+			this.id = id;
+			this.position_synch_lock = pos;
+			this.level = level;
+			this.weapon = startingWeapon;
+			this.tileType = tileType;
+			this.armourSet = armourSet;
 	}
-	
 	
 	public void internalUpdateFromJson(JsonVisibleCreature json, ArmourSet armourSet, Weapon weapon) {
 		if(weapon == null) { throw new IllegalArgumentException(); }
@@ -121,7 +102,6 @@ public final class Monster implements ICreature, IMutableCreature {
 		
 		this.weapon = weapon;
 	}
-	
 	
 	@Override
 	public Position getPosition() {
@@ -161,10 +141,6 @@ public final class Monster implements ICreature, IMutableCreature {
 		
 		return Collections.unmodifiableList(copy);
 	}
-
-//	public MonsterTemplate getTemplate() {
-//		return template;
-//	}
 	
 	public int getLevel() {
 		return level;
@@ -230,7 +206,6 @@ public final class Monster implements ICreature, IMutableCreature {
 		}
 
 		return result;
-		
 	}
 
 	@Override
@@ -312,5 +287,4 @@ public final class Monster implements ICreature, IMutableCreature {
 			return t.getLastTickUpdated();
 		}
 	}
-
 }

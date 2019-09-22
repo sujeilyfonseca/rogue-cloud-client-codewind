@@ -34,16 +34,13 @@ import java.util.List;
  * 
  * The purpose of this class being on a separate thread is to prevent slow IO writes from blocking
  * threads that log to file.
- *  
- **/
+ */
 public class InnerConsole {
 
 	private static final boolean ENABLED = true;
-	
 	private static final InnerConsole instance = new InnerConsole();
 	
 	private InnerConsole() {
-		
 		if(ENABLED) {
 			logDir = new File(new File(System.getProperty("user.home"), ".roguecloud"),  "logs");
 			logDir.mkdirs();
@@ -62,17 +59,11 @@ public class InnerConsole {
 	public static InnerConsole getInstance() {
 		return instance;
 	}
-	
-	// -------------------------
-	
+		
 	private final static String CR = System.getProperty("line.separator");
-
 	private final File logDir;
-	
 	private String severeError = null;
-	
 	private List<String> out = new ArrayList<>();
-	
 
 	public void write(String message) {
 		if(!ENABLED) { return; }
@@ -85,7 +76,6 @@ public class InnerConsole {
 			out.add(message);
 			out.notify();
 		}
-		
 	}
 	
 	
@@ -93,13 +83,13 @@ public class InnerConsole {
 	
 	private static final String getCptLogFileName() {		
 		return "cpt-"+System.currentTimeMillis()+"-"+sdf.format(new Date())+".log";
-		
 	}
 
 	private void run() {
 		final List<String> localCopy = new ArrayList<String>();
 		
 		FileOutputStream fos = null;
+		
 		try {
 			long bytesWrittenToCurrentFos = 0;
 			fos = new FileOutputStream(new File(logDir, getCptLogFileName()));
@@ -129,9 +119,7 @@ public class InnerConsole {
 					fos = new FileOutputStream(new File(logDir, getCptLogFileName())); 
 					bytesWrittenToCurrentFos = 0;					
 				}
-				
 			}
-
 		} catch (FileNotFoundException e1) {
 			synchronized (out) {
 				severeError = "Unable to open FileOutputStream to "+logDir;
@@ -145,10 +133,11 @@ public class InnerConsole {
 		} finally {
 			try { fos.close(); } catch (Exception e) { }
 		}
-		
 	}
 
-	/** Utility class to call run method. */
+	/** 
+	 * Utility class to call run method. 
+	 */
 	private class ICThreadWrapper extends Thread {
 		
 		public ICThreadWrapper() {
@@ -160,5 +149,4 @@ public class InnerConsole {
 			InnerConsole.this.run();
 		}
 	}
-	
 }

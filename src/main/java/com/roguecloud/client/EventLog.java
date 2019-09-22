@@ -31,15 +31,12 @@ import com.roguecloud.events.IMutableEvent;
  * See IEventLog for a description of the public interface of this method.
  * 
  * Thread-safe.
- **/
+ */
 public class EventLog implements IEventLog {
 	
 	private final Object lock = new Object();
-
 	private final List<IEvent> events_synch_lock = new ArrayList<>(); 
-	
 	private final HashMap<Long /* event id*/, IEvent> eventMap_synch_lock = new HashMap<>();
-	
 	private final int numberOfFramesOfEventsToKeep;
 	
 	public EventLog(int numberOfFramesOfEventsToKeep) {
@@ -134,5 +131,4 @@ public class EventLog implements IEventLog {
 					.collect(Collectors.toList());
 		}		
 	}
-	
 }

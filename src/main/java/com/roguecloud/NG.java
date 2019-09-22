@@ -23,8 +23,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** 
- * A specialized logger for 'nitty gritty' details that are too verbose for a traditional logger. Writes log statements
- * to the file on a separate thread. 
+ * A specialized logger for 'nitty gritty' details that are too verbose for a traditional logger. This class writes 
+ * log statements to the file on a separate thread. 
  * 
  * You should first call setWhoami(..) before calling the log(...) method.
  *  
@@ -35,6 +35,7 @@ public class NG {
 	private static final NG instance = new NG();
 
 	private NG() {
+		
 	}
 
 	public static NG getInstance() {
@@ -45,20 +46,16 @@ public class NG {
 		instance.logInner(gameTicks, str);
 	}
 
-	// -----------------------------------------------------
-
 	public static final boolean ENABLED = false;
-	
 	private final Object lock = new Object();
-
 	public String whoami_synch_lock;
-
 	private final List<String> toWrite_synch = new ArrayList<>();
-
 	private NittyGrittyLogThread thread;
 
 	public void setWhoami(String whoami) {
-		if(!ENABLED) { return; } 
+		if(!ENABLED) { 
+			return; 
+		} 
 		
 		synchronized (lock) {
 			if (this.whoami_synch_lock != null) {
@@ -87,10 +84,11 @@ public class NG {
 			toWrite_synch.add(statement);
 			toWrite_synch.notify();
 		}
-
 	}
 
-	/** Write to file on a separate thread, so that we don't block the callng thread on writing to the disk.  */
+	/** 
+	 * Write to file on a separate thread, so that we don't block the calling thread on writing to the disk.  
+	 */
 	private class NittyGrittyLogThread extends Thread {
 
 		private FileWriter fw;
@@ -118,7 +116,6 @@ public class NG {
 			while (true) {
 
 				try {
-
 					localToWrite.clear();
 
 					synchronized (toWrite_synch) {
@@ -144,12 +141,9 @@ public class NG {
 						toWrite_synch.wait(50);
 					}
 				} catch (Throwable t) {
-					/* ignore */
+					// Do nothing
 				}
-
 			}
 		}
-
 	}
-
 }

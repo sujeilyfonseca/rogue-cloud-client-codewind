@@ -21,7 +21,6 @@ import java.util.concurrent.TimeUnit;
 
 import com.roguecloud.actions.IActionResponse;
 
-
 /**  
  * When you send an action to the server, an instance of this class is immediately returned to you, that is, sending an action does not synchronously
  * block the calling method. 
@@ -48,30 +47,35 @@ import com.roguecloud.actions.IActionResponse;
 public class ActionResponseFuture  {
 
 	private final Object lock = new Object();
-	
 	private IActionResponse response_synch_lock = null; 
-	
 	private long messageId;
 	
 	public ActionResponseFuture() {
+		
 	}
 	
-	/** Has the server processed and responded to our action? */
+	/** 
+	 * Has the server processed and responded to our action? 
+	 */
 	public boolean isResponseReceived() {
 		synchronized (lock) {
 			return response_synch_lock != null;
 		}
 	}
 
-	/** Returns an IActionResponse if one has been received from the server, or null otherwise. */
+	/** 
+	 * Returns an IActionResponse if one has been received from the server, or null otherwise. 
+	 */
 	public IActionResponse getOrReturnNullIfNoResponse() {
 		synchronized (lock) {
 			return response_synch_lock;
 		}
 	}
 
-	/** Blocks until an IActionResponse is received from the server. If no response is received, this method
-	 * will wait until either the end of the universe, or program termination, whichever occurs first. */
+	/** 
+	 * Blocks until an IActionResponse is received from the server. If no response is received, this method
+	 * will wait until either the end of the universe, or program termination, whichever occurs first. 
+	 */
 	public IActionResponse getOrWaitForResponse() throws InterruptedException, ExecutionException {
 		synchronized (lock) {
 			if(response_synch_lock != null) {
@@ -84,11 +88,12 @@ public class ActionResponseFuture  {
 					return response_synch_lock;
 				}
 			}
-			
 		}
 	}
 
-	/** Blocks until an IActionResponse is received from the server, or until timeout (in which case null is returned). */
+	/** 
+	 * Blocks until an IActionResponse is received from the server, or until timeout (in which case null is returned). 
+	 */
 	public IActionResponse getOrWaitForResponse(long timeout, TimeUnit unit) {
 		
 		long expireTimeInNanos = System.nanoTime()+unit.toNanos(timeout);
@@ -105,9 +110,9 @@ public class ActionResponseFuture  {
 		return null;
 	}
 	
-	
-	// Methods for internal use only -------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public void internalSetMessageId(long messageId) {
 		this.messageId = messageId;
 	}
@@ -122,6 +127,4 @@ public class ActionResponseFuture  {
 			lock.notify();
 		}
 	}
-	
-
 }

@@ -32,20 +32,14 @@ import com.roguecloud.utils.Logger;
  * See the Weapon class for a description of the combat system.
  * 
  * Armour may be equipped by a character by using the EquipAction class.
- * 
- **/
+ */
 public class Armour implements IObject {
 
 	private static final Logger log = Logger.getInstance();
-	
 	private final ArmourType type;
-	
 	private final String name;
-	
 	private final int defense;
-	
 	private final TileType tileType;
-	
 	private final long id;
 	
 	public Armour(JsonArmour json) {
@@ -64,12 +58,16 @@ public class Armour implements IObject {
 		this.tileType = tileType;
 	}
 
-	/** Name of the item */
+	/** 
+	 * Method to get the name of the ite.
+	 */
 	public String getName() {
 		return name;
 	}
 
-	/** The defense stat of the item: during combat, the defense stats of all equipped items are aggregated and used to reduce incoming damage. */
+	/** Method to get the defense stat of the item: during combat.
+	 * The defense stats of all equipped items are aggregated and used to reduce incoming damage. 
+	 */
 	public int getDefense() {
 		return defense;
 	}
@@ -79,12 +77,16 @@ public class Armour implements IObject {
 		return ObjectType.ARMOUR;
 	}
 	
-	/** What type of armous is it? Head, Chest, Legs, Feet, etc? */
+	/** 
+	 * What type of armous is it? Head, Chest, Legs, Feet, etc? 
+	 */
 	public ArmourType getType() {
 		return type;
 	}
 	
-	/** A unique ID for this particular item. */
+	/** 
+	 * A unique ID for this particular item. 
+	 */
 	public long getId() {
 		return id;
 	}
@@ -94,7 +96,9 @@ public class Armour implements IObject {
 		return "("+id+") name: "+name+" defense: "+defense;
 	}
 
-	/** A character may wear multiple pieces of armour at time, one for each type or slot. */
+	/** 
+	 * A character may wear multiple pieces of armour at time, one for each type or slot. 
+	 */
 	public static enum ArmourType {
 		
 		HEAD("Head"), CHEST("Chest"), LEGS("Legs"), FEET("Feet"), SHIELD("Shield");
@@ -121,15 +125,14 @@ public class Armour implements IObject {
 		
 	}
 
-	// Internal methods only ----------------------------------------------------
-
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	@Override
 	public TileType getTileType() {
 		return tileType;
 	}
 	
-
 	public JsonArmour toJson() {
 		JsonArmour a = new JsonArmour();
 		a.setType(type.getName());
@@ -137,8 +140,6 @@ public class Armour implements IObject {
 		a.setDefense(defense);
 		a.setId(id);
 		a.setTile(tileType.getNumber());
-		return a;
-		
+		return a;	
 	}
-
 }

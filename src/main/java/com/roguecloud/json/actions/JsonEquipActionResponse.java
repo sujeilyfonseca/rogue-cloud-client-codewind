@@ -30,7 +30,6 @@ public class JsonEquipActionResponse extends JsonAbstractTypedMessage {
 	
 	private long objectId;
 
-
 	public JsonEquipActionResponse() {
 		setType(TYPE);
 	}
@@ -58,7 +57,4 @@ public class JsonEquipActionResponse extends JsonAbstractTypedMessage {
 	public final void setObjectId(long objectId) {
 		this.objectId = objectId;
 	}
-	
-	
-	
 }

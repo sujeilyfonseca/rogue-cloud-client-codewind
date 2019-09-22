@@ -19,9 +19,7 @@ package com.roguecloud.json;
 public class JsonClientInterrupt extends JsonAbstractTypedMessage {
 
 	public static final String TYPE = "JsonClientInterrupt";
-
 	long round;
-
 	int interruptNumber;
 
 	public JsonClientInterrupt() {
@@ -43,5 +41,4 @@ public class JsonClientInterrupt extends JsonAbstractTypedMessage {
 	public void setInterruptNumber(int interruptNumber) {
 		this.interruptNumber = interruptNumber;
 	}
-
 }

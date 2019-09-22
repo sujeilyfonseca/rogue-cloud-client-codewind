@@ -59,7 +59,7 @@ public class AIUtils {
 					if(t.isPresentlyPassable() == true) {
 						return p;
 					} else {
-						/* ignore */
+						// Do nothing
 					}
 				} else {
 					if(allowUnknownTiles) {
@@ -75,7 +75,9 @@ public class AIUtils {
 		return null;
 	}
 		
-	/** Locate ground objects around the given position, and return them as a sorted list (closest are first in the list). */
+	/** 
+	 * Locate ground objects around the given position, and return them as a sorted list (closest are first in the list). 
+	 */
 	public static List<IGroundObject> findAndSortGroundObjectsInRange(int clientViewWidth, int clientViewHeight, Position myPos, IMap map) {
 
 		int startX = Math.max(0, myPos.getX()-(clientViewWidth/2));
@@ -96,7 +98,6 @@ public class AIUtils {
 						result.add(e);
 					});
 				}
-				
 			}
 		}
 
@@ -105,26 +106,28 @@ public class AIUtils {
 			long bDistance = myPos.manhattanDistanceBetween(b.getPosition());
 			
 			return (int)(aDistance - bDistance);
-			
 		});
 		
 		return result;
 		
 	}
 
-	/** Remove creatures that represent other players from the given list. Other player's creatures cannot be attacked,
-	 * so this method will let you filter them out. */
+	/** 
+	 * Remove creatures that represent other players from the given list. Other player's creatures cannot be attacked,
+	 * so this method will let you filter them out. 
+	 */
 	public static void removePlayerCreaturesFromList(List<ICreature> creatures) {
 		for(Iterator<ICreature> it = creatures.iterator(); it.hasNext();) {
 			ICreature c = it.next();
 			if(c == null || c.isPlayerCreature()) {
 				it.remove();
 			}
-		}
-		
+		}	
 	}
 	
-	/** Sort a list of creatures by which is closest, with the closest being first in the list (sorted ascending by distance) */
+	/** 
+	 * Sort a list of creatures by which is closest, with the closest being first in the list (sorted ascending by distance).
+	 */
 	public static void sortClosestCreatures(Position myPos, List<ICreature> creatures) {
 		
 		Collections.sort(creatures, (a, b) -> { 
@@ -132,12 +135,11 @@ public class AIUtils {
 			long bDistance = myPos.manhattanDistanceBetween(b.getPosition());
 			
 			return (int)(aDistance - bDistance);
-
-		});
-		
+		});	
 	}
 	
-	/** Returns true if a creature at position 'src' can "reach" a player at position 'dest', and false otherwise.
+	/** 
+	 * Returns true if a creature at position 'src' can "reach" a player at position 'dest', and false otherwise.
 	 * NOTE: Reach means that the two positions are within 0 or 1 tiles of each other (and they are not diagonal)
 	 * 
 	 * A creature can only attack another creature if they can reach.
@@ -145,18 +147,11 @@ public class AIUtils {
 	 * A creature may reach her or his own tile.
 	 * 
 	 * Reach does NOT refer to whether or not there is a valid path between the two positions. For this, see AStarSearchJob.
-	 **/
+	 */
 	public static boolean canAttack(Position src, Position dest, IMap map, Weapon w) {
 		if(!src.isValid(map) || !dest.isValid(map)) {
 			return false;
 		}
-		
-//		int deltaX = Math.abs(dest.getX() - src.getX());
-//		int deltaY = Math.abs(dest.getY() - src.getY());
-//		
-//		if(deltaX + deltaY == 1 || deltaX + deltaY == 0) {
-//			return true;
-//		}
 		
 		int distance = src.manhattanDistanceBetween(dest);
 		
@@ -167,7 +162,8 @@ public class AIUtils {
 		return false;
 	}
 	
-	/** Returns true if a creature at position 'src' can "reach" a player at position 'dest', and false otherwise.
+	/** 
+	 * Returns true if a creature at position 'src' can "reach" a player at position 'dest', and false otherwise.
 	 * NOTE: Reach means that the two positions are within 0 or 1 tiles of each other (and they are not diagonal)
 	 * 
 	 * A creature can only move to a tile that they are adjacent to.
@@ -175,7 +171,7 @@ public class AIUtils {
 	 * A creature may reach her or his own tile.
 	 * 
 	 * Reach does NOT refer to whether or not there is a valid path between the two positions. For this, see AStarSearchJob.
-	 **/
+	 */
 	public static boolean isAdjacent(Position src, Position dest, IMap map) {
 		if(!src.isValid(map) || !dest.isValid(map)) {
 			return false;
@@ -185,14 +181,15 @@ public class AIUtils {
 		int deltaY = Math.abs(dest.getY() - src.getY());
 
 		if(deltaX + deltaY == 1 || deltaX + deltaY == 0) {
-//		if(deltaX <= 1 && deltaY <= 1) { // Use this for diagonal movement
 			return true;
 		}
 		return false;
 	}
 
 	
-	/**  Return an unsorted list of alive creatures that are within range of the viewWidth/viewHeight of myPos. */
+	/**  
+	 * Return an unsorted list of alive creatures that are within range of the viewWidth/viewHeight of myPos. 
+	 */
 	public static List<ICreature> findCreaturesInRange(int clientViewWidth, int clientViewHeight, Position myPos, IMap map) {
 
 		int startX = Math.max(0, myPos.getX()-(clientViewWidth/2));
@@ -215,16 +212,15 @@ public class AIUtils {
 						result.add(e);
 					});					
 				}
-				
 			}
-			
 		}
 	
 		return result;
 	}
 
-
-	/** Return an unsorted list of creatures that are in a specific range (measured in # of tiles) from myPos on the map. */
+	/** 
+	 * Return an unsorted list of creatures that are in a specific range (measured in # of tiles) from myPos on the map. 
+	 */
 	public static List<ICreature> findCreaturesInRange(int range, IMap map, Position myPos) {
 		if(myPos == null) { return Collections.emptyList(); }
 		
@@ -255,15 +251,15 @@ public class AIUtils {
 						result.add(e);
 					});					
 				}
-				
 			}
-			
 		}
 	
 		return result;
 	}
 	
-	/** Return an unsorted list of creatures that are in the bounds of the rectangle (startX, startY) to (endX, endY) inclusive, on the map. */
+	/** 
+	 * Return an unsorted list of creatures that are in the bounds of the rectangle (startX, startY) to (endX, endY) inclusive, on the map. 
+	 */
 	public static List<ICreature> findCreaturesInRectangle(int startX, int startY, int endX, int endY, Position myPos, IMap map) {
 		List<ICreature> result = new ArrayList<>();
 		
@@ -279,16 +275,15 @@ public class AIUtils {
 						result.add(e);
 					});					
 				}
-				
 			}
-			
 		}
 	
 		return result;
-		
 	}
 	
-	/** Returns the closest accessible ground objects from your current position. */
+	/** 
+	 * Returns the closest accessible ground objects from your current position. 
+	 */
 	public static FindClosestResult<IGroundObject> findClosestGroundObjectThatCanBeReached(IMap map, WorldState worldState, SelfState selfState) {
 		
 		List<IGroundObject> goList = findAndSortGroundObjectsInRange(worldState.getViewWidth(), worldState.getViewHeight(), selfState.getPlayer().getPosition(), map);
@@ -308,7 +303,9 @@ public class AIUtils {
 	}
 
 
-	/** Returns the closest accessible creature from your current position. */
+	/** 
+	 * Returns the closest accessible creature from your current position. 
+	 */
 	public static FindClosestResult<ICreature> findClosestCreatureThatCanBeReached(IMap map, WorldState worldState, SelfState selfState) {
 		
 		List<ICreature> creatures = AIUtils.findCreaturesInRange(worldState.getViewWidth(), worldState.getViewHeight(), selfState.getPlayer().getPosition(), map);
@@ -322,7 +319,6 @@ public class AIUtils {
 			if(routeToCreature.size() > 0) {
 				routeToCreature.remove(0);
 				return new FindClosestResult<ICreature>(routeToCreature, curr);
-				
 			} 
 		}
 		
@@ -330,7 +326,9 @@ public class AIUtils {
 	}
 	
 	
-	/** Return a valid list of Positions that can be reached, or moved to, from the position 'p' on the map. */
+	/** 
+	 * Return a valid list of Positions that can be reached, or moved to, from the position 'p' on the map. 
+	 */
 	public static List<Position> getValidNeighbouringPositions(Position p, IMap m) {
 		
 		List<Position> result = new ArrayList<>();
@@ -352,7 +350,9 @@ public class AIUtils {
 	}
 
 	
-	/** Simple utility class containing route data to creature or object */
+	/** 
+	 * Simple utility class containing route data to creature or object.
+	 */
 	public static class FindClosestResult<T> {
 		
 		public FindClosestResult(List<Position> route, T creatureOrObject) {
@@ -374,5 +374,4 @@ public class AIUtils {
 			return route;
 		}
 	}
-
 }

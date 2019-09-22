@@ -24,7 +24,6 @@ import com.roguecloud.utils.Coord;
 import com.roguecloud.utils.Logger;
 
 /**
- *
  * In addition to implementing the IMap and IMutableMap interface, this class maintains the following properties:
  * - The contents of the map should only be mutated from the game thread.
  * - To detect the above, getTile(...) methods should only be used for read, and getTileForWrite(...) should be used for write.
@@ -47,13 +46,9 @@ import com.roguecloud.utils.Logger;
 public final class RCArrayMap implements IMap, IMutableMap {
 	
 	private static final Logger log = Logger.getInstance();
-
 	private final int xSize, ySize;
-
 	private final Tile[] tileArray;
-	
 	private HashMap<Coord, Tile> overlay;
-	
 	private boolean clonedForRead = false;
 	
 	public RCArrayMap(int xSize, int ySize) {
@@ -186,8 +181,6 @@ public final class RCArrayMap implements IMap, IMutableMap {
 			});
 		}
 		
-		return new RCArrayMap(this.xSize, this.ySize, tile);
-		
+		return new RCArrayMap(this.xSize, this.ySize, tile);	
 	}
-	
 }

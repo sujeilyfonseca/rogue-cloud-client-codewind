@@ -18,8 +18,7 @@ package com.roguecloud.json.client;
 
 public class JsonUserRequest {
 
-	String username;
-	
+	String username;	
 	String password;
 
 	public String getUsername() {
@@ -37,5 +36,4 @@ public class JsonUserRequest {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 }

@@ -16,7 +16,9 @@
 
 package com.roguecloud.map;
 
-/** Walls are impassable terrain. */
+/** 
+ * Walls are impossible terrain. 
+ */
 public class WallTerrain implements ITerrain {
 
 	private TileType tileType;
@@ -34,5 +36,4 @@ public class WallTerrain implements ITerrain {
 	public boolean isPresentlyPassable() {
 		return false;
 	}
-
 }

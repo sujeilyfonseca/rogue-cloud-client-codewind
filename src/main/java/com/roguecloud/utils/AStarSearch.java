@@ -54,16 +54,20 @@ import com.roguecloud.map.Tile;
  * This should not be necessary for game client code (but is used server side to reduce CPU load on the hot path). 
  *
  * This class implements the algorithm described at https://en.wikipedia.org/wiki/A*_search_algorithm
- **/
+ */
 public final class AStarSearch {
 
-	/** Find a path between two points on a map. */
+	/** 
+	 * Find a path between two points on a map. 
+	 */
 	public final static List<Position> findPath(Position start, Position goal, IMap m) {
 		return findPath(start, goal, Long.MAX_VALUE, m);
 	}
 	
-	/** Find a path between two points on a map. Restrict search to at most 'maxTilesToSearch': use this option 
-	 * to reduce CPU usage. */
+	/** 
+	 * Find a path between two points on a map. Restrict search to at most 'maxTilesToSearch': use this option 
+	 * to reduce CPU usage. 
+	 */
 	public final static List<Position> findPath(Position start, Position goal, long maxTilesToSearch, IMap m) {
 
 		Node startNode = new Node(start);
@@ -71,31 +75,26 @@ public final class AStarSearch {
 		// The set of nodes already evaluated
 		HashMap<Node, Boolean> closedSet = new HashMap<>();
 
-		// The set of currently discovered nodes that are not evaluated yet.
-		// Initially, only the start node is known.
+		// The set of currently discovered nodes that are not evaluated yet
+		// Initially, only the start node is known
 		PriorityQueue<Node> openSet = new PriorityQueue<>(new FScoreComparator());
 
 		HashMap<Node, Boolean> inOpenSet = new HashMap<>();
 
 		openSet.add(startNode);
 
-		// For each node, which node it can most efficiently be reached from.
+		// For each node, which node it can most efficiently be reached from
 		// If a node can be reached from many nodes, cameFrom will eventually contain
-		// the
-		// most efficient previous step.
+		// thenmost efficient previous step
 		HashMap<Node, Node> cameFrom = new HashMap<>();
 
-		// // For each node, the cost of getting from the start node to that node.
-		// HashMap<Node, Long> gScore = new HashMap<>();
-
-		// // The cost of going from start to start is zero.
+		// For each node, the cost of getting from the start node to that node
+		// The cost of going from start to start is zero
 		startNode.g_score = 0;
 
 		// For each node, the total cost of getting from the start node to the goal
-		// by passing by that node. That value is partly known, partly heuristic.
-		// HashMap<Node, Long> fScore = new HashMap<>();
-
-		// For the first node, that value is completely heuristic.
+		// by passing by that node. That value is partly known, partly heuristic
+		// For the first node, that value is completely heuristic
 		startNode.f_score = heuristicCostEstimate(start, goal);
 
 		Node[] neighbours = new Node[4];
@@ -105,11 +104,10 @@ public final class AStarSearch {
 		while (!openSet.isEmpty() && closedSet.size() < maxTilesToSearch) {
 
 			c++;
+			
 			// current := the node in openSet having the lowest fScore[] value
 			Node current = openSet.remove();
 			inOpenSet.remove(current);
-
-//			m.putTile(current.p, new Tile(TileType.BRICK_FENCE_STRAIGHT_VERT_LEFT));
 
 			if (current.p.equals(goal)) {
 				return reconstructPath(cameFrom, current);
@@ -118,7 +116,7 @@ public final class AStarSearch {
 			closedSet.put(current, true);
 
 			getNeighbours(neighbours, current, m, (int)(c%4));
-//			System.out.println("neighbours: "+neighbours.size()+" "+m.getXSize()+" "+m.getYSize());
+
 			for (Node neighbour : neighbours) {
 				if(neighbour == null) { continue; }
 
@@ -130,9 +128,8 @@ public final class AStarSearch {
 				if (!inOpenSet.containsKey(neighbour)) {
 
 					Tile t = m.getTile(neighbour.p);
-//					System.out.println(neighbour.p +" -> " +t.isPresentlyPassable());
 					
-					// Here we assume that if we haven't seen a tile yet, that it is passable.
+					// Here we assume that if we haven't seen a tile yet, that it is possible.
 					if(t == null || t.isPresentlyPassable()) {
 						// Discover a new node
 						openSet.add(neighbour);
@@ -144,7 +141,7 @@ public final class AStarSearch {
 				}
 
 				// The distance from start to a neighbor
-				// the "dist_between" function may vary as per the solution requirements.
+				// the "dist_between" function may vary as per the solution requirements
 				// tentative_gScore := gScore[current] + dist_between(current, neighbor)
 				long tentative_gScore = current.g_score + distanceBetween(current, neighbour);
 				
@@ -162,18 +159,13 @@ public final class AStarSearch {
 				
 				// fScore[neighbor] := gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
 				neighbour.f_score = neighbour.g_score + heuristicCostEstimate(neighbour.p, goal);
-				
-
 			}
 		}
 
 		return new ArrayList<>();
-		
 	}
 
 	private final static void getNeighbours(Node[]  result, Node current, IMap m, int c) {
-//		List<Node> list = new ArrayList<Node>(4);
-//		Node[] result = new Node[4];
 
 		c = (int)(Math.random()* 4);
 		
@@ -183,7 +175,6 @@ public final class AStarSearch {
 		Position left = new Position(p.getX() - 1, p.getY());
 		if (left.isValid(m)) {
 			result[c] = new Node(left);
-//			list.add(new Node(left));
 			c = (c + 1) % result.length;
 		}
 
@@ -207,10 +198,6 @@ public final class AStarSearch {
 			result[c] = new Node(down);
 			c = (c + 1) % result.length;
 		}
-		
-//		Collections.shuffle(list);
-		
-//		return result;
 	}
 
 	private final static List<Position> reconstructPath(HashMap<Node, Node> cameFrom, Node current) {
@@ -238,7 +225,9 @@ public final class AStarSearch {
 		return Math.abs(goal.getX() - start.getX()) + Math.abs(goal.getY() - start.getY());
 	}
 
-	/** Node as defined by A-Star algorithm */
+	/** 
+	 * Node as defined by A-Star algorithm.
+	 */
 	private static final class Node {
 
 		final Position p;
@@ -262,7 +251,9 @@ public final class AStarSearch {
 
 	}
 
-	/** Sort a Node by f-score (ascending). */
+	/** 
+	 * Sort a Node by f-score (ascending). 
+	 */
 	private static class FScoreComparator implements Comparator<Node> {
 
 		@Override
@@ -279,6 +270,5 @@ public final class AStarSearch {
 
 			return (int) val;
 		}
-
 	}
 }

@@ -31,11 +31,12 @@ import com.roguecloud.client.ClientWorldState.ClientWorldStateListener;
  * 
  * Listeners are added to this class when they are first created, and never removed.
  *  
- * For internal server use only 
- **/
+ * For internal server use only.
+ */
 public class WorldStateListeners {
 	
 	private WorldStateListeners() {
+		
 	}
 	
 	private static final WorldStateListeners instance = new WorldStateListeners();
@@ -45,14 +46,12 @@ public class WorldStateListeners {
 	}
 	
 	// TODO: CURR - We're not removing WorldStateListeners.
-	
-	// ------------------------------
-	
+		
 	private final List<WSLEntry> listeners_synch = new ArrayList<>();
 
 	public void addListener(ClientWorldStateListener listener) {
-		
 		synchronized (listeners_synch) {
+			
 			listeners_synch.add(new WSLEntry(listener));
 
 			// Flag listeners which are closed
@@ -82,7 +81,9 @@ public class WorldStateListeners {
 		return result;
 	}
 
-	/** Internal struct-style class containing the listener, and when it expires as an absolute time */
+	/** 
+	 * Internal struct-style class containing the listener, and when it expires as an absolute time.
+	 */
 	private static class WSLEntry {
 		
 		public WSLEntry(ClientWorldStateListener listener) {
@@ -94,5 +95,4 @@ public class WorldStateListeners {
 		ClientWorldStateListener listener;
 		Long clientExpireTimeInNanos;
 	}
-	
 }

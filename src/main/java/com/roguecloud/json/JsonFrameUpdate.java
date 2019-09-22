@@ -19,24 +19,20 @@ package com.roguecloud.json;
 public class JsonFrameUpdate extends JsonAbstractTypedMessage {
 	
 	public static final String TYPE = "JsonFrameUpdate";
-
-	long gameTicks;
 	
+	long gameTicks;
 	long frame;
 	
 	JsonSelfState selfState;
-
 	JsonWorldState worldState;
-	
-	/** Whether or not the frame update is a full frame
-	 * Note: even if this is false, the frame may still be a full frame. However, if it is true, then the frame is always full. */
+	 
+	// Whether or not the frame update is a full frame.
+	// Note: even if this is false, the frame may still be a full frame. However, if it is true, then the frame is always full
 	boolean isFull = false;
 
-	
 	public JsonFrameUpdate() {
 		setType(TYPE);
 	}
-	
 	
 	public JsonSelfState getSelfState() {
 		return selfState;

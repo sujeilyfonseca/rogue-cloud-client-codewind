@@ -44,32 +44,21 @@ public class LibertyClientInstance {
 	public static LibertyClientInstance getInstance() {
 		return instance;
 	}
-	
-	// -------------------------------------------------------------------
-	
+		
 	private final String uuid;
-	
 	private final Object lock = new Object();
-	
 	private boolean disposeSignaled_synch_lock = false;
-	
 	private final List<WeakReference<LibertyClientBrowserSessionWrapper>> lcbswList_synch_lock = new ArrayList<>();
-	
 	private final List<WeakReference<LibertySessionWrapper>> lswList_synch_lock = new ArrayList<>();
-	
 	private final List<WeakReference<Session>> sessions_synch_lock = new ArrayList<>();
-	
 	private final List<WeakReference<Thread>> miscThreads_synch_lock = new ArrayList<>();
-	
 	private long objectsAdded_synch_lock = 0;
-	
 	
 	public LibertyClientInstance() {
 		this.uuid = UUID.randomUUID().toString();
 
 		log("Client instance started. ");
 	}
-	
 	
 	public void informStarted() {
 		log("Instance informed of start.");
@@ -81,12 +70,13 @@ public class LibertyClientInstance {
 		synchronized (lock) {
 			disposeSignaled_synch_lock = true;
 			
-			lcbswList_synch_lock.forEach( e -> { disposeObject(e); } ) ;
-			lswList_synch_lock.forEach( e -> { disposeObject(e); } ) ;
-			sessions_synch_lock.forEach( e -> { disposeObject(e); } ) ;
-			miscThreads_synch_lock.forEach( e -> { disposeObject(e); } ) ;
+			lcbswList_synch_lock.forEach( e -> { disposeObject(e); } );
+			lswList_synch_lock.forEach( e -> { disposeObject(e); } );
+			sessions_synch_lock.forEach( e -> { disposeObject(e); } );
+			miscThreads_synch_lock.forEach( e -> { disposeObject(e); } );
 			
 		}
+		
 		log("Disposing complete.");
 	}
 	
@@ -117,11 +107,10 @@ public class LibertyClientInstance {
 						log("Unrecognized object type: "+o.getClass().getName());
 					}
 				} catch(Exception e) {
-					/* ignore */
+					// Do nothing
 				}
 			}
 		}.start();
-		
 	}
 	
 	public void add(LibertySessionWrapper lsw) {
@@ -160,9 +149,12 @@ public class LibertyClientInstance {
 		}
 	}
 	
-	/** Remove null weak references from the various lists */
+	/** 
+	 * Remove null weak references from the various lists.
+	 */
 	private void cleanAllListsIfNeeded() {
 		synchronized(lock) {
+			
 			objectsAdded_synch_lock++;
 			if(objectsAdded_synch_lock < 0) { objectsAdded_synch_lock = 0; }
 			
@@ -196,16 +188,12 @@ public class LibertyClientInstance {
 					}
 				}
 			}
-			
-			
 		}
 	}
 	
-	
 	private void log(String str) {
-		System.out.println("[ci:"+uuid+"] " +str);
+		System.out.println("[ci:" + uuid + "] " + str);
 	}
-	
 	
 	public String getUuid() {
 		return uuid;

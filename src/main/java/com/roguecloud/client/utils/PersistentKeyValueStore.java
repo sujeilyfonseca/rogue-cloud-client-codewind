@@ -31,7 +31,7 @@ import com.roguecloud.utils.RCUtils;
  * 
  * This class is a simple Java object file store, which persists key-values to files which 
  * are serialized/deserialized Java objects using the Object(Input/Output)Stream API.  
- **/
+ */
 public class PersistentKeyValueStore implements IKeyValueStore {
 	
 	private final File dir;
@@ -95,6 +95,4 @@ public class PersistentKeyValueStore implements IKeyValueStore {
 			RCUtils.safeClose(ois);
 		}
 	}
-	
-	
 }

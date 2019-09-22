@@ -21,55 +21,45 @@ import java.util.concurrent.atomic.AtomicLong;
 
 import com.roguecloud.map.IMap;
 import com.roguecloud.map.Tile;
+import com.roguecloud.utils.Console;
 import com.roguecloud.utils.Logger;
 
 /** 
- * Utility methods and constants which are used to enable various DEBUG checks throughout the codebase. 
- * 
- * Many of these default to false, as they are computationally expensive when running in production.
- * 
+ * The RCRuntime contains the utility methods and constants, which are used to enable various DEBUG checks throughout the code base. 
+ * Many of these default methods are false, since they are computationally expensive when run in production.
  * This class is an internal class, for server use only. 
  */
 public class RCRuntime {
-	/** For internal use only */
-
+	
+	// For internal use only 
 	private static final Logger log = Logger.getInstance();
-
 	public static final AtomicLong GAME_TICKS = new AtomicLong(0);
 
-	/** Enable this to do runtime checking of various invariant properties throughout the code; this should
-	 * remaining disable in production as it necessarily imposes a performance penalty. */
+	// Enable this to do runtime checking of various invariant properties throughout the code
+	// This should remaining disable in production as it necessarily imposes a performance penalty
 	public static final boolean CHECK = false;
-	
 	public static final boolean CHECK_GAME_THREAD = false;
-	
 	public static final boolean PERF_ENABLED = true;
-
 	public static final boolean SIMULATE_BAD_CONNECTION = false;
-	
 	public static final boolean ENABLE_LATENCY_SIM = false;
-
-	public static final long MIN_LATENCY_SIM_IN_NANOS = TimeUnit.NANOSECONDS.convert(500, TimeUnit.MILLISECONDS);
-	
+	public static final long MIN_LATENCY_SIM_IN_NANOS = TimeUnit.NANOSECONDS.convert(500, TimeUnit.MILLISECONDS);	
 	public static final long MAX_LATENCY_SIM_IN_NANOS = TimeUnit.NANOSECONDS.convert(1000, TimeUnit.MICROSECONDS);
 
-	/** This should always be true (unless you a Microclimate developer writing a client that does not support deflate) */
+	// This should always be true (unless you are a Codewind developer writing a client that does not support deflate) 
 	public static final boolean ENABLE_DEFLATE_COMPRESSION = true;
 	
-	public static long convertToLong(Object o) {
-		if(o instanceof Long) {
-			return ((Long)o).longValue();
-			
-		} else if(o instanceof Integer) {
-			return ((Integer)o).intValue();
+	public static long convertToLong(Object object) {
+		if(object instanceof Long) {
+			return ((Long)object).longValue();
+		} else if(object instanceof Integer) {
+			return ((Integer)object).intValue();
 		} else {
-			log.severe("Could not convert object "+o+" to long.", null);			
-			throw new RuntimeException("Invalid value: "+o);
+			log.severe("Could not convert object " + object + " to long.", null);			
+			throw new RuntimeException("Invalid value: " + object);
 		}
 	}
 	
 	public static String dumpMap(IMap map, int startx, int starty, int width, int height) {
-
 		StringBuilder sb = new StringBuilder();
 		
 		sb.append("{\r\n");
@@ -89,7 +79,6 @@ public class RCRuntime {
 		sb.append("}\r\n");
 		
 		return sb.toString();
-		
 	}
 	
 	public final static void assertNotGameThread() {
@@ -98,9 +87,13 @@ public class RCRuntime {
 		if(Thread.currentThread().getName().startsWith("com.roguecloud.GameEngine$GameThread")) {
 			
 			while(true) {
-				log.severe("Invalid thread access: "+Thread.currentThread().getName(), new Throwable(), null);
-				System.err.println("INVALID THREAD ACCESS!!!!11");
-				try { Thread.sleep(10 * 1000); } catch (InterruptedException e) { e.printStackTrace(); }
+				log.severe("Invalid thread access: " + Thread.currentThread().getName(), new Throwable(), null);
+				System.err.println("INVALID THREAD ACCESS!!!");
+				try { 
+					Thread.sleep(10 * 1000); 
+				} catch (InterruptedException e) { 
+					Console.err("Error in RCRuntime.assertNotGameThread: " + e.toString(), null);  
+				}
 			}
 		}
 	}
@@ -111,11 +104,14 @@ public class RCRuntime {
 		if(!Thread.currentThread().getName().startsWith("com.roguecloud.GameEngine$GameThread")) {
 			
 			while(true) {
-				log.severe("Invalid thread access: "+Thread.currentThread().getName(), new Throwable(), null);
-				System.err.println("INVALID THREAD ACCESS!!!!11");
-				try { Thread.sleep(10 * 1000); } catch (InterruptedException e) { e.printStackTrace(); }
+				log.severe("Invalid thread access: " + Thread.currentThread().getName(), new Throwable(), null);
+				System.err.println("INVALID THREAD ACCESS!!!");
+				try { 
+					Thread.sleep(10 * 1000); 
+				} catch (InterruptedException e) { 
+					Console.err("Error in RCRuntime.assertGameThread: " + e.toString(), null); 
+				}
 			}
 		}
 	}
-	
 }

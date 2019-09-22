@@ -20,9 +20,10 @@ import com.roguecloud.client.ClientState;
 import com.roguecloud.client.ISessionWrapper;
 import com.roguecloud.client.IWebsocketFactory;
 
-/** This class provides a session wrapper which is implemented using the Liberty WebSocket implementation.
- * 
- * See IWebsocketFactory for details. */
+/** 
+ * This class provides a session wrapper which is implemented using the Liberty WebSocket implementation.
+ * See IWebsocketFactory for details. 
+ */
 public class LibertyWebsocketFactory implements IWebsocketFactory {
 
 	@Override
@@ -30,5 +31,4 @@ public class LibertyWebsocketFactory implements IWebsocketFactory {
 		LibertySessionWrapper result = new LibertySessionWrapper(cs);
 		return result;
 	}
-
 }

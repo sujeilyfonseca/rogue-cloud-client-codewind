@@ -45,6 +45,5 @@ public class JsonStepAction extends JsonAbstractTypedMessage {
 	
 	public void setDestination(JsonPosition destination) {
 		this.destination = destination;
-	}
-		
+	}	
 }

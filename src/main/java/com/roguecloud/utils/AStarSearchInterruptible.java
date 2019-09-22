@@ -37,31 +37,28 @@ import com.roguecloud.map.Tile;
  * in order to meet minimum framerate deadlines).
  * 
  * Client code should not need to use this class: FastPathSearch or AStarSearch are preferable under nearly all circumstances.
- *  
- **/
+ */
 public final class AStarSearchInterruptible {
 
 	// The set of nodes already evaluated
 	private final HashMap<Node, Boolean> closedSet = new HashMap<>();
 
-	// The set of currently discovered nodes that are not evaluated yet.
-	// Initially, only the start node is known.
+	// The set of currently discovered nodes that are not evaluated yet
+	// Initially, only the start node is known
 	private final PriorityQueue<Node> openSet = new PriorityQueue<>(new FScoreComparator());
 
 	private final HashMap<Node, Boolean> inOpenSet = new HashMap<>();
 
-	// For each node, which node it can most efficiently be reached from.
+	// For each node, which node it can most efficiently be reached from
 	// If a node can be reached from many nodes, cameFrom will eventually contain
-	// the most efficient previous step.
+	// the most efficient previous step
 	private final HashMap<Node, Node> cameFrom = new HashMap<>();
 	
 	private final Position start;
 	private final Position goal;
 
 	private final IMap m;
-	
 	private long elapsedTimeInNanos = 0;
-
 	private List<Position> result = null;
 	
 	public AStarSearchInterruptible(Position start, Position goal, IMap m) {
@@ -70,17 +67,18 @@ public final class AStarSearchInterruptible {
 		this.m = m;
 	}
 	
-	/** Returns true if search complete, false otherwise */
+	/** 
+	 * Returns true if search complete, false otherwise.
+	 */
 	public final boolean startSearch(long expireTimeInNanos) {
 
 		Node startNode = new Node(start);
-
 		openSet.add(startNode);
 
-		// // For each node, the cost of getting from the start node to that node.
+		// For each node, the cost of getting from the start node to that node.
 		// HashMap<Node, Long> gScore = new HashMap<>();
 
-		// // The cost of going from start to start is zero.
+		// The cost of going from start to start is zero.
 		startNode.g_score = 0;
 
 		// For each node, the total cost of getting from the start node to the goal
@@ -95,14 +93,18 @@ public final class AStarSearchInterruptible {
 		return searchFinished;
 	}
 	
-	/** Returns true if search complete, false otherwise */
+	/** 
+	 * Returns true if search complete, false otherwise.
+	 */
 	public final boolean continueSearch(long expireTimeInNanos) {
 		boolean result = doThing(expireTimeInNanos);
 		
 		return result;
 	}
 
-	/** Returns true if search complete, false otherwise */
+	/** 
+	 * Returns true if search complete, false otherwise.
+	 */
 	private final boolean doThing(long expireTimeInNanos) {
 		
 		long count = 0;
@@ -124,8 +126,6 @@ public final class AStarSearchInterruptible {
 			// current := the node in openSet having the lowest fScore[] value
 			Node current = openSet.remove();
 			inOpenSet.remove(current);
-
-//			m.putTile(current.p, new Tile(TileType.BRICK_FENCE_STRAIGHT_VERT_LEFT));
 						
 			if (current.p.equals(goal)) {
 				result = reconstructPath(cameFrom, current);
@@ -156,7 +156,7 @@ public final class AStarSearchInterruptible {
 				}
 
 				// The distance from start to a neighbor
-				// the "dist_between" function may vary as per the solution requirements.
+				// the "dist_between" function may vary as per the solution requirements
 				// tentative_gScore := gScore[current] + dist_between(current, neighbor)
 				long tentative_gScore = current.g_score + distanceBetween(current, neighbour);
 				
@@ -174,14 +174,12 @@ public final class AStarSearchInterruptible {
 				
 				// fScore[neighbor] := gScore[neighbor] + heuristic_cost_estimate(neighbor, goal)
 				neighbour.f_score = neighbour.g_score + heuristicCostEstimate(neighbour.p, goal);
-
 			}
 		}
 		
 		elapsedTimeInNanos += System.nanoTime() - startTimeInNanos;
 		
 		return true;
-
 	}
 	
 	public long getElapsedTimeInNanos() {
@@ -249,7 +247,9 @@ public final class AStarSearchInterruptible {
 		return Math.abs(goal.getX() - start.getX()) + Math.abs(goal.getY() - start.getY());
 	}
 
-	/** A Node as defined by the a-star search algorithm. */
+	/** 
+	 * A Node as defined by the a-star search algorithm. 
+	 */
 	private static final class Node {
 
 		final Position p;
@@ -270,10 +270,11 @@ public final class AStarSearchInterruptible {
 		public boolean equals(Object obj) {
 			return p.equals(((Node) obj).p);
 		}
-
 	}
 
-	/** Sort Nodes by f-score, ascending. */
+	/** 
+	 * Sort Nodes by f-score, ascending. 
+	 */
 	private static final class FScoreComparator implements Comparator<Node> {
 
 		@Override
@@ -290,7 +291,5 @@ public final class AStarSearchInterruptible {
 
 			return (int) val;
 		}
-
 	}
-	
 }

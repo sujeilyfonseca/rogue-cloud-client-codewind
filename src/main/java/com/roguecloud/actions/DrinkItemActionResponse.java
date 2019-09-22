@@ -28,15 +28,13 @@ import com.roguecloud.json.actions.JsonDrinkItemActionResponse;
  * Note: The only reason for a drink item action to fail is if the agent does not have the item in their inventory. 
  *  
  * See the IActionResponse class for more information on action responses.
- *  
- **/
+ */
 public class DrinkItemActionResponse implements IActionResponse {
 	
 	private final long id;
-	
 	private final boolean success;
 	
-	/** This may be null, for example if success is false.*/
+	// This may be null, for example if success is false
 	private final Effect effect;
 
 	public DrinkItemActionResponse(boolean success, long id, Effect effect) {
@@ -58,8 +56,7 @@ public class DrinkItemActionResponse implements IActionResponse {
 		return success;
 	}
 
-	// Internal methods ---------------------------------------------
-	
+	// Internal methods 
 	public JsonAbstractTypedMessage toJson() {
 		JsonDrinkItemActionResponse result = new JsonDrinkItemActionResponse();
 		result.setId(this.id);
@@ -73,5 +70,4 @@ public class DrinkItemActionResponse implements IActionResponse {
 	public final long getId() {
 		return id;
 	}
-
 }

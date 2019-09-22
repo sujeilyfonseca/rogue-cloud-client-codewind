@@ -21,10 +21,10 @@ import com.roguecloud.creatures.ICreature;
 import com.roguecloud.json.JsonAbstractTypedMessage;
 import com.roguecloud.json.events.JsonCombatActionEvent;
 
-/** An attack between two characters that occurred in the world. 
- * 
+/** 
+ * An attack between two characters that occurred in the world. 
  * Note that not all attacks are successful: an attack will sometimes miss, or may succeed but but deal minimal or zero damage.   
- **/
+ */
 public class CombatActionEvent extends AbstractEvent {
 
 	private final ICreature attacker;
@@ -48,41 +48,52 @@ public class CombatActionEvent extends AbstractEvent {
 		this.defender = defender;
 		this.hit = hit;
 		this.damageDone = damage;
-
 	}
 
-	/** The coordinates on the map at which that the event occurred. */
+	/** 
+	 * The coordinates on the map at which that the event occurred. 
+	 */
 	@Override
 	public Position getWorldLocation() {
 		return defender.getPosition();
 	}
 
-	/** The attacking creature */
+	/** 
+	 * The attacking creature.
+	 */
 	public ICreature getAttacker() {
 		return attacker;
 	}
 
-	/** The defending creature. */
+	/** 
+	 * The defending creature. 
+	 */
 	public ICreature getDefender() {
 		return defender;
 	}
 
-	/** Return false if the attack missed (and thus no damage was done), or true otherwise. */
+	/** 
+	 * Return false if the attack missed (and thus no damage was done), or true otherwise. 
+	 */
 	public boolean isHit() {
 		return hit;
 	}
 
-	/** How much damage was done by the attack, if any. */
+	/** 
+	 * How much damage was done by the attack, if any. 
+	 */
 	public long getDamageDone() {
 		return damageDone;
 	}
 	
 	@Override
 	public String toString() {
-		return "CombatActionEvent: attacker: "+attacker.getId()+" defender: "+defender.getId()+" hit: "+hit+"  damageDone: "+damageDone;
+		return "CombatActionEvent: attacker: " + attacker.getId() + " defender: " + defender.getId() + " hit: " + hit + "  damageDone: " + damageDone;
 	}
 	
-	/** Returns true if the specified creature was involved in this event (was the attacker or defender), or false otherwise. */
+	/** 
+	 * Returns true if the specified creature was involved in this event (was the attacker or defender), or false otherwise. 
+	 */
 	@Override
 	public boolean isCreatureInvolved(ICreature creature) {
 		if(creature == null ) { throw new IllegalArgumentException(); }
@@ -93,14 +104,17 @@ public class CombatActionEvent extends AbstractEvent {
 		return false;
 	}
 
-	/** Return a list of all the creatures involved in the event. */
+	/** 
+	 * Return a list of all the creatures involved in the event. 
+	 */
 	@Override
 	public ICreature[] getCreaturesInvolved() {
 		return new ICreature[] { attacker, defender };
 	}
 	
-	// Internal methods ---------------------------------------
-	
+	///////////////////////////////////////////////////////////////////////////////////////////
+	// Internal methods
+	///////////////////////////////////////////////////////////////////////////////////////////
 	public String userVisibleCombatResult() {
 		if(!hit) {
 			return "Miss";
@@ -118,8 +132,6 @@ public class CombatActionEvent extends AbstractEvent {
 		result.setFrame(frame);
 		result.setHit(hit);
 		result.setId(id);
-
 		return result;
 	}
-
 }

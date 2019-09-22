@@ -21,7 +21,6 @@ import com.roguecloud.json.JsonAbstractTypedMessage;
 public class JsonHealthCheck extends JsonAbstractTypedMessage {
 
 	public static final String TYPE = "JsonHealthCheck";
-	
 	private long id;
 	
 	public JsonHealthCheck() {
@@ -32,7 +31,6 @@ public class JsonHealthCheck extends JsonAbstractTypedMessage {
 		setType(TYPE);
 		this.id = id;
 	}
-	
 	
 	public long getId() {
 		return id;

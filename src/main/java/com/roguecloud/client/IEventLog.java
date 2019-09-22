@@ -35,22 +35,31 @@ import com.roguecloud.events.IEvent;
  * occur "off screen" will thus not be available. 
  * 
  * Implementations of this interface are thread safe.
- **/
+ */
 public interface IEventLog {
 	
-	/** Return a list of all events in the log. Note this may not return all game events, depending on memory constraints. */
+	/*
+	 * Return a list of all events in the log. Note this may not return all game events, depending on memory constraints.
+	 */
 	public List<IEvent> getAllEvents();
 	
-	/** Return a list of all the events that occurred in the last turn that involved a specific creature (us). */
+	/*
+	 * Return a list of all the events that occurred in the last turn that involved a specific creature (us).
+	 */
 	public List<IEvent> getLastTurnSelfEvents(ICreature c, WorldState worldState);
 	
-	/** Return a list of all the events that involved a specific creature (us), that occurred in the last X turns. */
+	/*
+	 * Return a list of all the events that involved a specific creature (us), that occurred in the last X turns.
+	 */
 	public List<IEvent> getLastXTurnsSelfEvents(int x, ICreature us, WorldState worldState);
 	
-	/** Return a list of all the events that occurred in the last turn (Note this only includes those that were visible to the agent) */
+	/*
+	 * Return a list of all the events that occurred in the last turn (Note this only includes those that were visible to the agent). 
+	 */
 	public List<IEvent> getLastTurnWorldEvents(WorldState worldState);
 	
-	/** Return a list of all the events that occurred in the last X turns (Note this only includes those that were visible to the agent) */
+	/*
+	 *  Return a list of all the events that occurred in the last X turns (Note this only includes those that were visible to the agent).
+	 */
 	public List<IEvent> getLastXTurnsWorldEvents(int x, WorldState worldState);
-	
 }

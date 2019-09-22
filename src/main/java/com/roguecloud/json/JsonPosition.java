@@ -26,6 +26,7 @@ public class JsonPosition {
 	private int y;
 	
 	public JsonPosition() {
+		
 	}
 
 	public JsonPosition(int x, int y) {
