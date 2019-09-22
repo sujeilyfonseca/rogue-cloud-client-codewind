@@ -70,7 +70,7 @@ import com.roguecloud.utils.AStarSearch;
  * 	  - If the user specified a position, then walk to it, then goto 1 (otherwise goto 1)
  * 
  * Each of the questions above correspond to methods below. More information on improving your code from the default behaviors
- * can be found on the Github project pages.
+ * can be found on the GitHub project pages.
  */
 @SuppressWarnings("unused")
 public class SimpleAIStable extends RemoteClient {
