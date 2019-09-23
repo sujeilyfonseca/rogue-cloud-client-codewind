@@ -79,7 +79,7 @@ The sample agent provides an API that can be used to implement a sophisticated a
 * The default ``whereShouldIGo`` implementation picks random spots on the map. A better strategy is to avoid areas that we have already seen, so as to discover as much of the world as possible.
 * The default ``shouldIDrinkAPotion`` implementation drinks a random potion when the character's health drops below 50%, and keeps on drinking potions until it is above 50%. Since potions can heal over multiple turns, some potions may overheal the player, and some potions don't heal at all. A better strategy would be to be carefully analyze the situation and choose potions to reflect the immediate need.
 * The default ``shouldIEquipNewItem`` implementation equips anything that is picked up. A better idea is to only equip items that are an improvement over what is already equipped.
-* The default ``beingAttackedShouldIAttackBack`` implementation ALWAYS attacks back. Some monsters are much tougher than your player character, and fleeing would likely be a better option!
+* The default ``unprovokedAttackShouldIAttackBack`` implementation ALWAYS attacks back. Some monsters are much tougher than your player character, and fleeing would likely be a better option!
 
 ### Advanced tips: ###
 * Build your own strategies! Think unconventionally... For example, what if you built a character that didn't attack monsters, but instead waited for other players to die, and then stole their dropped equipement? Another example is to consider a situation in which your character is being followed by multiple enemies. In that case, how could the player escape safely?
