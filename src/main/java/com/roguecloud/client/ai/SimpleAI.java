@@ -319,13 +319,10 @@ public class SimpleAI extends RemoteClient {
 				if (newArmour.getDefense() > previouslyEquippedArmour.getDefense()) {
 					System.out.println(ANSI_GREEN + "Equipped stronger armour: " + newArmour.getType() + ", " + newArmour.getDefense() + ANSI_RESET);
 					return true;
-				} else {
-					return false;
-				}
+				} 
+			} else {
+				return true;
 			}
-
-			return true;
-
 		} else if(newItem.getObjectType() == ObjectType.WEAPON) {
 			Weapon newWeapon = (Weapon) newItem;
 			Weapon previouslyEquippedWeapon = mainPlayer.getWeapon();
@@ -334,15 +331,13 @@ public class SimpleAI extends RemoteClient {
 				if (newWeapon.calculateWeaponRating() > previouslyEquippedWeapon.calculateWeaponRating()) {
 					System.out.println(ANSI_GREEN + "Equipped stronger weapon: " + newWeapon.calculateWeaponRating() + ANSI_RESET);
 					return true;
-				} else {
-					return false;
-				}
+				} 
+			} else {
+				return true;
 			}
-
-			return true;
 		}
 
-		System.out.println(ANSI_GREEN + "Not equipped anything!" + ANSI_RESET);
+		System.out.println(ANSI_GREEN + "Not equipped: " + newItem.getObjectType() + ANSI_RESET);
 		return false;
 	}
 
