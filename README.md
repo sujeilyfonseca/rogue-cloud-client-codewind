@@ -61,7 +61,7 @@ For more information, please refer to the [Useful Resources](https://github.com/
 ## Step-by-Step Guide ##
 
 ### A) shouldIPickUpItem ###
-The default `shouldIPickUpItem` implementation (Figure 3) picks up the first thing the player sees. However, the item could be protected by dangerous enemies, which can begin attacking the player once it tries to pick up the item.
+The default `shouldIPickUpItem` implementation (Figure 3) picks up the first thing the player sees. However, the item could be protected by dangerous enemies who can attack the player once it tries to pick up the item.
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem_default.png"></br><b>Figure 3:</b> Default shouldIPickUpItem implementation</p>
 
@@ -92,11 +92,11 @@ A complete example of how to use the described approach to improve the `shouldIP
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem.png"></br><b>Figure 4:</b> Improved shouldIPickUpItem implementation</p>
 
-There are several other manners in which this method could be improved. For example, you could also wait for enemies to leave the item area or attack them before picking up the element, if they are not strong enough. Think outside the box!
+There are several other manners in which this method could be improved. For example, you could also wait for enemies to leave the item area or attack them before picking up the item, if they are not strong enough. Think outside the box!
 
 
 ### B) shouldIAttackCreature ###
-The default `shouldIAttackCreature` implementation (Figure 5) attacks the first thing the player sees. This is often not a good idea because some enemies are more powerful than others, and the player may consider avoiding the attack if it health is low.
+The default `shouldIAttackCreature` implementation (Figure 5) attacks the first thing the player sees. This is often not a good idea because some enemies are more powerful than others, and the player may consider avoiding the attack if its health is low.
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIAttackCreature_default.png"></br><b>Figure 5:</b> Default shouldIAttackCreature implementation</p>
 
