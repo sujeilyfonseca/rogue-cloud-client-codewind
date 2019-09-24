@@ -175,7 +175,7 @@ public class SimpleAI extends RemoteClient {
 				System.out.println("Main Player Level: " + mainPlayer.getLevel());
 				System.out.println("Enemy Level: " + c.getLevel());
 
-				if ((c.getLevel() - 6) < mainPlayer.getLevel() && percentHealthLeft > 50) {
+				if ((c.getLevel() - 6) < mainPlayer.getLevel() && percentHealthLeft > 40) {
 					System.out.println(ANSI_GREEN + "Attacking enemy that could be stronger!" + ANSI_RESET);
 					return c;
 				} else if ((c.getLevel() - 2) < mainPlayer.getLevel() && percentHealthLeft > 10) { 
@@ -346,7 +346,7 @@ public class SimpleAI extends RemoteClient {
 	}
 
 	/** 
-	 * If a creature is attacking us (and we did not initiate the combat through the shouldIAttackCreature method), 
+	 * If a creature is attacking us (and we did not initiate the combat through the shouldIAttackCreature method). 
 	 * we can choose whether to attack back or to ignore them. 
 	 * 
 	 * Attack an attacking creature back is not always the best course of action, 
