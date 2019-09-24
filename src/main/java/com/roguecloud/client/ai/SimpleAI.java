@@ -76,7 +76,6 @@ import com.roguecloud.utils.AStarSearch;
  * Each of the questions above correspond to methods below. More information on improving your code from the default behaviors
  * can be found on the GitHub project pages.
  */
-//@SuppressWarnings("unused")
 public class SimpleAI extends RemoteClient {
 
 	public static final String ANSI_RESET = "\u001B[0m";
