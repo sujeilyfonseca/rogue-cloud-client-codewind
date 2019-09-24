@@ -175,11 +175,14 @@ public class SimpleAI extends RemoteClient {
 				System.out.println("Main Player Level: " + mainPlayer.getLevel());
 				System.out.println("Enemy Level: " + c.getLevel());
 
-				if ((c.getLevel() - 4) < mainPlayer.getLevel() && percentHealthLeft > 15) {
-					System.out.println(ANSI_GREEN + "Attack enemy!" + ANSI_RESET);
+				if ((c.getLevel() - 6) < mainPlayer.getLevel() && percentHealthLeft > 50) {
+					System.out.println(ANSI_GREEN + "Attacking enemy that could be stronger!" + ANSI_RESET);
+					return c;
+				} else if ((c.getLevel() - 2) < mainPlayer.getLevel() && percentHealthLeft > 10) { 
+					System.out.println(ANSI_GREEN + "Attacking enemy!" + ANSI_RESET);
 					return c;
 				} else {
-					System.out.println(ANSI_BLUE + "Avoiding a stronger enemy..." + ANSI_RESET);
+					System.out.println(ANSI_BLUE + "Avoiding a stronger enemy and/or running for my life..." + ANSI_RESET);
 				}
 			}
 		}
@@ -320,6 +323,7 @@ public class SimpleAI extends RemoteClient {
 					return true;
 				} 
 			} else {
+				System.out.println(ANSI_GREEN + "Equipped a new armour: " + newArmour.getType() + ", " + newArmour.getDefense() + ANSI_RESET);
 				return true;
 			}
 		} else if(newItem.getObjectType() == ObjectType.WEAPON) {
@@ -332,6 +336,7 @@ public class SimpleAI extends RemoteClient {
 					return true;
 				} 
 			} else {
+				System.out.println(ANSI_GREEN + "Equipped a new weapon: " + newWeapon.getType() + ", " + newWeapon.calculateWeaponRating() + ANSI_RESET);
 				return true;
 			}
 		}
