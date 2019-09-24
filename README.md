@@ -4,7 +4,7 @@
 ## Rogue Cloud client overview ##
 This repository serves as a client for the Rogue Cloud game. A client is a computer that accesses a server through a network. On the other hand, a server machine is a large capacity computer that can store a wide variety of files, such as applications and data files.
 
-<img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-eclipse-logs.png">
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-eclipse-logs.png"></br><b>Figure 1:</b> Rogue Cloud Agent Interacting with the Game World</p>
 
 
 ## Interactive part of session ##
@@ -12,7 +12,7 @@ In the interactive part of the session, students will be guided to improve their
 
 Following the strategies and the example given, students should have the opportunity to develop their code to participate in the challenge. As a base source, students can follow the Step-by-Step guide provided in this README file.
 
-<img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-winners.png">
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-winners.png"></br><b>Figure 2:</b> Rogue Cloud Winner Screen</p>
 
 
 ## Challenge Rules ##
@@ -53,7 +53,7 @@ To locate the source and documentation for a Rogue Cloud class, use the 'Goto' k
 * **Eclipse**: `CTRL-SHIFT-R` (Windows) or `Command-Shift-R` (Mac)
 * **Visual Studio Code**: `CTRL-P` or `Command-P` (Mac)
 
-For example, if you are using Eclipse on Mac, and you are looking for the `SimpleAI.java` class, press `Command-Shift-R`, type ``ICreature.java``, and click Enter. If you want to see the source code of a method and/or a class, press `fn` and then `F3`.
+For example, if you are using Eclipse on Mac, and you are looking for the `SimpleAI.java` class, press `Command-Shift-R`, type ``SimpleAI.java``, and click Enter. If you want to see the source code of a method and/or a class, press `fn` and then `F3`.
 
 For more information, please refer to the [Useful Resources](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind#useful-resources) section.
 
@@ -61,34 +61,230 @@ For more information, please refer to the [Useful Resources](https://github.com/
 ## Step-by-Step Guide ##
 
 ### A) shouldIPickUpItem ###
-* The default ``shouldIPickUpItem`` implementation picks up the first thing it sees. A better idea is to only pick up items that are an improvement over what the character already has.
+The default `shouldIPickUpItem` implementation (Figure 3) picks up the first thing the player sees. However, the item could be protected by dangerous enemies, which can begin attacking the player once it tries to pick up the item.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem_default.png"></br><b>Figure 3:</b> Default shouldIPickUpItem implementation</p>
+
+How could this be improved? We could check how many creatures are near the item. If the item is protected by two or more enemies, then avoid picking it up. To do this, you can use the `AIUtils.findCreaturesInRange (...)`, which can be used as follows:
+```java
+List<ICreature> creaturesInRange = AIUtils.findCreaturesInRange(worldState.getViewWidth(), worldState.getViewHeight(), getOurPosition(), worldState.getMap());
+AIUtils.removePlayerCreaturesFromList(creaturesInRange);
+AIUtils.sortClosestCreatures(getOurPosition(), creaturesInRange);
+```
+
+The following example demonstrates the use of the above method by verifying if there are less than two creatures within the vision range. The example also uses the Object types to see what items were found and the standard messages to describe them:
+``` java
+if(objectOnGround.getObjectType() == ObjectType.ARMOUR) {
+  Armour newArmour = (Armour) objectOnGround;
+  ArmourType newArmourType = newArmour.getType();
+  System.out.println(ANSI_GREEN + "Encountered armour: " + newArmourType + ", " + newArmour.getDefense() + ANSI_RESET);
+
+  if (!(creaturesInRange.size() > 2)) {
+    System.out.println(ANSI_PURPLE + "Picked up the armour!" + ANSI_RESET);
+    return visibleGroundObjectContainer;
+  } else {
+    System.out.println(ANSI_YELLOW + "Armour found, but not picked up!" + ANSI_RESET)
+  }
+}
+```
+
+A complete example of how to use the described approach to improve the `shouldIPickUpItem` method can be found in Figure 4.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem.png"></br><b>Figure 4:</b> Improved shouldIPickUpItem implementation</p>
+
+There are several other manners in which this method could be improved. For example, you could also wait for enemies to leave the item area or attack them before picking up the element, if they are not strong enough. Think outside the box!
+
 
 ### B) shouldIAttackCreature ###
-* The default ``shouldIAttackCreature`` implementation attacks the first thing it sees. This is often not a good idea: some monsters are more powerful than others, and the character may want to consider avoiding attack if its health is low.
+The default `shouldIAttackCreature` implementation (Figure 5) attacks the first thing the player sees. This is often not a good idea because some enemies are more powerful than others, and the player may consider avoiding the attack if it health is low.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIAttackCreature_default.png"></br><b>Figure 5:</b> Default shouldIAttackCreature implementation</p>
+
+How could this be improved? We could verify the enemies' level and the player's health. Depending on the current state, we could decide whether to attack or not.
+* A reference to the player can be obtained by calling `getSelfState().getPlayer()`. Those methods are located within the `RemoteClient.java` and `SelfState.java` classes, respectively. The enemy level can be obtained using the `getLevel()` method of the `ICreature` class.
+* The remaining player's health can be calculated using the following equation: `(int)(100d * (double)mainPlayer.getHp() / (double)mainPlayer.getMaxHp())`
+
+Here is an example of how to retrieve the mentioned information:
+```java
+for(ICreature c : visibleMonsters) {
+  int percentHealthLeft = (int)(100d * (double)mainPlayer.getHp() / (double)mainPlayer.getMaxHp());
+
+  if ((c.getLevel() - 6) < mainPlayer.getLevel() && percentHealthLeft > 40) {
+    System.out.println(ANSI_GREEN + "Attacking enemy that could be stronger!" + ANSI_RESET);
+    return c;
+  } else if ((c.getLevel() - 2) < mainPlayer.getLevel() && percentHealthLeft > 10) { 
+    System.out.println(ANSI_GREEN + "Attacking enemy!" + ANSI_RESET);
+    return c;
+  } else {
+    System.out.println(ANSI_BLUE + "Avoiding a stronger enemy and/or running for my life..." + ANSI_RESET);
+  }
+}
+```
+
+A complete example of how to use the described approach to improve the `shouldIAttackCreature` method can be found in Figure 6.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIAttackCreature.png"></br><b>Figure 6:</b> Improved shouldIAttackCreature implementation</p>
+
+There are several other manners in which this method could be improved. Think outside the box!
+
 
 ### C) whereShouldIGo ###
-* The default ``whereShouldIGo`` implementation picks random spots on the map. A better strategy is to avoid areas that we have already seen, so as to discover as much of the world as possible.
+The default `whereShouldIGo` implementation (Figure 7) picks random spots on the map.
 
-### D) shouldIEquipNewItem ###
-* The default ``shouldIDrinkAPotion`` implementation drinks a random potion when the character's health drops below 50%, and keeps on drinking potions until it is above 50%. Since potions can heal over multiple turns, some potions may overheal the player, and some potions don't heal at all. A better strategy would be to be carefully analyze the situation and choose potions to reflect the immediate need.
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/whereShouldIGo_default.png"></br><b>Figure 7:</b> Default whereShouldIGo implementation</p>
+
+How could this be improved?  A better strategy is to avoid areas that we have already seen, to discover as much of the world as possible. Another approach would be to look for routes of interest (e.g., where could the player find items if its health is low?, where could the player reach enemies to increase its score?). Let's follow this second approach!
+
+The `AIUtils.findClosestGroundObjectThatCanBeReached(...)` and `AIUtils.findClosestCreatureThatCanBeReached(...)` are good methods to obtain the mentioned information, which can be send to the `doWandering` method of the `SimpleAI.java` class. Both methods return a `FindClosestResult<Type>` object, which could be used to obtain the necessary positions to achieve the desired target. These positions can be obtained by calling the `getRoute ()` method located within the `FindClosestResult` inner class of` AIUtils.java`. This is how the code will look like:
+```java
+if (percentHealthLeft < 50) {
+  FindClosestResult<IGroundObject> closestGroundObject = AIUtils.findClosestGroundObjectThatCanBeReached(whatWeHaveSeenMap, worldState, selfState);
+    
+  if (closestGroundObject != null) {
+    System.out.println(ANSI_GREEN + "Found target: IGroundObject" + ANSI_RESET);
+    return closestGroundObject.getRoute();
+  }
+} else {
+  FindClosestResult<ICreature> closestCreature = AIUtils.findClosestCreatureThatCanBeReached(whatWeHaveSeenMap, worldState, selfState);
+			
+  if (closestCreature != null) {
+    System.out.println(ANSI_GREEN + "Found target: ICreature" + ANSI_RESET);
+    return closestCreature.getRoute();
+  }
+}
+```
+
+In order to use a `List` of ` Position` objects, you must change the return type to `List<Position` and modify the `doWandering` method to receive those values, as follows:
+```java
+// Find a new route
+if(wanderingStateDate.ourCurrentRoute == null) {
+  List<Position> routeToDestination = whereShouldIGo();
+  if(routeToDestination.size() > 1) {
+    // Success!!!
+
+    // Remove the first item, which is our current position
+    routeToDestination.remove(0);
+
+    wanderingStateDate.ourCurrentRoute = routeToDestination;
+  }
+}
+```
+
+A complete example of how to use the described approach to improve the `whereShouldIGo` method can be found in Figure 8. 
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/whereShouldIGo.png"></br><b>Figure 8:</b> Improved whereShouldIGo implementation</p>
+
+There are several other manners in which this method could be improved. Think outside the box!
+
+
+### D) shouldIDrinkAPotion ###
+The default `shouldIDrinkAPotion` implementation (Figure 9) drinks a random potion when the player's health drops below 50%, and continues to drink potions until the life is above 50%. Since potions can heal over multiple turns, some potions may overheal the player, and some potions don't heal at all. 
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIDrinkAPotion_default.png"></br><b>Figure 9:</b> Default shouldIDrinkAPotion implementation</p>
+
+How could this be improved? A better strategy would be to be carefully analyze the situation and choose potions to reflect the immediate need. To do this, we should consider scenarios for the available potions: `LIFE`, `VISION_RANGE`, `DAMAGE_REDUCTION` and `INVISIBILITY`. We could use the `EffectType.java` inner class of `Effect.java` to retrieve those scenarios. Here is an example of how to implement this:
+```java
+DrinkableItem potion = (DrinkableItem) currentObject;
+EffectType potionEffectType = potion.getEffect().getType();
+
+switch(potionEffectType) {
+  case LIFE:
+    int percentHealthLeft = (int)(100d * (double)mainPlayer.getHp() / (double)mainPlayer.getMaxHp()); 
+    if (percentHealthLeft < 50) {
+      System.out.println(ANSI_GREEN + "Potion taken: LIFE" + ANSI_RESET);
+      return object;
+    }
+    break;
+  case VISION_RANGE:
+    System.out.println(ANSI_GREEN + "Potion taken: VISION_RANGE" + ANSI_RESET);
+    return object;
+  case DAMAGE_REDUCTION:
+    System.out.println(ANSI_GREEN + "Potion taken: DAMAGE_REDUCTION" + ANSI_RESET);
+    return object;
+  case INVISIBILITY:
+    List<ICreature> creaturesInRange = AIUtils.findCreaturesInRange(worldState.getViewWidth(), worldState.getViewHeight(), getOurPosition(), worldState.getMap());
+    AIUtils.removePlayerCreaturesFromList(creaturesInRange);
+    AIUtils.sortClosestCreatures(getOurPosition(), creaturesInRange);
+
+    if (creaturesInRange.size() > 2) {
+      System.out.println(ANSI_GREEN + "Potion taken: INVISIBILITY" + ANSI_RESET);
+      return object;	
+    }
+    break;
+}
+```
+
+A complete example of how to use the described approach to improve the `shouldIDrinkAPotion` method can be found in Figure 10.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIDrinkAPotion.png"></br><b>Figure 10:</b> Improved shouldIDrinkAPotion implementation</p>
+
+There are several other manners in which this method could be improved. Think outside the box!
+
 
 ### E) shouldIEquipNewItem ###
-* The default ``shouldIEquipNewItem`` implementation equips anything that is picked up. A better idea is to only equip items that are an improvement over what is already equipped.
+The default `shouldIEquipNewItem` implementation (Figure 11) equips anything that is picked up.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIEquipNewItem_default.png"></br><b>Figure 11:</b> Default shouldIEquipNewItem implementation</p>
+
+How could this be improved? A better idea is to equip only items that are an improvement over what is already equipped. Following this approach, we could consider aspects to see what makes the item better. For example, the defense is something important in the `Armour Set`. We may consider getting the current equipped `Armour` (i.e., `mainPlayer.getArmour().get(newArmour.getType()`), if any, and compare its defense with the new item's defense. Here is an example of how to do this:
+```java
+if(newItem.getObjectType() == ObjectType.ARMOUR) {
+  Armour newArmour = (Armour) newItem;			
+  Armour previouslyEquippedArmour = mainPlayer.getArmour().get(newArmour.getType());
+      
+  if(previouslyEquippedArmour != null) {
+    if (newArmour.getDefense() > previouslyEquippedArmour.getDefense()) {
+      System.out.println(ANSI_GREEN + "Equipped stronger armour: " + newArmour.getType() + ", " + newArmour.getDefense() + ANSI_RESET);
+      return true;
+    } 
+  } else {
+    System.out.println(ANSI_GREEN + "Equipped a new armour: " + newArmour.getType() + ", " + newArmour.getDefense() + ANSI_RESET);
+    return true;
+  }
+}
+```
+
+You can also think about something that improves a `Weapon`. The `Weapon.java` class would help you retrieve the information you want. A complete example of how to use the described approach to improve the `shouldIEquipNewItem` method can be found in Figure 12.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIEquipNewItem.png"></br><b>Figure 12:</b> Improved shouldIEquipNewItem implementation</p>
+
+There are several other manners in which this method could be improved. Think outside the box!
+
 
 ### F) unprovokedAttackShouldIAttackBack ###
-* The default ``unprovokedAttackShouldIAttackBack`` implementation ALWAYS attacks back. Some monsters are much tougher than your player character, and fleeing would likely be a better option!
+The default `unprovokedAttackShouldIAttackBack` implementation (Figure 13) always attacks back. Some enemies are much stronger than your player character, and running would likely be a better option.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/unprovokedAttackShouldIAttackBack_default.png"></br><b>Figure 13:</b> Default unprovokedAttackShouldIAttackBack implementation</p>
+
+A complete example of how to perform defense attacks while obtaining the enemy's information can be found in Figure 14.
+
+<p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/unprovokedAttackShouldIAttackBack.png"></br><b>Figure 14:</b> Improved unprovokedAttackShouldIAttackBack implementation</p>
+
+There are several other manners in which this method could be improved. Another example is to verify if the enemies are following you to plan a safe escape or attack them before they can attack you. Think outside the box!
 
 
 ## Accessing Logs ##
 ### Accessing the logs using the IDEs: ###
 * **Eclipse:** Right click on your project, select **Show Log Files**, and click on the desired log file. You can also select **Show All Logs**.
 
-<img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-eclipse.png">
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-eclipse.png"></br><b>Figure 15:</b> Accessing the logs using the Eclipse IDE</p>
 
 * **Visual Studio Code:** Right click on your project and select **Show All Logs**. You can select the desired log file using the combo box.
 
-<img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-vscode.png">
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-vscode.png"></br><b>Figure 16:</b> Accessing the logs using the VS Code IDE</p>
 
+* Some useful logs for viewing the standard messages in the Eclipse Console are: `console.log` and `messages.log`. You may consider installing the [Eclipse ANSI Console](https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/) to include colors in your messages and facilitate seeing the player's interactions with the game world. Here are some examples of ANSI colors:
+```java
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_BLACK = "\u001B[30m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  public static final String ANSI_PURPLE = "\u001B[35m";
+  public static final String ANSI_CYAN = "\u001B[36m";
+  public static final String ANSI_WHITE = "\u001B[37m";
+```
 
 ### Accessing the logs within your machine: ###
 All Codewind logs can be found in the  `.logs` directory within your `codewind-workspace`. On Mac, if you don not have access to hidden items, press `Command` + `Shift` + `.`
@@ -99,7 +295,6 @@ All Codewind logs can be found in the  `.logs` directory within your `codewind-w
 2. [Javadocs for the Agent API Classes](http://www-rogue-cloud.mybluemix.net/)
 3. [Locations of Important Agent API Classes](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/important-agent-API-classes.md)
 4. [Key Concepts](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/introduction-and-concepts.md)
-5. [Eclipse ANSI Console](https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/)
 
 
 ## Next Steps ##
