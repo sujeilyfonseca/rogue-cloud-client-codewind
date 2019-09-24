@@ -17,7 +17,7 @@ Following the strategies and the example given, students should have the opportu
 
 ## Challenge Rules ##
 1. Students will be divided into groups with a maximum of 4 students.
-2. Each team must have its own computer, and the team members must indicate their username for the customer on the cards provided in the tables.
+2. Each team must have its own computer, and the team members must indicate their username for the client on the cards provided in the tables.
 2. Students have about 40 minutes to add functions to the SimpleAI Java class.
 3. Students will receive an example of how to access classes within the rogue-cloud-client-codewind repository.
 4. Students will have a step-by-step guide to improving the SimpleAI Java class. However, they must provide any improvement to the class to be considered as participants of the challenge.
