@@ -22,7 +22,7 @@ Following the strategies and the example given, students should have the opportu
 3. Students will receive an example of how to access classes within the rogue-cloud-client-codewind repository.
 4. Students will have a step-by-step guide to improving the SimpleAI Java class. However, they must provide any improvement to the class to be considered as participants of the challenge.
 5. At the end of the session, a game round will be observed to give the team with the highest scores the opportunity to explain their improvements.
-6. First place will receive a special prize.
+6. The first two places will receive a special award.
 7. The first three places will be recognized during the session.
 
 
