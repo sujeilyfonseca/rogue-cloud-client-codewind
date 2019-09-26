@@ -1,13 +1,13 @@
 # The Rogue Cloud, An Interactive Session #
 
 
-## Rogue Cloud client overview ##
+## Rogue Cloud Client Overview ##
 This repository serves as a client for the Rogue Cloud game. A client is a computer that accesses a server through a network. On the other hand, a server machine is a large capacity computer that can store a wide variety of files, such as applications and data files.
 
 <p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-eclipse-logs.png"></br><b>Figure 1:</b> Rogue Cloud Agent Interacting with the Game World</p>
 
 
-## Interactive part of session ##
+## Interactive Part of the Session ##
 In the interactive part of the session, students will be guided to improve their agent behavior on the scene. This could be done by modifying the game agent, which would be represented by a class called SimpleAI. The changes made to this class are reflected in the AI running in the Liberty MicroProfile container.
 
 Following the strategies and the example given, students should have the opportunity to develop their code to participate in the challenge. As a base source, students can follow the Step-by-Step guide provided in this README file.
@@ -17,7 +17,7 @@ Following the strategies and the example given, students should have the opportu
 
 ## Challenge Rules ##
 1. Students will be divided into groups with a maximum of 4 students.
-2. Each team must have its own computer, and the team members must indicate their username for the customer on the cards provided in the tables.
+2. Each team must have its own computer, and the team members must indicate their username for the client on the cards provided in the tables.
 2. Students have about 40 minutes to add functions to the SimpleAI Java class.
 3. Students will receive an example of how to access classes within the rogue-cloud-client-codewind repository.
 4. Students will have a step-by-step guide to improving the SimpleAI Java class. However, they must provide any improvement to the class to be considered as participants of the challenge.
@@ -45,7 +45,7 @@ Examine the source for each of these methods, and learn more about how the agent
 Do you need inspiration? See the **How to improve your character over the sample agent** section in the [Key Concepts](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/introduction-and-concepts.md) file.
 
 
-## How to Locate code and Learn About the Agent API classes ##
+## How to Locate Code and Learn About the Agent API classes ##
 
 While hacking on your agent code, it is important to be able to learn about the agent API classes and their methods. The best way to do this is to open their source in the git repo.
 
@@ -61,7 +61,7 @@ For more information, please refer to the [Useful Resources](https://github.com/
 ## Step-by-Step Guide ##
 
 ### A) shouldIPickUpItem ###
-The default `shouldIPickUpItem` implementation (Figure 3) picks up the first thing the player sees. However, the item could be protected by dangerous enemies, which can begin attacking the player once it tries to pick up the item.
+The default `shouldIPickUpItem` implementation (Figure 3) picks up the first thing the player sees. However, the item could be protected by dangerous enemies who can attack the player once it tries to pick up the item.
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem_default.png"></br><b>Figure 3:</b> Default shouldIPickUpItem implementation</p>
 
@@ -92,11 +92,11 @@ A complete example of how to use the described approach to improve the `shouldIP
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIPickUpItem.png"></br><b>Figure 4:</b> Improved shouldIPickUpItem implementation</p>
 
-There are several other manners in which this method could be improved. For example, you could also wait for enemies to leave the item area or attack them before picking up the element, if they are not strong enough. Think outside the box!
+There are several other manners in which this method could be improved. For example, you could also wait for enemies to leave the item area or attack them before picking up the item, if they are not strong enough. Think outside the box!
 
 
 ### B) shouldIAttackCreature ###
-The default `shouldIAttackCreature` implementation (Figure 5) attacks the first thing the player sees. This is often not a good idea because some enemies are more powerful than others, and the player may consider avoiding the attack if it health is low.
+The default `shouldIAttackCreature` implementation (Figure 5) attacks the first thing the player sees. This is often not a good idea because some enemies are more powerful than others, and the player may consider avoiding the attack if its health is low.
 
 <p align="center"><img width="750" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/shouldIAttackCreature_default.png"></br><b>Figure 5:</b> Default shouldIAttackCreature implementation</p>
 
