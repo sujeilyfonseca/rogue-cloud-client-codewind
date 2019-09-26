@@ -1,13 +1,13 @@
 # The Rogue Cloud, An Interactive Session #
 
 
-## Rogue Cloud client overview ##
+## Rogue Cloud Client Overview ##
 This repository serves as a client for the Rogue Cloud game. A client is a computer that accesses a server through a network. On the other hand, a server machine is a large capacity computer that can store a wide variety of files, such as applications and data files.
 
 <p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/rogue-cloud-client-eclipse-logs.png"></br><b>Figure 1:</b> Rogue Cloud Agent Interacting with the Game World</p>
 
 
-## Interactive part of session ##
+## Interactive Part of the Session ##
 In the interactive part of the session, students will be guided to improve their agent behavior on the scene. This could be done by modifying the game agent, which would be represented by a class called SimpleAI. The changes made to this class are reflected in the AI running in the Liberty MicroProfile container.
 
 Following the strategies and the example given, students should have the opportunity to develop their code to participate in the challenge. As a base source, students can follow the Step-by-Step guide provided in this README file.
@@ -45,7 +45,7 @@ Examine the source for each of these methods, and learn more about how the agent
 Do you need inspiration? See the **How to improve your character over the sample agent** section in the [Key Concepts](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/introduction-and-concepts.md) file.
 
 
-## How to Locate code and Learn About the Agent API classes ##
+## How to Locate Code and Learn About the Agent API classes ##
 
 While hacking on your agent code, it is important to be able to learn about the agent API classes and their methods. The best way to do this is to open their source in the git repo.
 
