@@ -77,10 +77,10 @@ The following example demonstrates the use of the above method by verifying if t
 if(objectOnGround.getObjectType() == ObjectType.ARMOUR) {
   Armour newArmour = (Armour) objectOnGround;
   ArmourType newArmourType = newArmour.getType();
-  System.out.println(ANSI_GREEN + "Encountered armour: " + newArmourType + ", " + newArmour.getDefense() + ANSI_RESET);
+  System.out.println(ANSI_PURPLE + "Encountered armour: " + newArmourType + ", " + newArmour.getDefense() + ANSI_RESET);
 
   if (!(creaturesInRange.size() > 2)) {
-    System.out.println(ANSI_PURPLE + "Picked up the armour!" + ANSI_RESET);
+    System.out.println(ANSI_GREEN + "Picked up the armour!" + ANSI_RESET);
     return visibleGroundObjectContainer;
   } else {
     System.out.println(ANSI_YELLOW + "Armour found, but not picked up!" + ANSI_RESET)
@@ -211,6 +211,15 @@ switch(potionEffectType) {
       return object;	
     }
     break;
+}
+					
+System.out.println(ANSI_PURPLE + "Saved potion: " + potionEffectType + ANSI_RESET);
+```
+
+Since this method is called each turn, a good recommendation would be to store the value of the inventory in a variable to avoid checking if a potion should be drunk if the amount of items in the inventory has not changed. To do this, we must define a private variable in the class (i.e., `private int previousInventorySize = 0;`) and use it at the beginning of the method as follows:
+```java
+if (!inventory.isEmpty() && inventory.size() != previousInventorySize) {
+    ...
 }
 ```
 
