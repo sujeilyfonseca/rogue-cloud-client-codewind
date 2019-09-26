@@ -13,7 +13,7 @@ com/roguecloud/map/Tile
 com/roguecloud/client/container/StartAgentServlet
 
 com/roguecloud/client/SelfState
-com/roguecloud/client/WorldStae
+com/roguecloud/client/WorldState
 com/roguecloud/client/IEventLog
 
 com/roguecloud/Position
