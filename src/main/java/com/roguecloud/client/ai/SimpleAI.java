@@ -78,16 +78,16 @@ import com.roguecloud.utils.AStarSearch;
  */
 public class SimpleAI extends RemoteClient {
 
-	public static final String ANSI_RESET = "\u001B[0m";
-	public static final String ANSI_BLACK = "\u001B[30m";
-	public static final String ANSI_RED = "\u001B[31m";
-	public static final String ANSI_GREEN = "\u001B[32m";
-	public static final String ANSI_YELLOW = "\u001B[33m";
-	public static final String ANSI_BLUE = "\u001B[34m";
-	public static final String ANSI_PURPLE = "\u001B[35m";
-	public static final String ANSI_CYAN = "\u001B[36m";
-	public static final String ANSI_WHITE = "\u001B[37m";
+	private static final String ANSI_RESET = "\u001B[0m";
+	private static final String ANSI_RED = "\u001B[31m";
+	private static final String ANSI_GREEN = "\u001B[32m";
+	private static final String ANSI_YELLOW = "\u001B[33m";
+	private static final String ANSI_BLUE = "\u001B[34m";
+	private static final String ANSI_PURPLE = "\u001B[35m";
+	private static final String ANSI_CYAN = "\u001B[36m";
 
+	private int previousInventorySize = 0;
+	
 	/**
 	 * This method received the list of all items on the ground in your current view; and is asked, do you want to pick any of these up?
 	 * If you see an item in the list that you want to pick up, return the IGroundObject that contains it.
@@ -116,30 +116,30 @@ public class SimpleAI extends RemoteClient {
 				if(objectOnGround.getObjectType() == ObjectType.ARMOUR) {
 					Armour newArmour = (Armour) objectOnGround;
 					ArmourType newArmourType = newArmour.getType();
-					System.out.println(ANSI_GREEN + "Encountered armour: " + newArmourType + ", " + newArmour.getDefense() + ANSI_RESET);
+					System.out.println(ANSI_PURPLE + "Encountered armour: " + newArmourType + ", " + newArmour.getDefense() + ANSI_RESET);
 
 					if (!(creaturesInRange.size() > 2)) {
-						System.out.println(ANSI_PURPLE + "Picked up the armour!" + ANSI_RESET);
+						System.out.println(ANSI_GREEN + "Picked up the armour!" + ANSI_RESET);
 						return visibleGroundObjectContainer;
 					} else {
 						System.out.println(ANSI_YELLOW + "Armour found, but not picked up!" + ANSI_RESET);
 					}
 				} else if(objectOnGround.getObjectType() == ObjectType.WEAPON) {
 					Weapon newWeapon = (Weapon) objectOnGround;
-					System.out.println(ANSI_GREEN + "Encountered weapon rating: " + newWeapon.calculateWeaponRating() + ANSI_RESET);
+					System.out.println(ANSI_PURPLE + "Encountered weapon rating: " + newWeapon.calculateWeaponRating() + ANSI_RESET);
 
 					if (!(creaturesInRange.size() > 2)) {
-						System.out.println(ANSI_PURPLE + "Picked up the weapon!" + ANSI_RESET);
+						System.out.println(ANSI_GREEN + "Picked up the weapon!" + ANSI_RESET);
 						return visibleGroundObjectContainer;
 					} else {
 						System.out.println(ANSI_YELLOW + "Weapon found, but not picked up!" + ANSI_RESET);
 					}
 				} else if(objectOnGround.getObjectType() == ObjectType.ITEM) {
 					DrinkableItem potion = (DrinkableItem) objectOnGround;
-					System.out.println(ANSI_GREEN + "Encountered potion: " + potion.getEffect().getType() + ANSI_RESET);
+					System.out.println(ANSI_PURPLE + "Encountered potion: " + potion.getEffect().getType() + ANSI_RESET);
 					 
 					if (!(creaturesInRange.size() > 2)) {
-						System.out.println(ANSI_PURPLE + "Picked up the potion!" + ANSI_RESET);
+						System.out.println(ANSI_GREEN + "Picked up the potion!" + ANSI_RESET);
 						return visibleGroundObjectContainer;
 					} else {
 						System.out.println(ANSI_YELLOW + "Potion found, but not picked up!" + ANSI_RESET);
@@ -255,9 +255,10 @@ public class SimpleAI extends RemoteClient {
 		WorldState worldState = getWorldState();
 		List<OwnableObject> inventory = getSelfState().getPlayer().getInventory();
 
-		if (!inventory.isEmpty()) {
+		if (!inventory.isEmpty() && inventory.size() != previousInventorySize) {
 			for(OwnableObject object : inventory) {
 				IObject currentObject = object.getContainedObject();
+				
 				if(currentObject.getObjectType() == ObjectType.ITEM) {
 					System.out.println(ANSI_CYAN +  "[[[ shouldIDrinkAPotion ]]]" + ANSI_RESET);
 
@@ -290,9 +291,11 @@ public class SimpleAI extends RemoteClient {
 						break;
 					}
 					
-					System.out.println("Saved potion: " + potionEffectType);
+					System.out.println(ANSI_PURPLE + "Saved potion: " + potionEffectType + ANSI_RESET);
 				}
 			}
+			
+			previousInventorySize = inventory.size();
 		}
 
 		// Otherwise, drink no potions
