@@ -32,7 +32,7 @@ The ``SimpleAI`` class provides a sample implementation and framework to easily 
 When you've got your code running, the next step is to focus on improving it. The ``SimpleAI`` class acts based on the implementation that you provide in each of the following methods:
 
 1. **shouldIPickUpItem**: I see an item, should I pick it up?
-2. **shouldIAttackCreature**: I see a creature, should I attack them?
+2. **shouldIAttackCreature**: I see a creature, should I attack it?
 3. **whereShouldIGo**: What coordinate on the map should I start moving towards?
 4. **shouldIDrinkAPotion**: Should I drink a potion this turn?
 5. **shouldIEquipNewItem**:  Should I equip a new item that I just picked up?
