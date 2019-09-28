@@ -36,7 +36,7 @@ When you've got your code running, the next step is to focus on improving it. Th
 3. **whereShouldIGo**: What coordinate on the map should I start moving towards?
 4. **shouldIDrinkAPotion**: Should I drink a potion this turn?
 5. **shouldIEquipNewItem**:  Should I equip a new item that I just picked up?
-6. **beingAttackedShouldIAttackBack**:  Help, I am being attacked, should I attack back?
+6. **unprovokedAttackShouldIAttackBack**:  Help, I am being attacked, should I attack back?
 
 It is up to your code to answer these questions, by improving upon the existing code contained in these methods.
 
