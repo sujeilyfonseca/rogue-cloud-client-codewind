@@ -55,7 +55,64 @@ To locate the source and documentation for a Rogue Cloud class, use the 'Goto' k
 
 For example, if you are using Eclipse on Mac, and you are looking for the `SimpleAI.java` class, press `Command-Shift-R`, type ``SimpleAI.java``, and click Enter. If you want to see the source code of a method and/or a class, press `fn` and then `F3`.
 
+### Locations of Important Agent API Classes ###
+
+Here are the locations of some of the most important classes within `gameclient/src/main/java`:
+
+```
+com/roguecloud/client/ai/SimpleAI
+
+com/roguecloud/creatures/ICreature
+
+com/roguecloud/map/IMap
+com/roguecloud/map/Tile
+
+com/roguecloud/client/container/StartAgentServlet
+
+com/roguecloud/client/SelfState
+com/roguecloud/client/WorldState
+com/roguecloud/client/IEventLog
+
+com/roguecloud/Position
+
+com/roguecloud/utils/AIUtils
+com/roguecloud/utils/AStarSearch
+com/roguecloud/utils/SimpleMap
+
+com/roguecloud/items/Armour
+com/roguecloud/items/Weapon
+com/roguecloud/items/Effect
+com/roguecloud/items/DrinkableItem
+com/roguecloud/items/OwnableObject
+com/roguecloud/items/IGroundObject
+com/roguecloud/items/IObject
+```
+
 For more information, please refer to the [Useful Resources](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind#useful-resources) section.
+
+
+## Accessing Logs ##
+### Accessing the logs using the IDEs: ###
+* **Eclipse:** Right click on your project, select **Show Log Files**, and click on the desired log file. You can also select **Show All Logs**.
+
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-eclipse.png"></br><b>Figure 15:</b> Accessing the logs using the Eclipse IDE</p>
+
+* **Visual Studio Code:** Right click on your project and select **Show All Logs**. You can select the desired log file using the combo box.
+
+<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-vscode.png"></br><b>Figure 16:</b> Accessing the logs using the VS Code IDE</p>
+
+* Some useful logs for viewing the standard messages in the Eclipse Console are: `console.log` and `messages.log`. You may consider installing the [Eclipse ANSI Console](https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/) to include colors in your messages and facilitate seeing the player's interactions with the game world. Here are some examples of ANSI colors:
+```java
+  public static final String ANSI_RESET = "\u001B[0m";
+  public static final String ANSI_BLACK = "\u001B[30m";
+  public static final String ANSI_RED = "\u001B[31m";
+  public static final String ANSI_GREEN = "\u001B[32m";
+  public static final String ANSI_YELLOW = "\u001B[33m";
+  public static final String ANSI_BLUE = "\u001B[34m";
+  public static final String ANSI_PURPLE = "\u001B[35m";
+  public static final String ANSI_CYAN = "\u001B[36m";
+  public static final String ANSI_WHITE = "\u001B[37m";
+```
 
 
 ## Step-by-Step Guide ##
@@ -272,38 +329,10 @@ A complete example of how to perform defense attacks while obtaining the enemy's
 There are several other manners in which this method could be improved. Another example is to verify if the enemies are following you to plan a safe escape or attack them before they can attack you. Think outside the box!
 
 
-## Accessing Logs ##
-### Accessing the logs using the IDEs: ###
-* **Eclipse:** Right click on your project, select **Show Log Files**, and click on the desired log file. You can also select **Show All Logs**.
-
-<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-eclipse.png"></br><b>Figure 15:</b> Accessing the logs using the Eclipse IDE</p>
-
-* **Visual Studio Code:** Right click on your project and select **Show All Logs**. You can select the desired log file using the combo box.
-
-<p align="center"><img height="550" width="850" src="https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/images/access-logs-vscode.png"></br><b>Figure 16:</b> Accessing the logs using the VS Code IDE</p>
-
-* Some useful logs for viewing the standard messages in the Eclipse Console are: `console.log` and `messages.log`. You may consider installing the [Eclipse ANSI Console](https://mihai-nita.net/2013/06/03/eclipse-plugin-ansi-in-console/) to include colors in your messages and facilitate seeing the player's interactions with the game world. Here are some examples of ANSI colors:
-```java
-  public static final String ANSI_RESET = "\u001B[0m";
-  public static final String ANSI_BLACK = "\u001B[30m";
-  public static final String ANSI_RED = "\u001B[31m";
-  public static final String ANSI_GREEN = "\u001B[32m";
-  public static final String ANSI_YELLOW = "\u001B[33m";
-  public static final String ANSI_BLUE = "\u001B[34m";
-  public static final String ANSI_PURPLE = "\u001B[35m";
-  public static final String ANSI_CYAN = "\u001B[36m";
-  public static final String ANSI_WHITE = "\u001B[37m";
-```
-
-### Accessing the logs within your machine: ###
-All Codewind logs can be found in the  `.logs` directory within your `codewind-workspace`. On Mac, if you don not have access to hidden items, press `Command` + `Shift` + `.`
-
-
 ## Useful Resources ##
 1. [Java API](https://docs.oracle.com/javase/7/docs/api/overview-summary.html)
 2. [Javadocs for the Agent API Classes](http://www-rogue-cloud.mybluemix.net/)
-3. [Locations of Important Agent API Classes](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/important-agent-API-classes.md)
-4. [Key Concepts](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/introduction-and-concepts.md)
+3. [Key Concepts](https://github.com/sujeilyfonseca/rogue-cloud-client-codewind/blob/master/docs/introduction-and-concepts.md)
 
 
 ## Next Steps ##
