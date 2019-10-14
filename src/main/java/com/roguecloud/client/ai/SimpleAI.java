@@ -73,7 +73,7 @@ import com.roguecloud.utils.AStarSearch;
  * Each of the questions above correspond to methods below. More information on improving your code from the default behaviors
  * can be found on the Github project pages.
  */
-@SuppressWarnings("unused")
+//@SuppressWarnings("unused")
 public class SimpleAI extends RemoteClient {
 	
 	/**
