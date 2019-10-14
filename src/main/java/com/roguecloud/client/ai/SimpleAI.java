@@ -76,6 +76,14 @@ import com.roguecloud.utils.AStarSearch;
 @SuppressWarnings("unused")
 public class SimpleAI extends RemoteClient {
 	
+	private static final String ANSI_RESET = "\u001B[0m";
+	private static final String ANSI_RED = "\u001B[31m";
+	private static final String ANSI_GREEN = "\u001B[32m";
+	private static final String ANSI_YELLOW = "\u001B[33m";
+	private static final String ANSI_BLUE = "\u001B[34m";
+	private static final String ANSI_PURPLE = "\u001B[35m";
+	private static final String ANSI_CYAN = "\u001B[36m";
+	
 	/**
 	 * This method received the list of all items on the ground in your current view; and is asked, do you want to pick any of these up?
 	 * If you see an item in the list that you want to pick up, return the IGroundObject that contains it.
